@@ -1,4 +1,4 @@
-name: Deploy The Monthly Pulse to GitHub Pages
+name: Deploy Company Newsletter to GitHub Pages
 
 on:
   push:
