@@ -932,6 +932,12 @@ init();
   }
 
   window.applyMonthlyPulseTextScale=applyScale;
+
+  // Scale text added later by the HR preview or published-edition renderer.
+  const observer=new MutationObserver(records=>{
+    if(records.some(record=>record.addedNodes.length))applyScale();
+  });
+  if(document.body)observer.observe(document.body,{childList:true,subtree:true});
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
   else init();
 })();
