@@ -639,7 +639,8 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
     });
 
     const output=document.getElementById('mpTextScaleValue');
-    if(output)output.textContent=Math.round(scale*100)+'%';
+    const scaleLabel=Math.round(scale*100)+'%';
+    if(output&&output.textContent!==scaleLabel)output.textContent=scaleLabel;
     const smaller=document.getElementById('mpTextSmaller');
     const larger=document.getElementById('mpTextLarger');
     if(smaller)smaller.disabled=scale<=MIN_SCALE+0.001;
