@@ -122,5 +122,22 @@ if (!saveBlock.includes("return true;") || !saveBlock.includes("return false;") 
   fail("Save/publish flow must report success or failure before claiming publication.");
 }
 
-console.log("Publication sync, section management, login, and route isolation checks passed.");
+
+for (const [label, html] of [["HR workspace", hr], ["Employee website", employee]]) {
+  for (const marker of [
+    'id="mpTextSmaller"',
+    'id="mpTextLarger"',
+    'id="mpTextScaleValue"',
+    "Decrease text size",
+    "Increase text size",
+    "monthly-pulse-text-scale-v1",
+    "MIN_SCALE=0.8",
+    "MAX_SCALE=1.4",
+    "MutationObserver",
+    "applyMonthlyPulseTextScale"
+  ]) {
+    if (!html.includes(marker)) fail(label + ": text-size control missing " + marker);
+  }
+}
+console.log("Publication sync, section management, text sizing, login, and route isolation checks passed.");
 console.log("All static and inline-JavaScript checks passed.");
