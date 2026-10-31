@@ -38,7 +38,9 @@ check("HR workspace", hr, [
   "HR Publishing Studio",
   "hrWorkspace",
   "hrLoginModal",
-  "claim_first_hr_admin",
+  'id="hrPassword"',
+  "Unlock Workspace",
+  "signInWithPassword",
   "saveToCloud",
   "newsletter_editions",
   "hr_admins",
@@ -46,4 +48,9 @@ check("HR workspace", hr, [
   "data-array-remove"
 ]);
 
+
+for (const obsolete of ['id="hrEmail"', 'id="hrBootstrapCode"', 'id="hrCreateAccountBtn"', 'id="hrClaimAdminBtn"', "claim_first_hr_admin"]) {
+  if (hr.includes(obsolete)) throw new Error("HR page still exposes obsolete sign-in flow: " + obsolete);
+}
+console.log("Password-only HR access checks passed.");
 console.log("All static checks passed.");
