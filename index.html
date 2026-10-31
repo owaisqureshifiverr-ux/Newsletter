@@ -463,10 +463,10 @@ function applySectionVisibility(data){
   closing:document.getElementById('closing')||document.querySelector('main .closing-band'),
   footer:document.getElementById('footer')||document.querySelector('footer.site-footer'),
  };
- Object.entries(map).forEach(([key,el])=>{if(el)el.hidden=hidden.has(key);});
+ Object.entries(map).forEach(([key,el])=>{if(el){const isHidden=hidden.has(key);el.hidden=isHidden;el.style.display=isHidden?'none':'';}});
  const businessHidden=hidden.has('businessInnovation'),peopleHidden=hidden.has('peopleCulture');
  const latest=document.getElementById('latest');
- if(latest&&!hidden.has('latest'))latest.hidden=businessHidden&&peopleHidden;
+ if(latest&&!hidden.has('latest')){const hideLatest=businessHidden&&peopleHidden;latest.hidden=hideLatest;latest.style.display=hideLatest?'none':'';}
  const nav=document.getElementById('mainNav');
  if(nav){
   nav.querySelectorAll('a[href^="#"]').forEach(a=>{
