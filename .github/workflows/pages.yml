@@ -45,3 +45,32 @@ jobs:
       - name: Publish website
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify published employee and HR pages
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          verify_page() {
+            local route="$1"
+            local url="${PAGE_URL%/}/${route}"
+            local body_file
+            body_file="$(mktemp)"
+            for attempt in {1..12}; do
+              status="$(curl --silent --show-error --location --max-time 20 --output "$body_file" --write-out "%{http_code}" "$url" || true)"
+              if [ "$status" = "200" ] && grep -qi "Company Newsletter" "$body_file"; then
+                echo "PASS: $url returned HTTP 200 and Company Newsletter content."
+                rm -f "$body_file"
+                return 0
+              fi
+              echo "Attempt $attempt: $url returned HTTP ${status:-unknown}; retrying."
+              sleep 5
+            done
+            echo "FAIL: $url did not return the expected Company Newsletter page."
+            echo "Response preview:"
+            head -c 1200 "$body_file" || true
+            rm -f "$body_file"
+            return 1
+          }
+          verify_page ""
+          verify_page "hr/"
