@@ -448,38 +448,6 @@ function render() {
   applySectionVisibility(publication);
 }
 
-const SECTION_CATALOG=[
- {key:'hero',label:'Masthead / Hero'},
- {key:'hcm',label:'A Message from HCM'},
- {key:'inside',label:'Inside This Month — Highlights'},
- {key:'latest',label:'The Latest — Entire Section'},
- {key:'businessInnovation',label:'Business & Innovation'},
- {key:'peopleCulture',label:'People & Culture'},
- {key:'international',label:'International Updates'},
- {key:'spotlight',label:'In the Spotlight'},
- {key:'comingUp',label:'Coming Up'},
- {key:'closing',label:'Closing Banner'},
- {key:'footer',label:'Footer'},
-];
-function sectionManagerMarkup(){
- const hidden=new Set(editorDraft.hiddenSections||[]);
- const rows=SECTION_CATALOG.map(item=>{
-  const removed=hidden.has(item.key);
-  return `<div class="section-manager-item"><strong>${esc(item.label)}</strong>${removed
-   ?`<button type="button" class="secondary-button" data-section-restore="${item.key}">Restore</button>`
-   :`<button type="button" class="danger-button" data-section-remove="${item.key}">Delete section</button>`}</div>`;
- }).join('');
- return `<div class="editor-section"><h4>Section Manager</h4><p class="editor-help">Remove any standard section from the employee edition, or restore it later. Removed sections and their content are excluded when you publish.</p><div class="section-manager-list">${rows}</div><div class="hr-status">Custom sections can be created below. All section changes are included in Save Draft and Publish.</div></div>`;
-}
-function customSectionEditorMarkup(){
- const sections=Array.isArray(editorDraft.customSections)?editorDraft.customSections:[];
- const blocks=sections.map((section,i)=>{
-  const items=Array.isArray(section.items)?section.items:[];
-  const itemMarkup=items.map((item,j)=>`<div class="custom-editor-item"><div class="custom-editor-section-head"><strong>Content item ${j+1}</strong><button type="button" class="danger-button" data-custom-item-remove="${i}" data-custom-item-index="${j}">Remove item</button></div><div class="editor-grid">${editorField(`customSections.${i}.items.${j}.type`,'Item label',item.type||'UPDATE')}${editorField(`customSections.${i}.items.${j}.headline`,'Heading',item.headline||'')}${editorField(`customSections.${i}.items.${j}.summary`,'Text / description',item.summary||'',{area:true,full:true})}${editorField(`customSections.${i}.items.${j}.url`,'Related link (HTTPS)',item.url||'')}${editorImage(`customSections.${i}.items.${j}.imageUrl`,'Attach picture',item.imageUrl||'')}</div></div>`).join('');
-  return `<div class="custom-editor-section"><div class="custom-editor-section-head"><strong>Custom section ${i+1}</strong><button type="button" class="danger-button" data-custom-section-remove="${i}">Delete this section</button></div><div class="editor-grid">${editorField(`customSections.${i}.title`,'Section title',section.title||'')}${editorField(`customSections.${i}.kicker`,'Small label / category',section.kicker||'ADDITIONAL SECTION')}${editorField(`customSections.${i}.intro`,'Section introduction',section.intro||'',{area:true,full:true})}</div><p class="custom-editor-note">Each section can contain multiple text and image cards.</p>${itemMarkup}<button type="button" class="secondary-button" data-custom-item-add="${i}">＋ Add content item</button></div>`;
- }).join('');
- return `<div class="editor-section"><h4>Custom Sections</h4><p class="editor-help">Create a completely new section for the employee page, with its own heading, description, text cards, links and pictures.</p><button type="button" class="primary-button" data-custom-section-add>＋ Add New Section</button>${blocks||'<p class="custom-editor-note">No custom sections added yet.</p>'}</div>`;
-}
 function applySectionVisibility(data){
  const hidden=new Set(Array.isArray(data.hiddenSections)?data.hiddenSections:[]);
  const map={
@@ -521,12 +489,6 @@ function renderCustomSections(data){
   return `<section class="section-shell custom-published-section" id="${esc(id)}"><div class="section-heading"><div><div class="section-kicker">${esc(section.kicker||'ADDITIONAL SECTION')}</div><h2>${esc(section.title||'New section')}</h2></div></div>${section.intro?`<p class="custom-intro">${esc(section.intro)}</p>`:''}<div class="custom-published-grid">${items||empty('No content has been added to this section yet.')}</div></section>`;
  }).join('');
 }
-function createCustomSection(){
- if(!Array.isArray(editorDraft.customSections))editorDraft.customSections=[];
- editorDraft.customSections.push({id:'custom-'+uid(),title:'New section',kicker:'ADDITIONAL SECTION',intro:'',items:[{type:'UPDATE',headline:'New item',summary:'',url:'',imageUrl:''}]});
- renderDirectEditor();render();$('directEditorStatus').textContent='New section added. Add its content, then save or publish.';
-}
-
 function openStory(type,index) {
   const items=type==='business'?publication.businessInnovation:publication.peopleCulture;
   const item=(items||[])[index]; if(!item) return;
