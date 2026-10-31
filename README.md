@@ -30,3 +30,7 @@ The HR workspace and employee newspaper use the same `newsletter_editions.public
 5. Choose **Save Draft to Cloud** to keep work private, or **Publish to Employees** to make the new edition live.
 
 The employee newspaper and HR editor are separate routes. The employee page does not include HR login or editing controls.
+
+## Text size controls
+
+Both routes include floating **−** and **+** controls. They change text size from 80% to 140% in 10% steps without zooming images. The selected size is saved in browser storage and shared by the employee and HR routes on the same site. Dynamically-rendered newsletter and editor content follows the selected size.
