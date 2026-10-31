@@ -1,4 +1,4 @@
-# The Monthly Pulse — Code Informatics
+# Company Newsletter — Code Informatics
 
 This repository contains two separate website routes:
 
