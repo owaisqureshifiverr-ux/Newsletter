@@ -345,6 +345,7 @@ main{max-width:1260px;margin:0 auto;background:#f8f4eb;box-shadow:0 18px 65px rg
 .empty-state{padding:22px 24px;border:1px solid rgba(35,34,31,.12);background:rgba(255,255,255,.55);color:#777168;font:400 14px/1.65 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif}
 @media(max-width:700px){.issue-status-note{margin:0 18px 24px;padding:13px 15px}}
 </style>
+<meta name="robots" content="index,follow">
 </head>
 <body>
 <div class="topline"><span>CODE INFORMATICS</span><span>INTERNAL EMPLOYEE PUBLICATION</span></div>
@@ -444,5 +445,36 @@ function initEmployeeEdition() {
   document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',()=>{const target=$(a.getAttribute('href').slice(1));if(target)target.scrollIntoView({behavior:'smooth',block:'start'});}));
 }
 if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initEmployeeEdition); else initEmployeeEdition();
-</script></body>
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(async function loadLatestPublishedEdition(){
+  try{
+    const client=window.supabase.createClient('https://hotyjsgogisglrbgmtns.supabase.co','sb_publishable_0pKDjnllPyQjKJ0S6F4vOQ_tMLpLVMM');
+    const {data,error}=await client.from('newsletter_editions').select('publication,published_at').eq('status','published').order('published_at',{ascending:false}).limit(1).maybeSingle();
+    if(error){console.warn('Could not load the latest newsletter edition:',error.message);return;}
+    if(!data||!data.publication)return;
+    const p=data.publication;
+    const setText=(id,value)=>{const el=document.getElementById(id);if(el&&value!=null)el.textContent=String(value);};
+    const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    setText('brandTag',p.brandTag||'Company News, People & Progress');setText('editionEyebrow',p.editionEyebrow||'THE CODE INFORMATICS EDITION');setText('heroSideLabel',p.heroSideLabel||'THIS MONTH, IN FOCUS');setText('heroCtaLabel',p.heroCtaLabel||'Explore this issue');
+    setText('hcmKicker',p.hcmKicker||'A MESSAGE FROM HCM');setText('hcmSignature',p.hcmSignature||'HUMAN CAPITAL MANAGEMENT · CODE INFORMATICS');setText('businessHeading',p.businessHeading||'Business & Innovation');setText('peopleHeading',p.peopleHeading||'People & Culture');setText('internationalKicker',p.internationalKicker||'INTERNATIONAL UPDATES');setText('internationalIntro',p.internationalIntro||'');
+    const title=document.getElementById('issueTitle');if(title)title.innerHTML=esc(p.title||'The Monthly Pulse')+'<span class="title-period">.</span>';
+    setText('issueSubtitle',p.subtitle||'');setText('issuePeriod',String(p.month||'').toUpperCase()+' '+(p.year||'')+' EDITION');setText('heroIntro',p.heroIntro||'');
+    setText('hcmHeading',p.hcmHeading||'');setText('hcmMessage',p.hcmMessage||'');setText('highlightsTitle',p.highlightsTitle||'Three quick highlights');setText('latestTitle',p.latestTitle||'Highlights from across the company');setText('internationalHeading',p.internationalTitle||'Global stories relevant to our work.');setText('spotlightHeading',p.spotlightTitle||'People, progress and shared success');setText('comingHeading',p.comingTitle||'Dates, events and opportunities');setText('footerSlogan',p.footerSlogan||'ONE TEAM. SHARED PROGRESS. BIGGER POSSIBILITIES.');setText('footerMessage',p.footerMessage||'');
+    const img=(id,url)=>{const el=document.getElementById(id);if(el&&url){el.src=url;el.style.display='block';}};img('heroImage',p.heroImageUrl);img('hcmImage',p.hcmImageUrl);
+    const highlights=document.getElementById('highlightsList');if(highlights)highlights.innerHTML=(p.highlights||[]).map((x,i)=>`<article class="highlight-card"><span class="highlight-number">0${i+1} / ${esc(x.type||'HIGHLIGHT').toUpperCase()}</span><h3>${esc(x.headline||'')}</h3><p>${esc(x.summary||'')}</p></article>`).join('');
+    const renderRows=(items)=> (items||[]).filter(x=>x&&(x.headline||x.summary)).map(x=>`<article class="article-row"><div class="article-topline">${esc(x.type||'UPDATE')}</div><h4>${esc(x.headline||'')}</h4><p>${esc([x.summary,x.outcome].filter(Boolean).join(' '))}</p>${x.imageUrl?`<img src="${esc(x.imageUrl)}" alt="" loading="lazy">`:''}</article>`).join('')||'<p class="empty-state">No updates have been published in this section yet.</p>';
+    setText('businessHeading',p.businessHeading||'Business & Innovation');setText('peopleHeading',p.peopleHeading||'People & Culture');
+    const business=document.getElementById('businessList');if(business)business.innerHTML=renderRows(p.businessInnovation);
+    const people=document.getElementById('peopleList');if(people)people.innerHTML=renderRows(p.peopleCulture);
+    const international=document.getElementById('internationalList');if(international){const x=p.international||{};international.innerHTML=`<article class="international-card"><h3>${esc(x.headline||'')}</h3><p>${esc(x.summary||'')}</p><p><strong>Relevance:</strong> ${esc(x.relevance||'')}</p>${x.sourceUrl?`<a href="${esc(x.sourceUrl)}" target="_blank" rel="noopener noreferrer">Approved source ↗</a>`:''}</article>`;}
+    const spotlight=document.getElementById('spotlightList');if(spotlight){const x=p.spotlight||{};spotlight.innerHTML=`<article class="spotlight-card"><h3>${esc(x.headline||'')}</h3><p>${esc(x.story||'')}</p></article>`;}
+    const coming=document.getElementById('comingList');if(coming)coming.innerHTML=(p.comingUp||[]).filter(x=>x&&(x.date||x.title||x.detail)).map(x=>`<article class="coming-item"><div class="coming-date">${esc(x.date||'')}</div><div><h3>${esc(x.title||'')}</h3><p>${esc(x.detail||'')}</p></div></article>`).join('')||'<p class="empty-state">New dates and activities will appear here.</p>';
+    const period=document.getElementById('issuePeriod');if(period)period.textContent=String(p.month||'').toUpperCase()+' '+(p.year||'')+' EDITION';
+  }catch(e){console.warn('Newsletter data refresh failed:',e);}
+})();
+</script>
+
+</body>
 </html>
