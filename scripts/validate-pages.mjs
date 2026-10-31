@@ -24,7 +24,7 @@ function checkDocument(label, html, required) {
   console.log(label + ": structure passed; " + compiled + " inline scripts syntax-checked.");
 
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
-  const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index && id !== "mp-app-code");
+  const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index && id !== "mp-app-code" && !id.includes("${"));
   if (duplicates.length) fail(label + ": duplicate DOM ids: " + [...new Set(duplicates)].join(", "));
 }
 
