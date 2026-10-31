@@ -71,9 +71,9 @@ for (const field of ["highlights","businessInnovation","peopleCulture","internat
 }
 
 function assertStaticDomReferences(label, html) {
-  const ids = new Set([...html.matchAll(/\\bid="([^"]+)"/g)].map(match => match[1]));
+  const ids = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]));
   const refs = [];
-  for (const match of html.matchAll(/\\$\\('([^']+)'\\)|document\\.getElementById\\('([^']+)'\\)/g)) {
+  for (const match of html.matchAll(/\$\('([^']+)'\)|document\.getElementById\('([^']+)'\)/g)) {
     refs.push(match[1] || match[2]);
   }
   const missing = [...new Set(refs)].filter(id => !ids.has(id));
@@ -87,7 +87,7 @@ function extractRenderer(html) {
   const end = html.indexOf("function openStory(", start);
   if (start < 0 || end < 0) fail("A route is missing the publication renderer.");
   return html.slice(start, end)
-    .replace(/^\\s*if\\(\\$\\('currentIssueStatus'\\)\\).*?\\n/m, "")
+    .replace(/^\s*if\(\$\('currentIssueStatus'\)\).*?\n/m, "")
     .trim();
 }
 if (extractRenderer(hr) !== extractRenderer(employee)) {
