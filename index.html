@@ -344,6 +344,24 @@ main{max-width:1260px;margin:0 auto;background:#f8f4eb;box-shadow:0 18px 65px rg
 .issue-status-note{max-width:1120px;margin:0 auto 30px;padding:15px 20px;border-left:3px solid #9b8c74;background:#f5f2ec;color:#4f4b45;font:500 13px/1.6 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;letter-spacing:.01em}
 .empty-state{padding:22px 24px;border:1px solid rgba(35,34,31,.12);background:rgba(255,255,255,.55);color:#777168;font:400 14px/1.65 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif}
 @media(max-width:700px){.issue-status-note{margin:0 18px 24px;padding:13px 15px}}
+
+.custom-published-section{padding-top:58px;padding-bottom:58px;border-top:1px solid var(--line)}
+.custom-published-section .custom-intro{max-width:850px;color:#64748b;white-space:pre-line}
+.custom-published-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:20px}
+.custom-published-card{background:#f7f9fb;border:1px solid #e5eaf0;padding:20px;min-width:0}
+.custom-published-card h3{font-family:var(--serif);font-size:20px;font-weight:600;line-height:1.35;margin:10px 0}
+.custom-published-card p{white-space:pre-line;color:#64748b;font-size:13px;line-height:1.8}
+.custom-published-card img{width:100%;max-height:210px;object-fit:cover;margin:8px 0 12px}
+.section-manager-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:9px;margin:12px 0}
+.section-manager-item{display:flex;align-items:center;justify-content:space-between;gap:9px;padding:10px 12px;border:1px solid #e2e8ef;background:#fbfcfd;font-size:11px}
+.section-manager-item strong{font-size:11px}
+.section-manager-item .danger-button,.section-manager-item .secondary-button{white-space:nowrap}
+.custom-editor-section{border:1px solid #dfe6ed;background:#fbfcfd;padding:15px;margin-top:14px}
+.custom-editor-section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.custom-editor-item{border:1px dashed #d4dde7;padding:12px;margin:10px 0;background:#fff}
+.custom-editor-note{font-size:10px;color:#718096;margin:4px 0 12px}
+@media(max-width:800px){.custom-published-section{padding-top:38px;padding-bottom:38px}.custom-published-grid{grid-template-columns:1fr}}
+
 </style>
 <meta name="robots" content="index,follow">
 </head>
@@ -355,16 +373,17 @@ main{max-width:1260px;margin:0 auto;background:#f8f4eb;box-shadow:0 18px 65px rg
 <nav class="main-nav" id="mainNav"><a href="#inside">Inside This Month</a><a href="#latest">The Latest</a><a href="#international">International Updates</a><a href="#spotlight">In the Spotlight</a><a href="#coming-up">Coming Up</a></nav>
 </header>
 <main>
-<section class="hero-wrap"><div><div class="eyebrow"><span class="eyebrow-line"></span> <span id="editionEyebrow">THE CODE INFORMATICS EDITION</span></div><h1 id="issueTitle">The Monthly Pulse<span class="title-period">.</span></h1><p class="hero-subtitle" id="issueSubtitle">NOVEMBER 2026 | COMPANY NEWS, PEOPLE &amp; PROGRESS</p><div class="hero-meta"><span id="issuePeriod">NOVEMBER 2026 EDITION</span><span class="meta-dot"></span><span>INSIDE CODE INFORMATICS</span></div></div><aside class="hero-side"><div class="hero-side-label" id="heroSideLabel">THIS MONTH, IN FOCUS</div><div class="hero-side-rule"></div><p id="heroIntro">A monthly snapshot of what we achieved, who made it happen, and what is ahead.</p><div class="hero-image-wrap" hidden="" id="heroImageWrap"></div><a class="text-link" href="#inside"><span id="heroCtaLabel">Explore this issue</span> <span>↘</span></a></aside></section><div class="issue-status-note" role="status">This edition is being prepared. Verified monthly updates will appear here once they have been reviewed and approved by Human Capital Management.</div>
-<section class="hcm-message section-shell"><div class="section-kicker" id="hcmKicker">A MESSAGE FROM HCM</div><div class="hcm-grid"><h2 id="hcmHeading">People are at the centre<br/>of our progress.</h2><div><p id="hcmMessage">This month, we are pleased to share a snapshot of progress across our teams - from business milestones and innovation to the people and partnerships moving us forward.</p><div class="hcm-image-wrap" hidden="" id="hcmImageWrap"></div><div class="signature" id="hcmSignature">HUMAN CAPITAL MANAGEMENT · CODE INFORMATICS</div></div></div></section>
+<section class="hero-wrap" id="hero"><div><div class="eyebrow"><span class="eyebrow-line"></span> <span id="editionEyebrow">THE CODE INFORMATICS EDITION</span></div><h1 id="issueTitle">The Monthly Pulse<span class="title-period">.</span></h1><p class="hero-subtitle" id="issueSubtitle">NOVEMBER 2026 | COMPANY NEWS, PEOPLE &amp; PROGRESS</p><div class="hero-meta"><span id="issuePeriod">NOVEMBER 2026 EDITION</span><span class="meta-dot"></span><span>INSIDE CODE INFORMATICS</span></div></div><aside class="hero-side"><div class="hero-side-label" id="heroSideLabel">THIS MONTH, IN FOCUS</div><div class="hero-side-rule"></div><p id="heroIntro">A monthly snapshot of what we achieved, who made it happen, and what is ahead.</p><div class="hero-image-wrap" hidden="" id="heroImageWrap"></div><a class="text-link" href="#inside"><span id="heroCtaLabel">Explore this issue</span> <span>↘</span></a></aside></section><div class="issue-status-note" role="status">This edition is being prepared. Verified monthly updates will appear here once they have been reviewed and approved by Human Capital Management.</div>
+<section class="hcm-message section-shell" id="hcm"><div class="section-kicker" id="hcmKicker">A MESSAGE FROM HCM</div><div class="hcm-grid"><h2 id="hcmHeading">People are at the centre<br/>of our progress.</h2><div><p id="hcmMessage">This month, we are pleased to share a snapshot of progress across our teams - from business milestones and innovation to the people and partnerships moving us forward.</p><div class="hcm-image-wrap" hidden="" id="hcmImageWrap"></div><div class="signature" id="hcmSignature">HUMAN CAPITAL MANAGEMENT · CODE INFORMATICS</div></div></div></section>
 <section class="section-shell highlights-section" id="inside"><div class="section-heading"><div><div class="section-kicker">INSIDE THIS MONTH</div><h2 id="highlightsHeading">Three quick highlights<span class="title-period">.</span></h2></div><span class="section-index">01 / THE MONTH AT A GLANCE</span></div><div class="highlight-grid" id="highlightGrid"></div></section>
 <section class="latest-section" id="latest"><div class="section-heading"><div><div class="section-kicker">THE LATEST</div><h2 id="latestHeading">Highlights from across the company<span class="title-period">.</span></h2></div><span class="section-index">02 / BUSINESS + PEOPLE</span></div><div class="latest-columns"><div><div class="column-heading"><span class="column-symbol">↗</span><h3 id="businessHeading">Business &amp; Innovation</h3></div><div id="businessList"></div></div><div><div class="column-heading"><span class="column-symbol people-symbol">✳</span><h3 id="peopleHeading">People &amp; Culture</h3></div><div id="peopleList"></div></div></div></section>
 <section class="international-band" id="international"><div class="section-shell"><div class="section-kicker light-kicker" id="internationalKicker">INTERNATIONAL UPDATES</div><div class="international-heading"><h2 id="internationalHeading">Global stories<br/><em>relevant to our work.</em></h2><p id="internationalIntro">International projects, client and partner milestones, and global business or technology developments.</p></div><div id="internationalList"></div></div></section>
 <section class="section-shell spotlight-section" id="spotlight"><div class="section-heading"><div><div class="section-kicker">IN THE SPOTLIGHT</div><h2 id="spotlightHeading">People, progress and shared success<span class="title-period">.</span></h2></div><span class="section-index">03 / FEATURE STORY</span></div><div id="spotlightList"></div></section>
 <section class="coming-section" id="coming-up"><div class="section-shell"><div class="section-heading"><div><div class="section-kicker">COMING UP</div><h2 id="comingHeading">Dates, events and opportunities<span class="title-period">.</span></h2></div><span class="section-index">04 / WHAT'S NEXT</span></div><div class="coming-list" id="comingList"></div></div></section>
-<section class="closing-band"><div class="closing-mark">MP</div><p id="footerSlogan">ONE TEAM. SHARED PROGRESS.<br/><strong>BIGGER POSSIBILITIES.</strong></p></section>
+<div id="customSectionsList"></div>
+  <section class="closing-band" id="closing"><div class="closing-mark">MP</div><p id="footerSlogan">ONE TEAM. SHARED PROGRESS.<br/><strong>BIGGER POSSIBILITIES.</strong></p></section>
 </main>
-<footer class="site-footer"><div><strong>CODE INFORMATICS</strong><span>THE MONTHLY PULSE</span></div><p>CODE INFORMATICS • THE MONTHLY PULSE • INTERNAL EMPLOYEE NEWSLETTER</p><span class="footer-note" id="footerMessage">The Monthly Pulse brings together verified monthly updates from across our teams and business units, compiled by Human Capital Management.</span></footer>
+<footer class="site-footer" id="footer"><div><strong>CODE INFORMATICS</strong><span>THE MONTHLY PULSE</span></div><p>CODE INFORMATICS • THE MONTHLY PULSE • INTERNAL EMPLOYEE NEWSLETTER</p><span class="footer-note" id="footerMessage">The Monthly Pulse brings together verified monthly updates from across our teams and business units, compiled by Human Capital Management.</span></footer>
 <div class="modal-backdrop" id="articleModal"><article class="article-modal"><button class="modal-close" id="articleClose">✕</button><div class="article-topline" id="modalCategory"></div><h2 id="modalTitle"></h2><p id="modalBody"></p><div id="modalLinks"></div></article></div>
 
 <script id="mp-newspaper-effects">
@@ -386,7 +405,7 @@ const safeImage = (value) => { const v=String(value||'').trim(); return /^https:
 const imageMarkup = (value, alt) => { const u=safeImage(value); return u ? `<img class="public-inline-image" loading="lazy" src="${esc(u)}" alt="${esc(alt||'Newsletter image')}">` : ''; };
 const empty = () => '<div class="empty-state">No updates have been added to this section for this edition yet.</div>';
 const linkHtml = (url, label) => { const u=https(url); return u ? `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>` : ''; };
-const publication = {"month": "November", "year": 2026, "title": "The Monthly Pulse", "subtitle": "NOVEMBER 2026 | COMPANY NEWS, PEOPLE & PROGRESS", "brandTag": "Company News, People & Progress", "editionEyebrow": "THE CODE INFORMATICS EDITION", "heroSideLabel": "NOVEMBER 2026 ISSUE", "heroCtaLabel": "Explore this issue", "heroIntro": "A monthly snapshot of what we achieved, who made it happen, and what is ahead.", "heroImageUrl": "", "hcmKicker": "A MESSAGE FROM HCM", "hcmHeading": "People are at the centre of our progress.", "hcmImageUrl": "", "hcmSignature": "HUMAN CAPITAL MANAGEMENT · CODE INFORMATICS", "highlightsTitle": "Three quick highlights", "latestTitle": "Highlights from across the company", "businessHeading": "Business & Innovation", "peopleHeading": "People & Culture", "internationalKicker": "INTERNATIONAL UPDATES", "internationalTitle": "Global stories\nrelevant to our work.", "internationalIntro": "International projects, client and partner milestones, and global business or technology developments.", "spotlightTitle": "People, progress and shared success", "comingTitle": "Dates, events and opportunities", "footerSlogan": "ONE TEAM. SHARED PROGRESS.\nBIGGER POSSIBILITIES.", "footerMessage": "The Monthly Pulse brings together verified monthly updates from across our teams and business units, compiled by Human Capital Management.", "hcmMessage": "This month, we are pleased to share a snapshot of progress across our teams — from business milestones and innovation to the people and partnerships moving us forward.", "highlights": [], "businessInnovation": [], "peopleCulture": [], "international": {"headline": "", "summary": "", "sourceUrl": "", "relevance": "", "imageUrl": ""}, "spotlight": {"headline": "", "story": "", "type": "", "personTeam": "", "sourceUrl": "", "imageUrl": ""}, "comingUp": [], "sourceFileName": "Employee edition template", "publishedAt": ""};
+let publication = {"month": "November", "year": 2026, "title": "The Monthly Pulse", "subtitle": "NOVEMBER 2026 | COMPANY NEWS, PEOPLE & PROGRESS", "brandTag": "Company News, People & Progress", "editionEyebrow": "THE CODE INFORMATICS EDITION", "heroSideLabel": "NOVEMBER 2026 ISSUE", "heroCtaLabel": "Explore this issue", "heroIntro": "A monthly snapshot of what we achieved, who made it happen, and what is ahead.", "heroImageUrl": "", "hcmKicker": "A MESSAGE FROM HCM", "hcmHeading": "People are at the centre of our progress.", "hcmImageUrl": "", "hcmSignature": "HUMAN CAPITAL MANAGEMENT · CODE INFORMATICS", "highlightsTitle": "Three quick highlights", "latestTitle": "Highlights from across the company", "businessHeading": "Business & Innovation", "peopleHeading": "People & Culture", "internationalKicker": "INTERNATIONAL UPDATES", "internationalTitle": "Global stories\nrelevant to our work.", "internationalIntro": "International projects, client and partner milestones, and global business or technology developments.", "spotlightTitle": "People, progress and shared success", "comingTitle": "Dates, events and opportunities", "footerSlogan": "ONE TEAM. SHARED PROGRESS.\nBIGGER POSSIBILITIES.", "footerMessage": "The Monthly Pulse brings together verified monthly updates from across our teams and business units, compiled by Human Capital Management.", "hcmMessage": "This month, we are pleased to share a snapshot of progress across our teams — from business milestones and innovation to the people and partnerships moving us forward.", "highlights": [], "businessInnovation": [], "peopleCulture": [], "international": {"headline": "", "summary": "", "sourceUrl": "", "relevance": "", "imageUrl": ""}, "spotlight": {"headline": "", "story": "", "type": "", "personTeam": "", "sourceUrl": "", "imageUrl": ""}, "comingUp": [], "sourceFileName": "Employee edition template", "publishedAt": ""};
 function renderArticleRows(items, section) {
   const list=(items||[]).filter(x=>x && (x.headline||x.summary));
   return list.length ? list.map((x,i)=>`<article class="article-row"><div class="article-topline">${esc(x.type||section)}</div><h4><button class="small-link" style="font-family:var(--serif);font-size:18px;font-weight:500;text-align:left;color:var(--ink)" data-story="${esc(section)}" data-index="${i}">${esc(x.headline||'')}</button></h4><p>${esc([x.summary,x.outcome].filter(Boolean).join('\n'))}</p>${imageMarkup(x.imageUrl,x.headline)}<div class="article-actions">${linkHtml(x.sourceUrl,'Approved source')}${linkHtml(x.ctaUrl,'More information')}</div></article>`).join('') : empty();
@@ -425,7 +444,89 @@ function render() {
   const sp=publication.spotlight||{};
   $('spotlightList').innerHTML=sp.headline?`<article class="spotlight-card"><div class="spotlight-image">${safeImage(sp.imageUrl)?`<img src="${esc(safeImage(sp.imageUrl))}" alt="${esc(sp.headline)}">`:'✳'}</div><div class="spotlight-copy"><div class="article-topline">${esc(sp.type||'FEATURE STORY / EMPLOYEE SPOTLIGHT / TEAM MILESTONE')}</div><h3>${esc(sp.headline)}</h3><p>${esc(sp.story||'')}</p><p>${esc(sp.personTeam||'')}</p>${linkHtml(sp.sourceUrl,'Related link')}</div></article>`:empty();
   $('comingList').innerHTML=(publication.comingUp||[]).filter(x=>x&&(x.title||x.detail)).map(x=>`<article class="coming-row"><div class="coming-date">${esc(x.date||'DATE')}</div><div><h3>${esc(x.title)}</h3>${imageMarkup(x.imageUrl,x.title)}</div><p>${esc(x.detail||'')} ${esc(x.audience||'')} ${esc(x.contact||'')} ${linkHtml(x.url,'Information / registration')}</p></article>`).join('')||empty();
+  renderCustomSections(publication);
+  applySectionVisibility(publication);
 }
+
+const SECTION_CATALOG=[
+ {key:'hero',label:'Masthead / Hero'},
+ {key:'hcm',label:'A Message from HCM'},
+ {key:'inside',label:'Inside This Month — Highlights'},
+ {key:'latest',label:'The Latest — Entire Section'},
+ {key:'businessInnovation',label:'Business & Innovation'},
+ {key:'peopleCulture',label:'People & Culture'},
+ {key:'international',label:'International Updates'},
+ {key:'spotlight',label:'In the Spotlight'},
+ {key:'comingUp',label:'Coming Up'},
+ {key:'closing',label:'Closing Banner'},
+ {key:'footer',label:'Footer'},
+];
+function sectionManagerMarkup(){
+ const hidden=new Set(editorDraft.hiddenSections||[]);
+ const rows=SECTION_CATALOG.map(item=>{
+  const removed=hidden.has(item.key);
+  return `<div class="section-manager-item"><strong>${esc(item.label)}</strong>${removed
+   ?`<button type="button" class="secondary-button" data-section-restore="${item.key}">Restore</button>`
+   :`<button type="button" class="danger-button" data-section-remove="${item.key}">Delete section</button>`}</div>`;
+ }).join('');
+ return `<div class="editor-section"><h4>Section Manager</h4><p class="editor-help">Remove any standard section from the employee edition, or restore it later. Removed sections and their content are excluded when you publish.</p><div class="section-manager-list">${rows}</div><div class="hr-status">Custom sections can be created below. All section changes are included in Save Draft and Publish.</div></div>`;
+}
+function customSectionEditorMarkup(){
+ const sections=Array.isArray(editorDraft.customSections)?editorDraft.customSections:[];
+ const blocks=sections.map((section,i)=>{
+  const items=Array.isArray(section.items)?section.items:[];
+  const itemMarkup=items.map((item,j)=>`<div class="custom-editor-item"><div class="custom-editor-section-head"><strong>Content item ${j+1}</strong><button type="button" class="danger-button" data-custom-item-remove="${i}" data-custom-item-index="${j}">Remove item</button></div><div class="editor-grid">${editorField(`customSections.${i}.items.${j}.type`,'Item label',item.type||'UPDATE')}${editorField(`customSections.${i}.items.${j}.headline`,'Heading',item.headline||'')}${editorField(`customSections.${i}.items.${j}.summary`,'Text / description',item.summary||'',{area:true,full:true})}${editorField(`customSections.${i}.items.${j}.url`,'Related link (HTTPS)',item.url||'')}${editorImage(`customSections.${i}.items.${j}.imageUrl`,'Attach picture',item.imageUrl||'')}</div></div>`).join('');
+  return `<div class="custom-editor-section"><div class="custom-editor-section-head"><strong>Custom section ${i+1}</strong><button type="button" class="danger-button" data-custom-section-remove="${i}">Delete this section</button></div><div class="editor-grid">${editorField(`customSections.${i}.title`,'Section title',section.title||'')}${editorField(`customSections.${i}.kicker`,'Small label / category',section.kicker||'ADDITIONAL SECTION')}${editorField(`customSections.${i}.intro`,'Section introduction',section.intro||'',{area:true,full:true})}</div><p class="custom-editor-note">Each section can contain multiple text and image cards.</p>${itemMarkup}<button type="button" class="secondary-button" data-custom-item-add="${i}">＋ Add content item</button></div>`;
+ }).join('');
+ return `<div class="editor-section"><h4>Custom Sections</h4><p class="editor-help">Create a completely new section for the employee page, with its own heading, description, text cards, links and pictures.</p><button type="button" class="primary-button" data-custom-section-add>＋ Add New Section</button>${blocks||'<p class="custom-editor-note">No custom sections added yet.</p>'}</div>`;
+}
+function applySectionVisibility(data){
+ const hidden=new Set(Array.isArray(data.hiddenSections)?data.hiddenSections:[]);
+ const map={
+  hero:document.getElementById('hero')||document.querySelector('main .hero-wrap'),
+  hcm:document.getElementById('hcm')||document.querySelector('main .hcm-message'),
+  inside:document.getElementById('inside'),
+  latest:document.getElementById('latest'),
+  businessInnovation:document.getElementById('businessList')?.parentElement,
+  peopleCulture:document.getElementById('peopleList')?.parentElement,
+  international:document.getElementById('international'),
+  spotlight:document.getElementById('spotlight'),
+  comingUp:document.getElementById('coming-up'),
+  closing:document.getElementById('closing')||document.querySelector('main .closing-band'),
+  footer:document.getElementById('footer')||document.querySelector('footer.site-footer'),
+ };
+ Object.entries(map).forEach(([key,el])=>{if(el)el.hidden=hidden.has(key);});
+ const businessHidden=hidden.has('businessInnovation'),peopleHidden=hidden.has('peopleCulture');
+ const latest=document.getElementById('latest');
+ if(latest&&!hidden.has('latest'))latest.hidden=businessHidden&&peopleHidden;
+ const nav=document.getElementById('mainNav');
+ if(nav){
+  nav.querySelectorAll('a[href^="#"]').forEach(a=>{
+   const key=({ '#inside':'inside','#latest':'latest','#international':'international','#spotlight':'spotlight','#coming-up':'comingUp' })[a.getAttribute('href')];
+   if(key)a.hidden=hidden.has(key)||(key==='latest'&&businessHidden&&peopleHidden);
+  });
+  nav.querySelectorAll('a[data-custom-nav]').forEach(a=>a.remove());
+  (data.customSections||[]).forEach(section=>{
+   const id=String(section.id||'').replace(/[^a-zA-Z0-9_-]/g,'');
+   if(id)nav.insertAdjacentHTML('beforeend',`<a data-custom-nav href="#${esc(id)}">${esc(section.title||'New section')}</a>`);
+  });
+ }
+}
+function renderCustomSections(data){
+ const host=document.getElementById('customSectionsList');
+ if(!host)return;
+ host.innerHTML=(data.customSections||[]).map((section,index)=>{
+  const id=String(section.id||('custom-'+index)).replace(/[^a-zA-Z0-9_-]/g,'');
+  const items=(section.items||[]).filter(item=>item&&(item.headline||item.summary||item.imageUrl)).map(item=>`<article class="custom-published-card"><div class="article-topline">${esc(item.type||section.kicker||'UPDATE')}</div><h3>${esc(item.headline||'')}</h3>${imageMarkup(item.imageUrl,item.headline||section.title)}<p>${esc(item.summary||'')}</p>${linkHtml(item.url,'Related information')}</article>`).join('');
+  return `<section class="section-shell custom-published-section" id="${esc(id)}"><div class="section-heading"><div><div class="section-kicker">${esc(section.kicker||'ADDITIONAL SECTION')}</div><h2>${esc(section.title||'New section')}</h2></div></div>${section.intro?`<p class="custom-intro">${esc(section.intro)}</p>`:''}<div class="custom-published-grid">${items||empty('No content has been added to this section yet.')}</div></section>`;
+ }).join('');
+}
+function createCustomSection(){
+ if(!Array.isArray(editorDraft.customSections))editorDraft.customSections=[];
+ editorDraft.customSections.push({id:'custom-'+uid(),title:'New section',kicker:'ADDITIONAL SECTION',intro:'',items:[{type:'UPDATE',headline:'New item',summary:'',url:'',imageUrl:''}]});
+ renderDirectEditor();render();$('directEditorStatus').textContent='New section added. Add its content, then save or publish.';
+}
+
 function openStory(type,index) {
   const items=type==='business'?publication.businessInnovation:publication.peopleCulture;
   const item=(items||[])[index]; if(!item) return;
@@ -449,30 +550,27 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 (async function loadLatestPublishedEdition(){
+  const statusNote=document.querySelector('.issue-status-note');
   try{
     const client=window.supabase.createClient('https://hotyjsgogisglrbgmtns.supabase.co','sb_publishable_0pKDjnllPyQjKJ0S6F4vOQ_tMLpLVMM');
-    const {data,error}=await client.from('newsletter_editions').select('publication,published_at').eq('status','published').order('published_at',{ascending:false}).limit(1).maybeSingle();
-    if(error){console.warn('Could not load the latest newsletter edition:',error.message);return;}
+    const {data,error}=await client.from('newsletter_editions')
+      .select('publication,published_at')
+      .eq('status','published')
+      .order('published_at',{ascending:false})
+      .order('updated_at',{ascending:false})
+      .limit(1)
+      .maybeSingle();
+    if(error)throw error;
     if(!data||!data.publication)return;
-    const p=data.publication;
-    const setText=(id,value)=>{const el=document.getElementById(id);if(el&&value!=null)el.textContent=String(value);};
-    const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-    setText('brandTag',p.brandTag||'Company News, People & Progress');setText('editionEyebrow',p.editionEyebrow||'THE CODE INFORMATICS EDITION');setText('heroSideLabel',p.heroSideLabel||'THIS MONTH, IN FOCUS');setText('heroCtaLabel',p.heroCtaLabel||'Explore this issue');
-    setText('hcmKicker',p.hcmKicker||'A MESSAGE FROM HCM');setText('hcmSignature',p.hcmSignature||'HUMAN CAPITAL MANAGEMENT · CODE INFORMATICS');setText('businessHeading',p.businessHeading||'Business & Innovation');setText('peopleHeading',p.peopleHeading||'People & Culture');setText('internationalKicker',p.internationalKicker||'INTERNATIONAL UPDATES');setText('internationalIntro',p.internationalIntro||'');
-    const title=document.getElementById('issueTitle');if(title)title.innerHTML=esc(p.title||'The Monthly Pulse')+'<span class="title-period">.</span>';
-    setText('issueSubtitle',p.subtitle||'');setText('issuePeriod',String(p.month||'').toUpperCase()+' '+(p.year||'')+' EDITION');setText('heroIntro',p.heroIntro||'');
-    setText('hcmHeading',p.hcmHeading||'');setText('hcmMessage',p.hcmMessage||'');setText('highlightsTitle',p.highlightsTitle||'Three quick highlights');setText('latestTitle',p.latestTitle||'Highlights from across the company');setText('internationalHeading',p.internationalTitle||'Global stories relevant to our work.');setText('spotlightHeading',p.spotlightTitle||'People, progress and shared success');setText('comingHeading',p.comingTitle||'Dates, events and opportunities');setText('footerSlogan',p.footerSlogan||'ONE TEAM. SHARED PROGRESS. BIGGER POSSIBILITIES.');setText('footerMessage',p.footerMessage||'');
-    const img=(id,url)=>{const el=document.getElementById(id);if(el&&url){el.src=url;el.style.display='block';}};img('heroImage',p.heroImageUrl);img('hcmImage',p.hcmImageUrl);
-    const highlights=document.getElementById('highlightsList');if(highlights)highlights.innerHTML=(p.highlights||[]).map((x,i)=>`<article class="highlight-card"><span class="highlight-number">0${i+1} / ${esc(x.type||'HIGHLIGHT').toUpperCase()}</span><h3>${esc(x.headline||'')}</h3><p>${esc(x.summary||'')}</p></article>`).join('');
-    const renderRows=(items)=> (items||[]).filter(x=>x&&(x.headline||x.summary)).map(x=>`<article class="article-row"><div class="article-topline">${esc(x.type||'UPDATE')}</div><h4>${esc(x.headline||'')}</h4><p>${esc([x.summary,x.outcome].filter(Boolean).join(' '))}</p>${x.imageUrl?`<img src="${esc(x.imageUrl)}" alt="" loading="lazy">`:''}</article>`).join('')||'<p class="empty-state">No updates have been published in this section yet.</p>';
-    setText('businessHeading',p.businessHeading||'Business & Innovation');setText('peopleHeading',p.peopleHeading||'People & Culture');
-    const business=document.getElementById('businessList');if(business)business.innerHTML=renderRows(p.businessInnovation);
-    const people=document.getElementById('peopleList');if(people)people.innerHTML=renderRows(p.peopleCulture);
-    const international=document.getElementById('internationalList');if(international){const x=p.international||{};international.innerHTML=`<article class="international-card"><h3>${esc(x.headline||'')}</h3><p>${esc(x.summary||'')}</p><p><strong>Relevance:</strong> ${esc(x.relevance||'')}</p>${x.sourceUrl?`<a href="${esc(x.sourceUrl)}" target="_blank" rel="noopener noreferrer">Approved source ↗</a>`:''}</article>`;}
-    const spotlight=document.getElementById('spotlightList');if(spotlight){const x=p.spotlight||{};spotlight.innerHTML=`<article class="spotlight-card"><h3>${esc(x.headline||'')}</h3><p>${esc(x.story||'')}</p></article>`;}
-    const coming=document.getElementById('comingList');if(coming)coming.innerHTML=(p.comingUp||[]).filter(x=>x&&(x.date||x.title||x.detail)).map(x=>`<article class="coming-item"><div class="coming-date">${esc(x.date||'')}</div><div><h3>${esc(x.title||'')}</h3><p>${esc(x.detail||'')}</p></div></article>`).join('')||'<p class="empty-state">New dates and activities will appear here.</p>';
-    const period=document.getElementById('issuePeriod');if(period)period.textContent=String(p.month||'').toUpperCase()+' '+(p.year||'')+' EDITION';
-  }catch(e){console.warn('Newsletter data refresh failed:',e);}
+    publication={...publication,...data.publication,publishedAt:data.published_at||data.publication.publishedAt||''};
+    render();
+    if(statusNote)statusNote.remove();
+    document.dispatchEvent(new CustomEvent('newsletter:published-edition-loaded',{
+      detail:{publishedAt:data.published_at||null,sectionCount:(publication.customSections||[]).length}
+    }));
+  }catch(error){
+    console.warn('Could not load the published employee edition:',error.message||error);
+  }
 })();
 </script>
 
