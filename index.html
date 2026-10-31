@@ -511,28 +511,53 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-(async function loadLatestPublishedEdition(){
+(async function employeeEditionSync(){
+  let client=null;
+  let lastPublishedAt='';
+  let checking=false;
   const statusNote=document.querySelector('.issue-status-note');
-  try{
-    const client=window.supabase.createClient('https://hotyjsgogisglrbgmtns.supabase.co','sb_publishable_0pKDjnllPyQjKJ0S6F4vOQ_tMLpLVMM');
-    const {data,error}=await client.from('newsletter_editions')
-      .select('publication,published_at')
-      .eq('status','published')
-      .order('published_at',{ascending:false})
-      .order('updated_at',{ascending:false})
-      .limit(1)
-      .maybeSingle();
-    if(error)throw error;
-    if(!data||!data.publication)return;
-    publication={...publication,...data.publication,publishedAt:data.published_at||data.publication.publishedAt||''};
-    render();
-    if(statusNote)statusNote.remove();
-    document.dispatchEvent(new CustomEvent('newsletter:published-edition-loaded',{
-      detail:{publishedAt:data.published_at||null,sectionCount:(publication.customSections||[]).length}
-    }));
-  }catch(error){
-    console.warn('Could not load the published employee edition:',error.message||error);
+
+  async function loadLatestPublishedEdition(){
+    if(checking)return;
+    checking=true;
+    try{
+      if(!client)client=window.supabase.createClient('https://hotyjsgogisglrbgmtns.supabase.co','sb_publishable_0pKDjnllPyQjKJ0S6F4vOQ_tMLpLVMM');
+      const {data,error}=await client.from('newsletter_editions')
+        .select('publication,published_at')
+        .eq('status','published')
+        .order('published_at',{ascending:false})
+        .order('updated_at',{ascending:false})
+        .limit(1)
+        .maybeSingle();
+      if(error)throw error;
+      if(!data||!data.publication)return;
+
+      const publishedAt=data.published_at||data.publication.publishedAt||'';
+      const isNewEdition=publishedAt!==lastPublishedAt;
+      if(isNewEdition){
+        publication={...publication,...data.publication,publishedAt};
+        render();
+        lastPublishedAt=publishedAt;
+        document.dispatchEvent(new CustomEvent('newsletter:published-edition-loaded',{
+          detail:{publishedAt:publishedAt||null,sectionCount:(publication.customSections||[]).length}
+        }));
+      }
+      if(statusNote)statusNote.remove();
+    }catch(error){
+      console.warn('Could not load the published employee edition:',error.message||error);
+    }finally{
+      checking=false;
+    }
   }
+
+  await loadLatestPublishedEdition();
+  // Keep already-open employee pages in sync with new HR publications.
+  window.setInterval(()=>{
+    if(document.visibilityState==='visible')loadLatestPublishedEdition();
+  },20000);
+  document.addEventListener('visibilitychange',()=>{
+    if(document.visibilityState==='visible')loadLatestPublishedEdition();
+  });
 })();
 </script>
 
