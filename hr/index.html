@@ -337,6 +337,24 @@ main{max-width:1260px;margin:0 auto;background:#f8f4eb;box-shadow:0 18px 65px rg
 @media(prefers-reduced-motion:reduce){.news-reveal,.brand-name,.hero-wrap{opacity:1;transform:none;animation:none!important}*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
 /* ===== END NEWSPAPER REDESIGN ===== */
 
+
+.custom-published-section{padding-top:58px;padding-bottom:58px;border-top:1px solid var(--line)}
+.custom-published-section .custom-intro{max-width:850px;color:#64748b;white-space:pre-line}
+.custom-published-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:20px}
+.custom-published-card{background:#f7f9fb;border:1px solid #e5eaf0;padding:20px;min-width:0}
+.custom-published-card h3{font-family:var(--serif);font-size:20px;font-weight:600;line-height:1.35;margin:10px 0}
+.custom-published-card p{white-space:pre-line;color:#64748b;font-size:13px;line-height:1.8}
+.custom-published-card img{width:100%;max-height:210px;object-fit:cover;margin:8px 0 12px}
+.section-manager-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:9px;margin:12px 0}
+.section-manager-item{display:flex;align-items:center;justify-content:space-between;gap:9px;padding:10px 12px;border:1px solid #e2e8ef;background:#fbfcfd;font-size:11px}
+.section-manager-item strong{font-size:11px}
+.section-manager-item .danger-button,.section-manager-item .secondary-button{white-space:nowrap}
+.custom-editor-section{border:1px solid #dfe6ed;background:#fbfcfd;padding:15px;margin-top:14px}
+.custom-editor-section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.custom-editor-item{border:1px dashed #d4dde7;padding:12px;margin:10px 0;background:#fff}
+.custom-editor-note{font-size:10px;color:#718096;margin:4px 0 12px}
+@media(max-width:800px){.custom-published-section{padding-top:38px;padding-bottom:38px}.custom-published-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -348,20 +366,21 @@ main{max-width:1260px;margin:0 auto;background:#f8f4eb;box-shadow:0 18px 65px rg
   <div class="header-actions"><button class="admin-link" id="hrOpenBtn">HR Admin Sign In ↗</button></div>
 </header>
 <main>
-  <section class="hero-wrap"><div><div class="eyebrow"><span class="eyebrow-line"></span> <span id="editionEyebrow">THE CODE INFORMATICS EDITION</span></div><h1 id="issueTitle">The Monthly Pulse<span class="title-period">.</span></h1><p class="hero-subtitle" id="issueSubtitle">[MONTH YEAR] | COMPANY NEWS, PEOPLE &amp; PROGRESS</p><div class="hero-meta"><span id="issuePeriod">MONTHLY EDITION</span><span class="meta-dot"></span><span>INSIDE CODE INFORMATICS</span></div></div><aside class="hero-side"><div class="hero-side-label" id="heroSideLabel">THIS MONTH, IN FOCUS</div><div class="hero-side-rule"></div><p id="heroIntro">A monthly snapshot of what we achieved, who made it happen, and what is ahead.</p><div id="heroImageWrap" class="hero-image-wrap" hidden></div><a class="text-link" href="#inside"><span id="heroCtaLabel">Explore this issue</span> <span>↘</span></a></aside></section>
-  <section class="hcm-message section-shell"><div class="section-kicker" id="hcmKicker">A MESSAGE FROM HCM</div><div class="hcm-grid"><h2 id="hcmHeading">People are at the centre<br>of our progress.</h2><div><p id="hcmMessage">This month, we are pleased to share a snapshot of progress across our teams - from business milestones and innovation to the people and partnerships moving us forward.</p><div id="hcmImageWrap" class="hcm-image-wrap" hidden></div><div class="signature" id="hcmSignature">HUMAN CAPITAL MANAGEMENT · CODE INFORMATICS</div></div></div></section>
+  <section class="hero-wrap" id="hero"><div><div class="eyebrow"><span class="eyebrow-line"></span> <span id="editionEyebrow">THE CODE INFORMATICS EDITION</span></div><h1 id="issueTitle">The Monthly Pulse<span class="title-period">.</span></h1><p class="hero-subtitle" id="issueSubtitle">[MONTH YEAR] | COMPANY NEWS, PEOPLE &amp; PROGRESS</p><div class="hero-meta"><span id="issuePeriod">MONTHLY EDITION</span><span class="meta-dot"></span><span>INSIDE CODE INFORMATICS</span></div></div><aside class="hero-side"><div class="hero-side-label" id="heroSideLabel">THIS MONTH, IN FOCUS</div><div class="hero-side-rule"></div><p id="heroIntro">A monthly snapshot of what we achieved, who made it happen, and what is ahead.</p><div id="heroImageWrap" class="hero-image-wrap" hidden></div><a class="text-link" href="#inside"><span id="heroCtaLabel">Explore this issue</span> <span>↘</span></a></aside></section>
+  <section class="hcm-message section-shell" id="hcm"><div class="section-kicker" id="hcmKicker">A MESSAGE FROM HCM</div><div class="hcm-grid"><h2 id="hcmHeading">People are at the centre<br>of our progress.</h2><div><p id="hcmMessage">This month, we are pleased to share a snapshot of progress across our teams - from business milestones and innovation to the people and partnerships moving us forward.</p><div id="hcmImageWrap" class="hcm-image-wrap" hidden></div><div class="signature" id="hcmSignature">HUMAN CAPITAL MANAGEMENT · CODE INFORMATICS</div></div></div></section>
   <section class="section-shell highlights-section" id="inside"><div class="section-heading"><div><div class="section-kicker">INSIDE THIS MONTH</div><h2 id="highlightsHeading">Three quick highlights<span class="title-period">.</span></h2></div><span class="section-index">01 / THE MONTH AT A GLANCE</span></div><div class="highlight-grid" id="highlightGrid"></div></section>
   <section class="latest-section" id="latest"><div class="section-heading"><div><div class="section-kicker">THE LATEST</div><h2 id="latestHeading">Highlights from across the company<span class="title-period">.</span></h2></div><span class="section-index">02 / BUSINESS + PEOPLE</span></div><div class="latest-columns"><div><div class="column-heading"><span class="column-symbol">↗</span><h3 id="businessHeading">Business &amp; Innovation</h3></div><div id="businessList"></div></div><div><div class="column-heading"><span class="column-symbol people-symbol">✳</span><h3 id="peopleHeading">People &amp; Culture</h3></div><div id="peopleList"></div></div></div></section>
   <section class="international-band" id="international"><div class="section-shell"><div class="section-kicker light-kicker" id="internationalKicker">INTERNATIONAL UPDATES</div><div class="international-heading"><h2 id="internationalHeading">Global stories<br><em>relevant to our work.</em></h2><p id="internationalIntro">International projects, client and partner milestones, and global business or technology developments.</p></div><div id="internationalList"></div></div></section>
   <section class="section-shell spotlight-section" id="spotlight"><div class="section-heading"><div><div class="section-kicker">IN THE SPOTLIGHT</div><h2 id="spotlightHeading">People, progress and shared success<span class="title-period">.</span></h2></div><span class="section-index">03 / FEATURE STORY</span></div><div id="spotlightList"></div></section>
   <section class="coming-section" id="coming-up"><div class="section-shell"><div class="section-heading"><div><div class="section-kicker">COMING UP</div><h2 id="comingHeading">Dates, events and opportunities<span class="title-period">.</span></h2></div><span class="section-index">04 / WHAT'S NEXT</span></div><div id="comingList" class="coming-list"></div></div></section>
-  <section class="closing-band"><div class="closing-mark">MP</div><p id="footerSlogan">ONE TEAM. SHARED PROGRESS.<br><strong>BIGGER POSSIBILITIES.</strong></p></section>
+  <div id="customSectionsList"></div>
+  <section class="closing-band" id="closing"><div class="closing-mark">MP</div><p id="footerSlogan">ONE TEAM. SHARED PROGRESS.<br><strong>BIGGER POSSIBILITIES.</strong></p></section>
 </main>
-<footer class="site-footer"><div><strong>CODE INFORMATICS</strong><span>THE MONTHLY PULSE</span></div><p>CODE INFORMATICS • THE MONTHLY PULSE • INTERNAL EMPLOYEE NEWSLETTER</p><span class="footer-note" id="footerMessage">The Monthly Pulse brings together verified monthly updates from across our teams and business units, compiled by Human Capital Management.</span><div class="privacy-note">This newsletter contains company-approved monthly updates. Engagement data in the single-file edition is browser-local; Site-level analytics are available separately in your hosting dashboard.</div></footer>
+<footer class="site-footer" id="footer"><div><strong>CODE INFORMATICS</strong><span>THE MONTHLY PULSE</span></div><p>CODE INFORMATICS • THE MONTHLY PULSE • INTERNAL EMPLOYEE NEWSLETTER</p><span class="footer-note" id="footerMessage">The Monthly Pulse brings together verified monthly updates from across our teams and business units, compiled by Human Capital Management.</span><div class="privacy-note">This newsletter contains company-approved monthly updates. Engagement data in the single-file edition is browser-local; Site-level analytics are available separately in your hosting dashboard.</div></footer>
 
 <section class="hr-workspace" id="hrWorkspace"><div class="hr-wrap">
   <div class="hr-head"><div><div class="section-kicker">HUMAN CAPITAL MANAGEMENT</div><h2>HR Publishing Studio<span class="hr-heading-star">✦</span></h2><p>Shape every story, image and detail of the employee edition in one elegant workspace.</p></div><button class="secondary-button" id="hrLogoutBtn">Lock workspace</button></div>
-  <div class="demo-label"><strong>Secure publishing:</strong> This workspace uses verified Supabase email/password sign-in and database-level HR permissions. Drafts are saved centrally. Publishing updates the employee newsletter link automatically. Employees never receive this workspace or its administrator controls.</div>
+  <div class="demo-label"><strong>Secure publishing:</strong> This workspace uses a password-protected HR login and database-level administrator permissions. Employee users cannot access editing controls. Drafts are saved centrally. Publishing updates the employee newsletter link automatically. Employees never receive this workspace or its administrator controls.</div>
   <div class="hr-card" id="directEditorCard"><div class="hr-card-eyebrow">CONTENT STUDIO · 01</div><h3>Edit your newsletter</h3><p>Use the structured content tables below to update every heading, article, date, supporting link and picture. Save to refresh the main preview, then generate a self-contained HTML edition for employees.</p><div class="hr-actions" style="margin-bottom:16px"><button class="primary-button" id="saveDirectEditorBtn">Save Draft to Cloud</button><button class="primary-button" id="publishIssueBtn">Publish to Employees ↗</button><button class="secondary-button" id="generateEmployeeHtmlBtn">Download Employee HTML</button><button class="secondary-button" id="downloadDirectHtmlBtn">Download HR Master Copy ↓</button></div><div class="hr-status" id="directEditorStatus" role="status"></div><div id="directEditor"></div><div class="hr-actions" style="margin-top:16px"><button class="primary-button" id="saveDirectEditorBottomBtn">Save Draft to Cloud</button><button class="primary-button" id="publishIssueBottomBtn">Publish to Employees ↗</button><button class="secondary-button" id="generateEmployeeHtmlBottomBtn">Download Employee HTML</button><button class="secondary-button" id="downloadDirectHtmlBottomBtn">Download HR Master Copy</button></div></div>
   <div class="hr-card"><div class="hr-card-eyebrow">ENGAGEMENT · 02</div><h3>Website visit &amp; engagement overview</h3><p>Review activity captured in this browser. Site-wide analytics depend on the hosting provider and can be connected separately.</p><div class="hr-kpis" id="analyticsKpis"></div><div class="hr-actions" style="margin-top:14px"><a class="secondary-button" id="netlifyAnalyticsLink" href="https://app.netlify.com/" target="_blank" rel="noopener">Open hosting dashboard ↗</a><button class="danger-button" id="clearActivityBtn">Clear browser activity</button></div><div class="hr-status" id="analyticsStatus"></div><div class="hr-table-wrap" style="margin-top:14px"><table class="hr-table"><thead><tr><th>Time</th><th>Visitor ID</th><th>Event</th><th>Section / Item</th></tr></thead><tbody id="activityRows"></tbody></table></div></div>
   <div class="hr-card"><div class="hr-card-eyebrow">PUBLICATION · 03</div><h3>Current edition</h3><p id="currentIssueStatus">Starter newsletter preview.</p><div class="hr-actions"><button class="secondary-button" id="resetPreviewBtn">Restore Word-template starter content</button></div></div>
@@ -428,6 +447,14 @@ function hydratePublication(value){
  publication.international={...starter.international,...publication.international};
  publication.spotlight={...starter.spotlight,...publication.spotlight};
  publication.comingUp=(publication.comingUp||starter.comingUp).map((x,i)=>({...starter.comingUp[i],...x}));
+ publication.hiddenSections=Array.isArray(publication.hiddenSections)?publication.hiddenSections:[];
+ publication.customSections=Array.isArray(publication.customSections)?publication.customSections.map((section,i)=>({
+  id:String(section.id||('custom-'+i)).replace(/[^a-zA-Z0-9_-]/g,''),
+  title:String(section.title||'New section'),
+  kicker:String(section.kicker||'ADDITIONAL SECTION'),
+  intro:String(section.intro||''),
+  items:Array.isArray(section.items)?section.items.map(item=>({...item})):[],
+ })):[];
 }
 function savePublication(){writeStore(STORE.publication,publication)}
 function track(eventType,target){events.push({id:uid(),time:new Date().toISOString(),visitorId,sessionId,eventType,target:target||'',issue:`${publication.month} ${publication.year}`});if(events.length>5000)events=events.slice(-5000);writeStore(STORE.events,events);if(hrOpen)renderAnalytics()}
@@ -444,6 +471,8 @@ function render(){
  const sp=publication.spotlight||{};$('spotlightList').innerHTML=sp.headline?`<article class="spotlight-card"><div class="spotlight-image">${safeImage(sp.imageUrl)?`<img src="${esc(safeImage(sp.imageUrl))}" alt="${esc(sp.headline)}">`:'✳'}</div><div class="spotlight-copy"><div class="article-topline">${esc(sp.type||'FEATURE STORY / EMPLOYEE SPOTLIGHT / TEAM MILESTONE')}</div><h3>${esc(sp.headline)}</h3><p>${esc(sp.story)}</p><p>${esc(sp.personTeam||'')}</p>${linkHtml(sp.sourceUrl,'Related link')}</div></article>`:empty('No feature story has been added.');
  $('comingList').innerHTML=(publication.comingUp||[]).filter(x=>x&&(x.title||x.detail)).map((x,i)=>`<article class="coming-row"><div class="coming-date">${esc(x.date||'DATE')}</div><div><h3>${esc(x.title)}</h3>${imageMarkup(x.imageUrl,x.title)}</div><p>${esc(x.detail)} ${esc(x.audience||'')} ${esc(x.contact||'')} ${linkHtml(x.url,'Information / registration')}</p></article>`).join('')||empty('No upcoming activities have been added.');
  if($('currentIssueStatus'))$('currentIssueStatus').textContent=`${publication.month||''} ${publication.year||''} · ${publication.title||''} · ${publication.sourceFileName||'Starter content'} · ${publication.publishedAt?new Date(publication.publishedAt).toLocaleString():'Preview only'}`;
+ renderCustomSections(publication);
+ applySectionVisibility(publication);
 }
 function openStory(type,index){let item,title,body,url='';if(type==='business'){item=(publication.businessInnovation||[])[index];title=item?.headline;body=[item?.summary,item?.outcome].filter(Boolean).join('\n\n');url=item?.sourceUrl||item?.ctaUrl}if(type==='people'){item=(publication.peopleCulture||[])[index];title=item?.headline;body=[item?.summary,item?.impact,item?.personTeam].filter(Boolean).join('\n\n');url=item?.ctaUrl}if(!item)return;$('modalCategory').textContent=type==='business'?'BUSINESS & INNOVATION':'PEOPLE & CULTURE';$('modalTitle').textContent=title||'';$('modalBody').textContent=body||'';$('modalLinks').innerHTML=linkHtml(url,'More information');$('articleModal').classList.add('open');track('article_open',title)}
 const SUPABASE_URL = 'https://hotyjsgogisglrbgmtns.supabase.co';
@@ -504,9 +533,91 @@ function editorImage(path,label,value){const url=safeImage(value);return `<div c
 function editorItem(title,fields,removePath,removeIndex){const remove=removePath?`<button type="button" class="danger-button" data-array-remove="${esc(removePath)}" data-array-index="${removeIndex}">Remove this item</button>`:'';return `<div class="editor-item"><h5>${esc(title)}</h5><div class="editor-grid">${fields.join('')}</div>${remove}</div>`;}
 function arrayAddButton(path,label){return `<button type="button" class="secondary-button" data-array-add="${esc(path)}">＋ Add ${esc(label)}</button>`;}
 function newArrayItem(path){const templates={highlights:{type:'Company highlight',headline:'New highlight',summary:'',linkUrl:'',imageUrl:''},businessInnovation:{type:'Business update',headline:'New business story',summary:'',outcome:'',sourceUrl:'',ctaUrl:'',imageUrl:''},peopleCulture:{type:'People & culture',headline:'New people story',summary:'',impact:'',personTeam:'',ctaUrl:'',imageUrl:''},comingUp:{date:'',title:'New activity',detail:'',audience:'',contact:'',url:'',imageUrl:''}};return JSON.parse(JSON.stringify(templates[path]));}
+
+const SECTION_CATALOG=[
+ {key:'hero',label:'Masthead / Hero'},
+ {key:'hcm',label:'A Message from HCM'},
+ {key:'inside',label:'Inside This Month — Highlights'},
+ {key:'latest',label:'The Latest — Entire Section'},
+ {key:'businessInnovation',label:'Business & Innovation'},
+ {key:'peopleCulture',label:'People & Culture'},
+ {key:'international',label:'International Updates'},
+ {key:'spotlight',label:'In the Spotlight'},
+ {key:'comingUp',label:'Coming Up'},
+ {key:'closing',label:'Closing Banner'},
+ {key:'footer',label:'Footer'},
+];
+function sectionManagerMarkup(){
+ const hidden=new Set(editorDraft.hiddenSections||[]);
+ const rows=SECTION_CATALOG.map(item=>{
+  const removed=hidden.has(item.key);
+  return `<div class="section-manager-item"><strong>${esc(item.label)}</strong>${removed
+   ?`<button type="button" class="secondary-button" data-section-restore="${item.key}">Restore</button>`
+   :`<button type="button" class="danger-button" data-section-remove="${item.key}">Delete section</button>`}</div>`;
+ }).join('');
+ return `<div class="editor-section"><h4>Section Manager</h4><p class="editor-help">Remove any standard section from the employee edition, or restore it later. Removed sections and their content are excluded when you publish.</p><div class="section-manager-list">${rows}</div><div class="hr-status">Custom sections can be created below. All section changes are included in Save Draft and Publish.</div></div>`;
+}
+function customSectionEditorMarkup(){
+ const sections=Array.isArray(editorDraft.customSections)?editorDraft.customSections:[];
+ const blocks=sections.map((section,i)=>{
+  const items=Array.isArray(section.items)?section.items:[];
+  const itemMarkup=items.map((item,j)=>`<div class="custom-editor-item"><div class="custom-editor-section-head"><strong>Content item ${j+1}</strong><button type="button" class="danger-button" data-custom-item-remove="${i}" data-custom-item-index="${j}">Remove item</button></div><div class="editor-grid">${editorField(`customSections.${i}.items.${j}.type`,'Item label',item.type||'UPDATE')}${editorField(`customSections.${i}.items.${j}.headline`,'Heading',item.headline||'')}${editorField(`customSections.${i}.items.${j}.summary`,'Text / description',item.summary||'',{area:true,full:true})}${editorField(`customSections.${i}.items.${j}.url`,'Related link (HTTPS)',item.url||'')}${editorImage(`customSections.${i}.items.${j}.imageUrl`,'Attach picture',item.imageUrl||'')}</div></div>`).join('');
+  return `<div class="custom-editor-section"><div class="custom-editor-section-head"><strong>Custom section ${i+1}</strong><button type="button" class="danger-button" data-custom-section-remove="${i}">Delete this section</button></div><div class="editor-grid">${editorField(`customSections.${i}.title`,'Section title',section.title||'')}${editorField(`customSections.${i}.kicker`,'Small label / category',section.kicker||'ADDITIONAL SECTION')}${editorField(`customSections.${i}.intro`,'Section introduction',section.intro||'',{area:true,full:true})}</div><p class="custom-editor-note">Each section can contain multiple text and image cards.</p>${itemMarkup}<button type="button" class="secondary-button" data-custom-item-add="${i}">＋ Add content item</button></div>`;
+ }).join('');
+ return `<div class="editor-section"><h4>Custom Sections</h4><p class="editor-help">Create a completely new section for the employee page, with its own heading, description, text cards, links and pictures.</p><button type="button" class="primary-button" data-custom-section-add>＋ Add New Section</button>${blocks||'<p class="custom-editor-note">No custom sections added yet.</p>'}</div>`;
+}
+function applySectionVisibility(data){
+ const hidden=new Set(Array.isArray(data.hiddenSections)?data.hiddenSections:[]);
+ const map={
+  hero:document.getElementById('hero')||document.querySelector('main .hero-wrap'),
+  hcm:document.getElementById('hcm')||document.querySelector('main .hcm-message'),
+  inside:document.getElementById('inside'),
+  latest:document.getElementById('latest'),
+  businessInnovation:document.getElementById('businessList')?.parentElement,
+  peopleCulture:document.getElementById('peopleList')?.parentElement,
+  international:document.getElementById('international'),
+  spotlight:document.getElementById('spotlight'),
+  comingUp:document.getElementById('coming-up'),
+  closing:document.getElementById('closing')||document.querySelector('main .closing-band'),
+  footer:document.getElementById('footer')||document.querySelector('footer.site-footer'),
+ };
+ Object.entries(map).forEach(([key,el])=>{if(el)el.hidden=hidden.has(key);});
+ const businessHidden=hidden.has('businessInnovation'),peopleHidden=hidden.has('peopleCulture');
+ const latest=document.getElementById('latest');
+ if(latest&&!hidden.has('latest'))latest.hidden=businessHidden&&peopleHidden;
+ const nav=document.getElementById('mainNav');
+ if(nav){
+  nav.querySelectorAll('a[href^="#"]').forEach(a=>{
+   const key=({ '#inside':'inside','#latest':'latest','#international':'international','#spotlight':'spotlight','#coming-up':'comingUp' })[a.getAttribute('href')];
+   if(key)a.hidden=hidden.has(key)||(key==='latest'&&businessHidden&&peopleHidden);
+  });
+  nav.querySelectorAll('a[data-custom-nav]').forEach(a=>a.remove());
+  (data.customSections||[]).forEach(section=>{
+   const id=String(section.id||'').replace(/[^a-zA-Z0-9_-]/g,'');
+   if(id)nav.insertAdjacentHTML('beforeend',`<a data-custom-nav href="#${esc(id)}">${esc(section.title||'New section')}</a>`);
+  });
+ }
+}
+function renderCustomSections(data){
+ const host=document.getElementById('customSectionsList');
+ if(!host)return;
+ host.innerHTML=(data.customSections||[]).map((section,index)=>{
+  const id=String(section.id||('custom-'+index)).replace(/[^a-zA-Z0-9_-]/g,'');
+  const items=(section.items||[]).filter(item=>item&&(item.headline||item.summary||item.imageUrl)).map(item=>`<article class="custom-published-card"><div class="article-topline">${esc(item.type||section.kicker||'UPDATE')}</div><h3>${esc(item.headline||'')}</h3>${imageMarkup(item.imageUrl,item.headline||section.title)}<p>${esc(item.summary||'')}</p>${linkHtml(item.url,'Related information')}</article>`).join('');
+  return `<section class="section-shell custom-published-section" id="${esc(id)}"><div class="section-heading"><div><div class="section-kicker">${esc(section.kicker||'ADDITIONAL SECTION')}</div><h2>${esc(section.title||'New section')}</h2></div></div>${section.intro?`<p class="custom-intro">${esc(section.intro)}</p>`:''}<div class="custom-published-grid">${items||empty('No content has been added to this section yet.')}</div></section>`;
+ }).join('');
+}
+function createCustomSection(){
+ if(!Array.isArray(editorDraft.customSections))editorDraft.customSections=[];
+ editorDraft.customSections.push({id:'custom-'+uid(),title:'New section',kicker:'ADDITIONAL SECTION',intro:'',items:[{type:'UPDATE',headline:'New item',summary:'',url:'',imageUrl:''}]});
+ renderDirectEditor();render();$('directEditorStatus').textContent='New section added. Add its content, then save or publish.';
+}
+
 function renderDirectEditor(){
  if(!$('directEditor'))return;if(!editorDraft)editorDraft=cloneData(publication);
  const f=[];
+ f.push(sectionManagerMarkup());
+ f.push(customSectionEditorMarkup());
  f.push(`<div class="editor-section"><h4>Publication masthead</h4><p class="editor-help">These details appear at the top of the employee newsletter.</p><div class="editor-grid">${editorField('month','Publication month',editorDraft.month)}${editorField('year','Publication year',editorDraft.year,{type:'number'})}${editorField('title','Newsletter title',editorDraft.title)}${editorField('subtitle','Subtitle / edition line',editorDraft.subtitle)}${editorField('brandTag','Brand tagline',editorDraft.brandTag)}${editorField('editionEyebrow','Top edition label',editorDraft.editionEyebrow)}${editorField('heroSideLabel','Hero side label',editorDraft.heroSideLabel)}${editorField('heroCtaLabel','Hero button text',editorDraft.heroCtaLabel)}${editorField('heroIntro','Hero introduction',editorDraft.heroIntro,{area:true,full:true})}${editorImage('heroImageUrl','Masthead / hero picture',editorDraft.heroImageUrl)}</div></div>`);
  f.push(`<div class="editor-section"><h4>A Message from HCM</h4><div class="editor-grid">${editorField('hcmKicker','HCM section label',editorDraft.hcmKicker)}${editorField('hcmHeading','HCM heading',editorDraft.hcmHeading)}${editorField('hcmSignature','HCM signature',editorDraft.hcmSignature)}${editorField('hcmMessage','HCM message',editorDraft.hcmMessage,{area:true,full:true})}${editorImage('hcmImageUrl','HCM section picture',editorDraft.hcmImageUrl)}</div></div>`);
  f.push(`<div class="editor-section"><h4>Inside This Month · Three highlights</h4><div class="editor-grid">${editorField('highlightsTitle','Section heading',editorDraft.highlightsTitle)}</div><p class="editor-help">Add, edit or remove as many highlight cards as the edition needs.</p>${arrayAddButton('highlights','highlight')}`);
@@ -530,6 +641,8 @@ function saveDirectEditor(){
  if(!editorDraft)editorDraft=cloneData(publication);
  const y=Number(editorDraft.year);if(!editorDraft.month||!Number.isInteger(y)||y<2020||y>2100||!String(editorDraft.title||'').trim()){ $('directEditorStatus').textContent='Please enter a valid month, year and newsletter title.';return false; }
  const urlErrors=[];const scan=(obj,path='')=>{if(!obj||typeof obj!=='object')return;Object.keys(obj).forEach(k=>{const v=obj[k],p=path?path+'.'+k:k;if(v&&typeof v==='string'&&/Url$/i.test(k)){if(k.toLowerCase().includes('image')){if(!safeImage(v))urlErrors.push(p)}else if(!https(v))urlErrors.push(p)}else if(v&&typeof v==='object')scan(v,p)})};scan(editorDraft);if(urlErrors.length){$('directEditorStatus').textContent='Use HTTPS for all external links and valid image URLs for: '+urlErrors.slice(0,5).join(', ');return false;}
+ editorDraft.hiddenSections=Array.from(new Set((editorDraft.hiddenSections||[]).filter(key=>SECTION_CATALOG.some(x=>x.key===key))));
+ editorDraft.customSections=(editorDraft.customSections||[]).map((section,i)=>({...section,id:String(section.id||('custom-'+i)).replace(/[^a-zA-Z0-9_-]/g,''),title:String(section.title||'New section'),kicker:String(section.kicker||'ADDITIONAL SECTION'),intro:String(section.intro||''),items:Array.isArray(section.items)?section.items:[]}));
  const totalImages=JSON.stringify(editorDraft).length;
  if(totalImages>4200000){$('directEditorStatus').textContent='Image data is too large for this single-file version. Remove some pictures or use smaller images.';return false;}
  publication=cloneData(editorDraft);publication.sourceFileName='HR direct editor';publication.publishedAt=new Date().toISOString();
@@ -543,13 +656,20 @@ async function saveToCloud(status='draft'){
  if(status==='draft'&&currentDraftId){result=await cloud.from('newsletter_editions').update(payload).eq('id',currentDraftId).select('id').single();}
  else if(status==='published'&&currentDraftId){result=await cloud.from('newsletter_editions').update(payload).eq('id',currentDraftId).select('id').single();}
  else {result=await cloud.from('newsletter_editions').insert({...payload,created_by:cloudUser.id}).select('id').single();}
- if(result.error){$('directEditorStatus').textContent='Cloud save failed: '+result.error.message;return;}
- if(status==='draft'){currentDraftId=result.data.id;$('directEditorStatus').textContent='Draft saved securely to the cloud. Employees cannot see it until you publish.';}
- else {currentDraftId=null;$('directEditorStatus').textContent='Published successfully. The employee newsletter link now shows this latest issue.';}
+ if(result.error){$('directEditorStatus').textContent='Cloud save failed: '+result.error.message;return false;}
+ if(status==='draft'){currentDraftId=result.data.id;$('directEditorStatus').textContent='Draft saved securely to the cloud. Employees cannot see it until you publish.';return true;}
+ currentDraftId=null;
+ $('directEditorStatus').textContent='Published successfully. The employee newsletter link now shows this latest issue.';
+ $('currentIssueStatus').textContent='Published · '+publication.month+' '+publication.year+' · '+new Date().toLocaleString();
+ return true;
 }
 async function publishToEmployees(){
  if(!confirm('Publish this issue to the employee newsletter link? Employees will see it immediately.'))return;
- await saveToCloud('published');
+ const published=await saveToCloud('published');
+ if(published){
+  $('directEditorStatus').textContent='Published successfully. The employee page now uses this edition across all supported sections.';
+  track('hr_edition_published','Employee newsletter');
+ }
 }
 function compressImageFile(file){
  return new Promise((resolve,reject)=>{if(!file||!file.type.startsWith('image/'))return reject(new Error('Please choose an image file.'));if(file.size>8*1024*1024)return reject(new Error('Choose an image smaller than 8 MB.'));const url=URL.createObjectURL(file);const img=new Image();img.onload=()=>{try{const maxW=1400,maxH=1000,scale=Math.min(1,maxW/img.width,maxH/img.height);const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(img.width*scale));canvas.height=Math.max(1,Math.round(img.height*scale));const ctx=canvas.getContext('2d');ctx.fillStyle='#ffffff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,canvas.width,canvas.height);URL.revokeObjectURL(url);let quality=.82;const make=()=>canvas.toBlob(blob=>{if(!blob)return reject(new Error('Could not process this image.'));if(blob.size>260*1024&&quality>.5){quality-=.1;make();return}const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(new Error('Could not read the compressed image.'));reader.readAsDataURL(blob);},'image/jpeg',quality);make();}catch(e){URL.revokeObjectURL(url);reject(e)}};img.onerror=()=>{URL.revokeObjectURL(url);reject(new Error('This image could not be opened.'))};img.src=url;});
@@ -576,7 +696,48 @@ function bind(){
  ['downloadDirectHtmlBtn','downloadDirectHtmlBottomBtn'].forEach(id=>$(id)?.addEventListener('click',downloadEditableMasterHtml));
  $('directEditor')?.addEventListener('input',e=>{const path=e.target.dataset.editorPath;if(path&&editorDraft)pathSet(editorDraft,path,e.target.value)});
  $('directEditor')?.addEventListener('change',async e=>{const fileInput=e.target.closest('[data-image-path]');if(fileInput){const file=fileInput.files&&fileInput.files[0];if(!file)return;const path=fileInput.dataset.imagePath;const status=$('directEditor').querySelector(`[data-image-status="${CSS.escape(path)}"]`);if(status)status.textContent='Compressing picture…';const oldValue=pathGet(editorDraft,path)||'';try{const data=await compressImageFile(file);attachEditorImage(path,data);if(editorDraft&&JSON.stringify(editorDraft).length>4200000){pathSet(editorDraft,path,oldValue);throw new Error('Total image and text size is too large. Remove one picture and try again.');}}catch(err){if(status)status.textContent=err.message;fileInput.value='';}}else if(e.target.dataset.editorPath&&editorDraft){pathSet(editorDraft,e.target.dataset.editorPath,e.target.value)}});
- $('directEditor')?.addEventListener('click',e=>{const add=e.target.closest('[data-array-add]');if(add&&editorDraft){const path=add.dataset.arrayAdd;if(!Array.isArray(editorDraft[path]))editorDraft[path]=[];editorDraft[path].push(newArrayItem(path));renderDirectEditor();$('directEditorStatus').textContent='New item added. Complete its fields, then save the draft.';return;}const remove=e.target.closest('[data-array-remove]');if(remove&&editorDraft){const path=remove.dataset.arrayRemove,index=Number(remove.dataset.arrayIndex);if(Array.isArray(editorDraft[path])&&Number.isInteger(index)&&index>=0&&index<editorDraft[path].length&&confirm('Remove this item from the edition?')){editorDraft[path].splice(index,1);renderDirectEditor();$('directEditorStatus').textContent='Item removed from the draft. Save changes to keep the update.';}return;}const clear=e.target.closest('[data-image-clear]');if(clear&&editorDraft){const path=clear.dataset.imageClear;pathSet(editorDraft,path,'');const preview=$('directEditor').querySelector(`[data-image-preview="${CSS.escape(path)}"]`);if(preview){preview.removeAttribute('src');preview.style.display='none'}const status=$('directEditor').querySelector(`[data-image-status="${CSS.escape(path)}"]`);if(status)status.textContent='Picture removed';}});
+ $('directEditor')?.addEventListener('click',e=>{
+  const removeSection=e.target.closest('[data-section-remove]');
+  if(removeSection&&editorDraft){
+   const key=removeSection.dataset.sectionRemove;
+   if(confirm('Remove this section from the employee edition? Its content remains saved and can be restored.')){
+    editorDraft.hiddenSections=Array.isArray(editorDraft.hiddenSections)?editorDraft.hiddenSections:[];
+    if(!editorDraft.hiddenSections.includes(key))editorDraft.hiddenSections.push(key);
+    renderDirectEditor();render();$('directEditorStatus').textContent='Section removed from the employee edition. Save or publish to apply it.';
+   }return;
+  }
+  const restoreSection=e.target.closest('[data-section-restore]');
+  if(restoreSection&&editorDraft){
+   const key=restoreSection.dataset.sectionRestore;
+   editorDraft.hiddenSections=(editorDraft.hiddenSections||[]).filter(x=>x!==key);
+   renderDirectEditor();render();$('directEditorStatus').textContent='Section restored. Save or publish to show it on the employee page.';
+   return;
+  }
+  if(e.target.closest('[data-custom-section-add]')){createCustomSection();return;}
+  const removeCustomSection=e.target.closest('[data-custom-section-remove]');
+  if(removeCustomSection&&editorDraft){
+   const index=Number(removeCustomSection.dataset.customSectionRemove);
+   if(confirm('Permanently delete this custom section and its content?')){
+    editorDraft.customSections.splice(index,1);renderDirectEditor();render();$('directEditorStatus').textContent='Custom section deleted. Save or publish to apply the change.';
+   }return;
+  }
+  const addCustomItem=e.target.closest('[data-custom-item-add]');
+  if(addCustomItem&&editorDraft){
+   const index=Number(addCustomItem.dataset.customItemAdd);
+   editorDraft.customSections[index].items=Array.isArray(editorDraft.customSections[index].items)?editorDraft.customSections[index].items:[];
+   editorDraft.customSections[index].items.push({type:'UPDATE',headline:'New item',summary:'',url:'',imageUrl:''});
+   renderDirectEditor();$('directEditorStatus').textContent='New content item added to the custom section.';
+   return;
+  }
+  const removeCustomItem=e.target.closest('[data-custom-item-remove]');
+  if(removeCustomItem&&editorDraft){
+   const sectionIndex=Number(removeCustomItem.dataset.customItemRemove),itemIndex=Number(removeCustomItem.dataset.customItemIndex);
+   if(confirm('Remove this content item?')){
+    editorDraft.customSections[sectionIndex].items.splice(itemIndex,1);
+    renderDirectEditor();render();$('directEditorStatus').textContent='Content item removed. Save or publish to apply the change.';
+   }return;
+  }
+  const add=e.target.closest('[data-array-add]');if(add&&editorDraft){const path=add.dataset.arrayAdd;if(!Array.isArray(editorDraft[path]))editorDraft[path]=[];editorDraft[path].push(newArrayItem(path));renderDirectEditor();$('directEditorStatus').textContent='New item added. Complete its fields, then save the draft.';return;}const remove=e.target.closest('[data-array-remove]');if(remove&&editorDraft){const path=remove.dataset.arrayRemove,index=Number(remove.dataset.arrayIndex);if(Array.isArray(editorDraft[path])&&Number.isInteger(index)&&index>=0&&index<editorDraft[path].length&&confirm('Remove this item from the edition?')){editorDraft[path].splice(index,1);renderDirectEditor();$('directEditorStatus').textContent='Item removed from the draft. Save changes to keep the update.';}return;}const clear=e.target.closest('[data-image-clear]');if(clear&&editorDraft){const path=clear.dataset.imageClear;pathSet(editorDraft,path,'');const preview=$('directEditor').querySelector(`[data-image-preview="${CSS.escape(path)}"]`);if(preview){preview.removeAttribute('src');preview.style.display='none'}const status=$('directEditor').querySelector(`[data-image-status="${CSS.escape(path)}"]`);if(status)status.textContent='Picture removed';}});
  $('menuToggle')?.addEventListener('click',()=>$('mainNav')?.classList.toggle('open'));document.querySelectorAll('#mainNav a').forEach(a=>a.addEventListener('click',()=>$('mainNav')?.classList.remove('open')));
  $('articleClose')?.addEventListener('click',()=>$('articleModal')?.classList.remove('open'));$('articleModal')?.addEventListener('click',e=>{if(e.target===$('articleModal'))$('articleModal').classList.remove('open')});
  document.addEventListener('click',e=>{const trackEl=e.target.closest('[data-event]');if(trackEl)track(trackEl.dataset.event,trackEl.dataset.label||trackEl.textContent.trim());const a=e.target.closest('a[href^="#"]');if(a&&a.getAttribute('href').length>1)track('nav_click',a.textContent.trim());const story=e.target.closest('[data-story]');if(story)openStory(story.dataset.story,Number(story.dataset.index||0));});
