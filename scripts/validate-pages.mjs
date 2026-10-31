@@ -46,7 +46,7 @@ const loaderStart = employee.indexOf("async function loadLatestPublishedEdition(
 const loaderEnd = employee.indexOf("</script>", loaderStart);
 if (loaderStart < 0 || loaderEnd < 0) fail("Employee page is missing the database publication loader.");
 const loader = employee.slice(loaderStart, loaderEnd);
-for (const marker of [".eq('status','published')", ".order('published_at'", "publication={...publication,...data.publication,", "render();"]) {
+for (const marker of [".eq('status','published')", ".order('published_at'", "publication={...publication,...data.publication,", "render();", "window.setInterval", "document.addEventListener('visibilitychange'"]) {
   if (!loader.includes(marker)) fail("Employee publication loader is missing: " + marker);
 }
 for (const obsolete of ["highlightsList", "heroImage'", "hcmImage'"]) {
