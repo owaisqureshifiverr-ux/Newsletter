@@ -29,7 +29,7 @@ function checkDocument(label, html, required) {
 }
 
 checkDocument("Employee website", employee, [
-  "The Monthly Pulse",
+  "Company Newsletter",
   "newsletter_editions",
   "let publication =",
   "publication={...publication,...data.publication",
