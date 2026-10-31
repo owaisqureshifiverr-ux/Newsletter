@@ -5,27 +5,28 @@ This repository contains two separate website routes:
 - Employee newspaper: `/Newsletter/`
 - Secure HR publishing workspace: `/Newsletter/hr/`
 
-## GitHub Pages hosting
+## Hosting and deployment
 
-The `.github/workflows/pages.yml` workflow validates both pages and deploys them after every push to `main`.
+The `.github/workflows/pages.yml` workflow checks both website routes and their inline JavaScript, then deploys the site to GitHub Pages after every push to `main`.
 
-## Supabase backend
+## Shared publication data
 
-Both pages use the existing Supabase project and its browser-safe publishable key. No service-role or database secret is included in the website source.
+The HR workspace and employee newspaper use the same `newsletter_editions.publication` JSON document in Supabase.
 
+- **Save Draft to Cloud** stores HR edits without showing them to employees.
+- **Publish to Employees** writes the complete publication, including text, cards, URLs, pictures, hidden sections and custom sections.
+- The employee route loads the newest published edition and re-renders the whole page from that publication document.
+- The section manager can remove or restore standard page sections.
+- HR can add and permanently delete custom sections, then add, edit or remove content cards inside them.
+- Existing HR database permissions remain in force; only an approved HR administrator can save or publish.
 - Public visitors can read only editions marked `published`.
-- Drafts and HR administrator records remain protected by Row Level Security.
-- The HR login screen displays a single password field. The HR sign-in uses the existing verified HR Auth account internally; its email is not requested in the interface.
-- Only an account with a row in `hr_admins` can edit, save, or publish.
-- HR can save drafts and publish editions to the employee website.
 
 ## Monthly publishing workflow
 
-1. Open the HR workspace and enter the HR workspace password.
-2. Update stories, highlights, images, dates and headings.
-3. Choose **Save Draft to Cloud**.
-4. Preview the employee page and choose **Publish to Employees**.
+1. Open the HR workspace and enter the private workspace password.
+2. Edit any existing story, heading, date, link or picture.
+3. Add/remove cards or use **Section Manager** to remove/restore a standard section.
+4. Use **Add New Section** for additional content areas.
+5. Choose **Save Draft to Cloud** to keep work private, or **Publish to Employees** to make the new edition live.
 
-The employee page reads only the newest published issue. Draft content is not available to anonymous visitors.
-
-The employee newspaper and the HR editor are separate routes. Employees are not shown the HR login or publishing interface.
+The employee newspaper and HR editor are separate routes. The employee page does not include HR login or editing controls.
