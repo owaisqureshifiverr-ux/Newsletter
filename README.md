@@ -2,32 +2,33 @@
 
 A monthly employee newsletter with a separate secured HR publishing workspace.
 
-## Live routes
-- Employee newsletter: `https://owaisqureshifiverr-ux.github.io/Newsletter/`
-- HR workspace: `https://owaisqureshifiverr-ux.github.io/Newsletter/hr.html`
+## Active website links
+- **Employee newsletter:** https://hotyjsgogisglrbgmtns.supabase.co/functions/v1/monthly-pulse
+- **HR workspace (private sign-in):** https://hotyjsgogisglrbgmtns.supabase.co/functions/v1/monthly-pulse?view=hr
 
-## First-time hosting setup
-1. In this GitHub repository open **Settings → Pages**.
-2. Set **Build and deployment → Source** to **GitHub Actions**.
-3. Wait for the `Deploy The Monthly Pulse to GitHub Pages` workflow to finish successfully.
+The pages are currently served by the active Supabase Edge Function `monthly-pulse`. GitHub contains the source files and a Pages workflow; GitHub Pages itself is not enabled yet because the connected GitHub integration cannot create the Pages site. To move hosting to GitHub's domain later, open **Settings → Pages → Build and deployment → Source → GitHub Actions** and save.
 
 ## First-time HR administrator setup
-1. Open the HR workspace URL above.
-2. Enter the HR email address and choose a strong password, then select **Create HR account**.
-3. Verify the email from the message Supabase sends; return to `hr.html` and sign in.
-4. Enter the private one-time first-admin setup code supplied separately to the owner, then select **Activate first HR administrator**. The code can only be used once and expires after seven days. Do not share it with employees.
-5. Once access is activated, HR can edit every newsletter field, save drafts privately, and publish the current issue to the employee link.
+1. In Supabase **Authentication → URL Configuration**, set **Site URL** to the employee newsletter URL above.
+2. Add this **Redirect URL**: `https://hotyjsgogisglrbgmtns.supabase.co/functions/v1/monthly-pulse*`
+3. Open the HR workspace URL above.
+4. Enter the HR email address and choose a strong password, then select **Create HR account**.
+5. Verify the email from the message Supabase sends, return to the HR workspace and sign in.
+6. Enter the private one-time first-admin setup code supplied separately to the owner, then select **Activate first HR administrator**. The code can only be used once and expires seven days after setup. Never share it with employees.
+7. After activation, the HR workspace unlocks.
 
 ## Monthly workflow
-- Open `hr.html` and sign in.
-- Edit headlines, stories, links, dates and images in the newspaper-style editor.
+- Open the HR workspace and sign in.
+- Edit headlines, stories, links, dates and images in the original newspaper-style editor.
 - Select **Save Draft to Cloud** to save privately.
-- Select **Publish to Employees** when approved. The employee page automatically loads the latest published issue from the database; no monthly HTML replacement is required.
+- Select **Publish to Employees** when approved. The employee page automatically loads the latest published issue; no monthly HTML replacement is required.
 
-## Security and content visibility
-- The HR workspace uses Supabase Auth and database Row Level Security. The publishable client key is designed for browser use; no service-role or database secret is included in either HTML file.
-- The employee route can only read rows marked `published`. Drafts and HR administrator records are not available to anonymous visitors.
-- This GitHub repository is public, and GitHub Pages content is publicly reachable on the web. Share only company-approved content cleared for public web access. GitHub Pages here is not an employee-only access-control boundary.
-- Supabase Auth must allow the GitHub Pages callback URL. In Supabase **Authentication → URL Configuration**, set Site URL to `https://owaisqureshifiverr-ux.github.io/Newsletter/` and add `https://owaisqureshifiverr-ux.github.io/Newsletter/*` to Redirect URLs.
+## Security and publication
+- The HR workspace uses Supabase Auth and database Row Level Security. The publishable client key in the pages is designed for browser use; no service-role or database secret is included in either HTML page.
+- The employee route can only read rows marked `published`. Drafts and HR administrator records are not available to anonymous visitors. The anonymous-access policy was tested: a simulated published record was visible, while drafts and HR-admin rows were not.
+- The one-time first-admin setup code is not stored in this repository or in either HTML page.
+- GitHub repository visibility is public. Supabase-hosted pages are publicly reachable too; publish only content approved for public web access. The employee link does not require employee sign-in.
+- The current November 2026 record begins as a private draft with the sections from the supplied Word template. Add verified company stories before publishing.
 
-The current November 2026 record starts as a private draft containing the section prompts from the supplied Word template. Add verified company stories before publishing.
+## Source repository
+https://github.com/owaisqureshifiverr-ux/Newsletter
