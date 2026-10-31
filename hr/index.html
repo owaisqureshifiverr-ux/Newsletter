@@ -367,7 +367,7 @@ main{max-width:1260px;margin:0 auto;background:#f8f4eb;box-shadow:0 18px 65px rg
   <div class="hr-card"><div class="hr-card-eyebrow">PUBLICATION · 03</div><h3>Current edition</h3><p id="currentIssueStatus">Starter newsletter preview.</p><div class="hr-actions"><button class="secondary-button" id="resetPreviewBtn">Restore Word-template starter content</button></div></div>
 </div></section>
 
-<div class="modal-backdrop" id="hrLoginModal"><form class="login-box" id="hrLoginForm"><button type="button" class="modal-close" id="hrLoginClose">✕</button><div class="section-kicker">SECURE HR ACCESS</div><h2>HR Publishing Workspace</h2><p>Sign in with your verified HR email account. Only approved HR administrators can edit or publish content.</p><label for="hrEmail">HR email</label><input type="email" id="hrEmail" autocomplete="username" required><label for="hrPassword" style="display:block;margin-top:12px">Password</label><input type="password" id="hrPassword" autocomplete="current-password" minlength="8" required><div class="login-error" id="hrLoginError" role="status"></div><div class="hr-actions" style="margin-top:16px"><button class="primary-button" type="submit">Sign in</button><button class="secondary-button" type="button" id="hrCreateAccountBtn">Create HR account</button></div><div style="height:1px;background:var(--line);margin:20px 0"></div><label for="hrBootstrapCode">One-time first-admin setup code</label><input type="password" id="hrBootstrapCode" autocomplete="off" placeholder="Enter private setup code"><div class="hr-actions" style="margin-top:12px"><button class="secondary-button" type="button" id="hrClaimAdminBtn">Activate first HR administrator</button></div><p style="font-size:11px;color:var(--muted);margin:12px 0 0">Use the setup code only once, after creating your account and signing in. Never share this code with employees.</p></form></div>
+<div class="modal-backdrop" id="hrLoginModal"><form class="login-box" id="hrLoginForm"><button type="button" class="modal-close" id="hrLoginClose">✕</button><div class="section-kicker">SECURE HR ACCESS</div><h2>HR Publishing Workspace</h2><p>Enter the private HR workspace password to unlock editing and publishing controls.</p><label for="hrPassword">Workspace password</label><input type="password" id="hrPassword" autocomplete="current-password" minlength="8" required autofocus><div class="login-error" id="hrLoginError" role="status"></div><div class="hr-actions" style="margin-top:16px"><button class="primary-button" type="submit">Unlock Workspace</button></div></form></div>
 <div class="modal-backdrop" id="articleModal"><article class="article-modal"><button class="modal-close" id="articleClose">✕</button><div class="article-topline" id="modalCategory"></div><h2 id="modalTitle"></h2><p id="modalBody"></p><div id="modalLinks"></div></article></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -450,7 +450,7 @@ const SUPABASE_URL = 'https://hotyjsgogisglrbgmtns.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_0pKDjnllPyQjKJ0S6F4vOQ_tMLpLVMM';
 const cloud = window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
 let cloudUser = null; let cloudAdmin = false; let currentDraftId = null;
-function showLogin(){ $('hrLoginError').textContent='';$('hrEmail').value='';$('hrPassword').value='';$('hrBootstrapCode').value='';$('hrLoginModal').classList.add('open');$('hrEmail').focus() }
+function showLogin(){ $('hrLoginError').textContent='';$('hrPassword').value='';$('hrLoginModal').classList.add('open');$('hrPassword').focus() }
 function openHr(){if(cloudAdmin){unlockHr();return}showLogin()}
 async function verifyHrAdmin(){
  const {data:{session}} = await cloud.auth.getSession();
@@ -480,30 +480,16 @@ function unlockHr(){
  $('hrWorkspace').scrollIntoView({behavior:'smooth'});track('hr_workspace_open','HR Workspace');
 }
 async function login(e){
- e.preventDefault();$('hrLoginError').textContent='';
- const email=$('hrEmail').value.trim().toLowerCase(),password=$('hrPassword').value;
- const {data,error}=await cloud.auth.signInWithPassword({email,password});
- if(error){$('hrLoginError').textContent=error.message;return;}
- cloudUser=data.user;const ok=await verifyHrAdmin();
- if(ok)unlockHr();else $('hrLoginError').textContent='Signed in, but this account is not yet an approved HR administrator. Use the private one-time setup code only for the first administrator.';
-}
-async function createHrAccount(){
- $('hrLoginError').textContent='';const email=$('hrEmail').value.trim().toLowerCase(),password=$('hrPassword').value;
- if(!email||password.length<8){$('hrLoginError').textContent='Enter a valid email and a password of at least 8 characters.';return;}
- const {data,error}=await cloud.auth.signUp({email,password,options:{emailRedirectTo:location.href.split('#')[0]}});
- if(error){$('hrLoginError').textContent=error.message;return;}
- if(data.session){cloudUser=data.user;const ok=await verifyHrAdmin();if(ok)unlockHr();else $('hrLoginError').textContent='Account created and signed in. Enter the one-time setup code to activate the first HR administrator.';}
- else $('hrLoginError').textContent='Account created. Check your email to verify it, then return here and sign in.';
-}
-async function claimFirstAdmin(){
+ e.preventDefault();
  $('hrLoginError').textContent='';
- const {data:{session}}=await cloud.auth.getSession();
- if(!session){$('hrLoginError').textContent='Create your account and sign in first, then claim administrator access.';return;}
- const token=$('hrBootstrapCode').value.trim();if(!token){$('hrLoginError').textContent='Enter the private one-time setup code.';return;}
- const {data,error}=await cloud.rpc('claim_first_hr_admin',{p_token:token});
- if(error){$('hrLoginError').textContent=error.message;return;}
- $('hrBootstrapCode').value='';const ok=await verifyHrAdmin();
- if(ok)unlockHr();else $('hrLoginError').textContent='Setup completed, but the administrator permission could not be confirmed. Please sign out and sign in again.';
+ const password=$('hrPassword').value;
+ if(!password){$('hrLoginError').textContent='Enter the HR workspace password.';return;}
+ const {data,error}=await cloud.auth.signInWithPassword({email:'owaisqureshifiverr@gmail.com',password});
+ if(error){$('hrLoginError').textContent='Incorrect password. Please try again.';return;}
+ cloudUser=data.user;
+ const ok=await verifyHrAdmin();
+ if(ok){$('hrPassword').value='';unlockHr();}
+ else{$('hrLoginError').textContent='This login is not authorised for HR publishing.';await cloud.auth.signOut();}
 }
 async function logout(){
  hrOpen=false;cloudAdmin=false;cloudUser=null;currentDraftId=null;
@@ -584,7 +570,7 @@ function downloadEditableMasterHtml(){if(!saveDirectEditor())return;try{const ht
 
 function renderAnalytics(){const page=events.filter(e=>e.eventType==='page_view').length,unique=new Set(events.map(e=>e.visitorId)).size,clicks=events.filter(e=>e.eventType.includes('click')||e.eventType==='article_open').length,sections=events.filter(e=>e.eventType==='section_visit').length;const values=[['BROWSER VIEWS',page],['BROWSER IDS',unique],['CLICKS / OPENS',clicks],['SECTION VISITS',sections]];$('analyticsKpis').innerHTML=values.map(x=>`<div class="hr-kpi"><span>${x[0]}</span><strong>${x[1]}</strong></div>`).join('');$('activityRows').innerHTML=events.slice(-35).reverse().map(e=>`<tr><td>${esc(new Date(e.time).toLocaleString())}</td><td>${esc(String(e.visitorId).slice(0,12))}</td><td>${esc(e.eventType)}</td><td>${esc(e.target)}</td></tr>`).join('')||'<tr><td colspan="4">No activity recorded in this browser yet.</td></tr>';}
 function bind(){
- if($('hrOpenBtn')){$('hrOpenBtn').addEventListener('click',openHr);$('hrLoginForm')?.addEventListener('submit',login);$('hrCreateAccountBtn')?.addEventListener('click',createHrAccount);$('hrClaimAdminBtn')?.addEventListener('click',claimFirstAdmin);$('hrLoginClose')?.addEventListener('click',()=>$('hrLoginModal')?.classList.remove('open'));$('hrLoginModal')?.addEventListener('click',e=>{if(e.target===$('hrLoginModal'))$('hrLoginModal').classList.remove('open')});$('hrLogoutBtn')?.addEventListener('click',logout);$('clearActivityBtn')?.addEventListener('click',()=>{if(confirm('Clear browser-local demo analytics?')){events=[];writeStore(STORE.events,events);renderAnalytics()}});$('resetPreviewBtn')?.addEventListener('click',()=>{if(confirm('Restore Word-template starter content?')){publication=cloneData(starter);editorDraft=cloneData(publication);savePublication();render();renderDirectEditor();$('currentIssueStatus').textContent='Starter content restored in this browser.';$('directEditorStatus').textContent='Starter content restored.'}});}
+ if($('hrOpenBtn')){$('hrOpenBtn').addEventListener('click',openHr);$('hrLoginForm')?.addEventListener('submit',login);$('hrLoginClose')?.addEventListener('click',()=>$('hrLoginModal')?.classList.remove('open'));$('hrLoginModal')?.addEventListener('click',e=>{if(e.target===$('hrLoginModal'))$('hrLoginModal').classList.remove('open')});$('hrLogoutBtn')?.addEventListener('click',logout);$('clearActivityBtn')?.addEventListener('click',()=>{if(confirm('Clear browser-local demo analytics?')){events=[];writeStore(STORE.events,events);renderAnalytics()}});$('resetPreviewBtn')?.addEventListener('click',()=>{if(confirm('Restore Word-template starter content?')){publication=cloneData(starter);editorDraft=cloneData(publication);savePublication();render();renderDirectEditor();$('currentIssueStatus').textContent='Starter content restored in this browser.';$('directEditorStatus').textContent='Starter content restored.'}});}
  const saveBtns=['saveDirectEditorBtn','saveDirectEditorBottomBtn'];saveBtns.forEach(id=>$(id)?.addEventListener('click',()=>saveToCloud('draft')));['publishIssueBtn','publishIssueBottomBtn'].forEach(id=>$(id)?.addEventListener('click',publishToEmployees));
  ['generateEmployeeHtmlBtn','generateEmployeeHtmlBottomBtn'].forEach(id=>$(id)?.addEventListener('click',generateEmployeeHtml));
  ['downloadDirectHtmlBtn','downloadDirectHtmlBottomBtn'].forEach(id=>$(id)?.addEventListener('click',downloadEditableMasterHtml));
