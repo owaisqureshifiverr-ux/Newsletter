@@ -70,6 +70,30 @@ for (const field of ["highlights","businessInnovation","peopleCulture","internat
   if (!hr.includes(field) || !employee.includes("publication." + field)) fail("Publication field is not connected to both pages: " + field);
 }
 
+function assertStaticDomReferences(label, html) {
+  const ids = new Set([...html.matchAll(/\\bid="([^"]+)"/g)].map(match => match[1]));
+  const refs = [];
+  for (const match of html.matchAll(/\\$\\('([^']+)'\\)|document\\.getElementById\\('([^']+)'\\)/g)) {
+    refs.push(match[1] || match[2]);
+  }
+  const missing = [...new Set(refs)].filter(id => !ids.has(id));
+  if (missing.length) fail(label + ": code references missing DOM ids: " + missing.join(", "));
+}
+assertStaticDomReferences("Employee website", employee);
+assertStaticDomReferences("HR workspace", hr);
+
+function extractRenderer(html) {
+  const start = html.indexOf("function render() {");
+  const end = html.indexOf("function openStory(", start);
+  if (start < 0 || end < 0) fail("A route is missing the publication renderer.");
+  return html.slice(start, end)
+    .replace(/^\\s*if\\(\\$\\('currentIssueStatus'\\)\\).*?\\n/m, "")
+    .trim();
+}
+if (extractRenderer(hr) !== extractRenderer(employee)) {
+  fail("HR preview and employee page do not use identical publication rendering logic.");
+}
+
 checkDocument("HR workspace", hr, [
   "HR Publishing Studio",
   "hrWorkspace",
