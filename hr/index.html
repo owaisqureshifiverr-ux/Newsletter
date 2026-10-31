@@ -461,18 +461,85 @@ function track(eventType,target){events.push({id:uid(),time:new Date().toISOStri
 function empty(message){return `<div class="empty-state">${esc(message)}</div>`}
 function linkHtml(url,label){const u=https(url);return u?`<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`:''}
 function renderArticleRows(items,section){const list=(items||[]).filter(x=>x&&(x.headline||x.summary));return list.length?list.map((x,i)=>`<article class="article-row"><div class="article-topline">${esc(x.type||section)}</div><h4><button class="small-link" style="font-family:var(--serif);font-size:18px;font-weight:500;text-align:left;color:var(--ink)" data-story="${esc(section)}" data-index="${i}">${esc(x.headline||'')}</button></h4><p>${esc([x.summary,x.outcome].filter(Boolean).join('\n'))}</p>${imageMarkup(x.imageUrl,x.headline)}<div class="article-actions">${linkHtml(x.sourceUrl,'Approved source')}${linkHtml(x.ctaUrl,'More information')}</div></article>`).join('') : empty('No content has been added to this section yet.')}
-function render(){
- $('brandTag').textContent=publication.brandTag||'Company News, People & Progress';$('editionEyebrow').textContent=publication.editionEyebrow||'THE CODE INFORMATICS EDITION';$('heroSideLabel').textContent=publication.heroSideLabel||'THIS MONTH, IN FOCUS';$('heroCtaLabel').textContent=publication.heroCtaLabel||'Explore this issue';$('hcmKicker').textContent=publication.hcmKicker||'A MESSAGE FROM HCM';$('hcmSignature').textContent=publication.hcmSignature||'HUMAN CAPITAL MANAGEMENT · CODE INFORMATICS';$('businessHeading').textContent=publication.businessHeading||'Business & Innovation';$('peopleHeading').textContent=publication.peopleHeading||'People & Culture';$('internationalKicker').textContent=publication.internationalKicker||'INTERNATIONAL UPDATES';$('internationalIntro').textContent=publication.internationalIntro||'International projects, client and partner milestones, and global business or technology developments.';$('issueTitle').innerHTML=`${esc(publication.title||'The Monthly Pulse')}<span class="title-period">.</span>`;$('issueSubtitle').textContent=publication.subtitle||'';$('issuePeriod').textContent=`${String(publication.month||'').toUpperCase()} ${publication.year||''} EDITION`;$('heroIntro').textContent=publication.heroIntro||'A monthly snapshot of what we achieved, who made it happen, and what is ahead.';$('hcmMessage').textContent=publication.hcmMessage||'';$('hcmHeading').textContent=publication.hcmHeading||'People are at the centre of our progress.';$('footerMessage').textContent=publication.footerMessage||'';$('highlightsHeading').innerHTML=`${esc(publication.highlightsTitle||'Three quick highlights')}<span class="title-period">.</span>`;$('latestHeading').innerHTML=`${esc(publication.latestTitle||'Highlights from across the company')}<span class="title-period">.</span>`;$('internationalHeading').textContent=publication.internationalTitle||'Global stories\nrelevant to our work.';$('spotlightHeading').innerHTML=`${esc(publication.spotlightTitle||'People, progress and shared success')}<span class="title-period">.</span>`;$('comingHeading').innerHTML=`${esc(publication.comingTitle||'Dates, events and opportunities')}<span class="title-period">.</span>`;$('footerSlogan').textContent=publication.footerSlogan||'ONE TEAM. SHARED PROGRESS.\nBIGGER POSSIBILITIES.';
- const heroImg=publication.heroImageUrl&&safeImage(publication.heroImageUrl);$('heroImageWrap').innerHTML=heroImg?`<img class="hero-upload-image" src="${esc(heroImg)}" alt="Newsletter feature">`:'';$('heroImageWrap').hidden=!heroImg;
- const hcmImg=publication.hcmImageUrl&&safeImage(publication.hcmImageUrl);$('hcmImageWrap').innerHTML=hcmImg?`<img class="hcm-upload-image" src="${esc(hcmImg)}" alt="HCM feature">`:'';$('hcmImageWrap').hidden=!hcmImg;
- $('highlightGrid').innerHTML=(publication.highlights||[]).map((x,i)=>`<article class="highlight-card"><span class="highlight-number">0${i+1} / ${esc(x.type)}</span>${imageMarkup(x.imageUrl,x.headline)}<h3>${esc(x.headline)}</h3><p>${esc(x.summary)}</p>${linkHtml(x.linkUrl,'Related information')}<a href="#${i===1?'spotlight':i===2?'coming-up':'latest'}" data-event="highlight_click" data-label="${esc(x.headline)}">Explore highlight ↗</a></article>`).join('')||empty('No highlights have been added.');
- $('businessList').innerHTML=renderArticleRows(publication.businessInnovation,'business');$('peopleList').innerHTML=renderArticleRows(publication.peopleCulture,'people');
- const it=publication.international||{};$('internationalList').innerHTML=it.headline?`<article class="international-card"><div class="article-topline">GLOBAL PERSPECTIVE</div>${imageMarkup(it.imageUrl,it.headline)}<h3>${esc(it.headline)}</h3><p>${esc(it.summary)}</p><p><strong>Relevance:</strong> ${esc(it.relevance||'')}</p>${linkHtml(it.sourceUrl,'Approved source')}</article>`:empty('No international update has been added.');
- const sp=publication.spotlight||{};$('spotlightList').innerHTML=sp.headline?`<article class="spotlight-card"><div class="spotlight-image">${safeImage(sp.imageUrl)?`<img src="${esc(safeImage(sp.imageUrl))}" alt="${esc(sp.headline)}">`:'✳'}</div><div class="spotlight-copy"><div class="article-topline">${esc(sp.type||'FEATURE STORY / EMPLOYEE SPOTLIGHT / TEAM MILESTONE')}</div><h3>${esc(sp.headline)}</h3><p>${esc(sp.story)}</p><p>${esc(sp.personTeam||'')}</p>${linkHtml(sp.sourceUrl,'Related link')}</div></article>`:empty('No feature story has been added.');
- $('comingList').innerHTML=(publication.comingUp||[]).filter(x=>x&&(x.title||x.detail)).map((x,i)=>`<article class="coming-row"><div class="coming-date">${esc(x.date||'DATE')}</div><div><h3>${esc(x.title)}</h3>${imageMarkup(x.imageUrl,x.title)}</div><p>${esc(x.detail)} ${esc(x.audience||'')} ${esc(x.contact||'')} ${linkHtml(x.url,'Information / registration')}</p></article>`).join('')||empty('No upcoming activities have been added.');
- if($('currentIssueStatus'))$('currentIssueStatus').textContent=`${publication.month||''} ${publication.year||''} · ${publication.title||''} · ${publication.sourceFileName||'Starter content'} · ${publication.publishedAt?new Date(publication.publishedAt).toLocaleString():'Preview only'}`;
- renderCustomSections(publication);
- applySectionVisibility(publication);
+function render() {
+  $('brandTag').textContent=publication.brandTag;
+  $('editionEyebrow').textContent=publication.editionEyebrow;
+  $('heroSideLabel').textContent=publication.heroSideLabel;
+  $('heroCtaLabel').textContent=publication.heroCtaLabel;
+  $('hcmKicker').textContent=publication.hcmKicker;
+  $('hcmSignature').textContent=publication.hcmSignature;
+  $('businessHeading').textContent=publication.businessHeading;
+  $('peopleHeading').textContent=publication.peopleHeading;
+  $('internationalKicker').textContent=publication.internationalKicker;
+  $('internationalIntro').textContent=publication.internationalIntro;
+  $('issueTitle').innerHTML=`${esc(publication.title)}<span class="title-period">.</span>`;
+  $('issueSubtitle').textContent=publication.subtitle;
+  $('issuePeriod').textContent=`${publication.month.toUpperCase()} ${publication.year} EDITION`;
+  $('heroIntro').textContent=publication.heroIntro;
+  $('hcmMessage').textContent=publication.hcmMessage;
+  $('hcmHeading').textContent=publication.hcmHeading;
+  $('footerMessage').textContent=publication.footerMessage;
+  $('highlightsHeading').innerHTML=`${esc(publication.highlightsTitle)}<span class="title-period">.</span>`;
+  $('latestHeading').innerHTML=`${esc(publication.latestTitle)}<span class="title-period">.</span>`;
+  $('internationalHeading').textContent=publication.internationalTitle;
+  $('spotlightHeading').innerHTML=`${esc(publication.spotlightTitle)}<span class="title-period">.</span>`;
+  $('comingHeading').innerHTML=`${esc(publication.comingTitle)}<span class="title-period">.</span>`;
+  $('footerSlogan').textContent=publication.footerSlogan;
+  const heroImg=safeImage(publication.heroImageUrl); $('heroImageWrap').innerHTML=heroImg?`<img class="hero-upload-image" src="${esc(heroImg)}" alt="Newsletter feature">`:''; $('heroImageWrap').hidden=!heroImg;
+  const hcmImg=safeImage(publication.hcmImageUrl); $('hcmImageWrap').innerHTML=hcmImg?`<img class="hcm-upload-image" src="${esc(hcmImg)}" alt="HCM feature">`:''; $('hcmImageWrap').hidden=!hcmImg;
+  $('highlightGrid').innerHTML=(publication.highlights||[]).filter(x=>x&&(x.headline||x.summary)).map((x,i)=>`<article class="highlight-card"><span class="highlight-number">0${i+1} / ${esc(x.type||'HIGHLIGHT')}</span>${imageMarkup(x.imageUrl,x.headline)}<h3>${esc(x.headline)}</h3><p>${esc(x.summary)}</p>${linkHtml(x.linkUrl,'Related information')}<a href="#${i===1?'spotlight':i===2?'coming-up':'latest'}">Explore highlight ↗</a></article>`).join('') || empty();
+  $('businessList').innerHTML=renderArticleRows(publication.businessInnovation,'business');
+  $('peopleList').innerHTML=renderArticleRows(publication.peopleCulture,'people');
+  const it=publication.international||{};
+  $('internationalList').innerHTML=(it.headline||it.summary)?`<article class="international-card"><div class="article-topline">GLOBAL PERSPECTIVE</div>${imageMarkup(it.imageUrl,it.headline)}<h3>${esc(it.headline)}</h3><p>${esc(it.summary)}</p><p><strong>Relevance:</strong> ${esc(it.relevance||'')}</p>${linkHtml(it.sourceUrl,'Approved source')}</article>`:empty();
+  const sp=publication.spotlight||{};
+  $('spotlightList').innerHTML=sp.headline?`<article class="spotlight-card"><div class="spotlight-image">${safeImage(sp.imageUrl)?`<img src="${esc(safeImage(sp.imageUrl))}" alt="${esc(sp.headline)}">`:'✳'}</div><div class="spotlight-copy"><div class="article-topline">${esc(sp.type||'FEATURE STORY / EMPLOYEE SPOTLIGHT / TEAM MILESTONE')}</div><h3>${esc(sp.headline)}</h3><p>${esc(sp.story||'')}</p><p>${esc(sp.personTeam||'')}</p>${linkHtml(sp.sourceUrl,'Related link')}</div></article>`:empty();
+  $('comingList').innerHTML=(publication.comingUp||[]).filter(x=>x&&(x.title||x.detail)).map(x=>`<article class="coming-row"><div class="coming-date">${esc(x.date||'DATE')}</div><div><h3>${esc(x.title)}</h3>${imageMarkup(x.imageUrl,x.title)}</div><p>${esc(x.detail||'')} ${esc(x.audience||'')} ${esc(x.contact||'')} ${linkHtml(x.url,'Information / registration')}</p></article>`).join('')||empty();
+  if($('currentIssueStatus'))$('currentIssueStatus').textContent=`${publication.month||''} ${publication.year||''} · ${publication.title||''} · ${publication.sourceFileName||'Starter content'} · ${publication.publishedAt?new Date(publication.publishedAt).toLocaleString():'Preview only'}`;
+  renderCustomSections(publication);
+  applySectionVisibility(publication);
+}
+
+function applySectionVisibility(data){
+ const hidden=new Set(Array.isArray(data.hiddenSections)?data.hiddenSections:[]);
+ const map={
+  hero:document.getElementById('hero')||document.querySelector('main .hero-wrap'),
+  hcm:document.getElementById('hcm')||document.querySelector('main .hcm-message'),
+  inside:document.getElementById('inside'),
+  latest:document.getElementById('latest'),
+  businessInnovation:document.getElementById('businessList')?.parentElement,
+  peopleCulture:document.getElementById('peopleList')?.parentElement,
+  international:document.getElementById('international'),
+  spotlight:document.getElementById('spotlight'),
+  comingUp:document.getElementById('coming-up'),
+  closing:document.getElementById('closing')||document.querySelector('main .closing-band'),
+  footer:document.getElementById('footer')||document.querySelector('footer.site-footer'),
+ };
+ Object.entries(map).forEach(([key,el])=>{if(el){const isHidden=hidden.has(key);el.hidden=isHidden;el.style.display=isHidden?'none':'';}});
+ const businessHidden=hidden.has('businessInnovation'),peopleHidden=hidden.has('peopleCulture');
+ const latest=document.getElementById('latest');
+ if(latest&&!hidden.has('latest')){const hideLatest=businessHidden&&peopleHidden;latest.hidden=hideLatest;latest.style.display=hideLatest?'none':'';}
+ const nav=document.getElementById('mainNav');
+ if(nav){
+  nav.querySelectorAll('a[href^="#"]').forEach(a=>{
+   const key=({ '#inside':'inside','#latest':'latest','#international':'international','#spotlight':'spotlight','#coming-up':'comingUp' })[a.getAttribute('href')];
+   if(key)a.hidden=hidden.has(key)||(key==='latest'&&businessHidden&&peopleHidden);
+  });
+  nav.querySelectorAll('a[data-custom-nav]').forEach(a=>a.remove());
+  (data.customSections||[]).forEach(section=>{
+   const id=String(section.id||'').replace(/[^a-zA-Z0-9_-]/g,'');
+   if(id)nav.insertAdjacentHTML('beforeend',`<a data-custom-nav href="#${esc(id)}">${esc(section.title||'New section')}</a>`);
+  });
+ }
+}
+function renderCustomSections(data){
+ const host=document.getElementById('customSectionsList');
+ if(!host)return;
+ host.innerHTML=(data.customSections||[]).map((section,index)=>{
+  const id=String(section.id||('custom-'+index)).replace(/[^a-zA-Z0-9_-]/g,'');
+  const items=(section.items||[]).filter(item=>item&&(item.headline||item.summary||item.imageUrl)).map(item=>`<article class="custom-published-card"><div class="article-topline">${esc(item.type||section.kicker||'UPDATE')}</div><h3>${esc(item.headline||'')}</h3>${imageMarkup(item.imageUrl,item.headline||section.title)}<p>${esc(item.summary||'')}</p>${linkHtml(item.url,'Related information')}</article>`).join('');
+  return `<section class="section-shell custom-published-section" id="${esc(id)}"><div class="section-heading"><div><div class="section-kicker">${esc(section.kicker||'ADDITIONAL SECTION')}</div><h2>${esc(section.title||'New section')}</h2></div></div>${section.intro?`<p class="custom-intro">${esc(section.intro)}</p>`:''}<div class="custom-published-grid">${items||empty('No content has been added to this section yet.')}</div></section>`;
+ }).join('');
 }
 function openStory(type,index){let item,title,body,url='';if(type==='business'){item=(publication.businessInnovation||[])[index];title=item?.headline;body=[item?.summary,item?.outcome].filter(Boolean).join('\n\n');url=item?.sourceUrl||item?.ctaUrl}if(type==='people'){item=(publication.peopleCulture||[])[index];title=item?.headline;body=[item?.summary,item?.impact,item?.personTeam].filter(Boolean).join('\n\n');url=item?.ctaUrl}if(!item)return;$('modalCategory').textContent=type==='business'?'BUSINESS & INNOVATION':'PEOPLE & CULTURE';$('modalTitle').textContent=title||'';$('modalBody').textContent=body||'';$('modalLinks').innerHTML=linkHtml(url,'More information');$('articleModal').classList.add('open');track('article_open',title)}
 const SUPABASE_URL = 'https://hotyjsgogisglrbgmtns.supabase.co';
