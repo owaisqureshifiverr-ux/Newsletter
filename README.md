@@ -34,3 +34,10 @@ The employee newspaper and HR editor are separate routes. The employee page does
 ## Text size controls
 
 Both routes include floating **−** and **+** controls. They change text size from 80% to 140% in 10% steps without zooming images. The selected size is saved in browser storage and shared by the employee and HR routes on the same site. Dynamically-rendered newsletter and editor content follows the selected size.
+
+
+## Employee surveys
+
+The HR Publishing Workspace includes a survey builder for draft, active, and closed surveys. HR can add 1–5 Likert-scale, multiple-choice, and open-ended questions, activate one survey on the Employee Newspaper, review anonymous question-level results, and export responses as CSV.
+
+Survey definitions and anonymous submissions are stored in dedicated Supabase tables: `newsletter_surveys` and `newsletter_survey_responses`. Public users can read only the active survey and submit answers; only approved HR administrators can manage surveys and read responses. The employee form does not collect names or email addresses.
