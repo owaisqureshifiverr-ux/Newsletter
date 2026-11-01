@@ -423,6 +423,41 @@ main{max-width:1260px;margin:0 auto;background:#f8f4eb;box-shadow:0 18px 65px rg
 .survey-response-time{font-size:9px;color:#8a97a6}
 @media(max-width:760px){.survey-section{padding:42px 0}.survey-header{align-items:flex-start;flex-direction:column}.survey-admin-grid{grid-template-columns:1fr}.survey-question{padding:15px}.survey-rating-options,.survey-choice-list{gap:7px}.survey-rating-choice,.survey-choice{padding:9px 10px}}
 </style>
+<style id="companyNewsletterSurveyStyles">
+/* Identified employee survey and analytics */
+.survey-identity-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 18px}
+.survey-identity-field{display:flex;flex-direction:column;gap:6px}
+.survey-identity-field label{font-size:10px;font-weight:800;color:#52657a}
+.survey-identity-field input{width:100%;padding:12px;border:1px solid #d9e1e9;border-radius:9px;background:#fff;color:#23364f;font:inherit;font-size:13px}
+.survey-consent{display:flex;align-items:flex-start;gap:8px;max-width:760px;color:#617187;font-size:10px;line-height:1.65;margin:15px 0}
+.survey-consent input{margin-top:2px;accent-color:var(--teal)}
+.survey-question-description{font-size:11px;color:#718096;line-height:1.7;white-space:pre-line;margin:5px 0 0}
+.survey-editor-question .survey-admin-field textarea{min-height:62px}
+.survey-admin-grid{grid-template-columns:1fr!important}
+.survey-dashboard-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:15px 0}
+.survey-dashboard-kpi{border:1px solid #e0e7ee;border-radius:11px;padding:13px;background:#f8fafb}
+.survey-dashboard-kpi span{display:block;color:#7a899a;font-size:9px;letter-spacing:.5px;text-transform:uppercase}
+.survey-dashboard-kpi strong{display:block;color:var(--ink);font-size:24px;margin-top:4px;line-height:1.2}
+.survey-dashboard-kpi small{color:#758398;font-size:9px}
+.survey-insights{border:1px solid #dce8e7;background:#f3f8f7;border-radius:12px;padding:15px;margin:12px 0 18px}
+.survey-insights h4{font-size:12px;color:#215d59;margin:0 0 8px}
+.survey-insights p,.survey-insights li{font-size:11px;line-height:1.7;color:#4e6573}
+.survey-insights ul{margin:6px 0 0;padding-left:18px}
+.survey-trend{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));align-items:end;gap:7px;min-height:100px;margin:12px 0}
+.survey-trend-day{display:flex;flex-direction:column;align-items:center;justify-content:end;gap:5px;min-width:0}
+.survey-trend-bar{width:100%;max-width:38px;min-height:3px;background:var(--teal);border-radius:5px 5px 2px 2px}
+.survey-trend-day span{font-size:8px;color:#718096;text-align:center;white-space:nowrap}
+.survey-data-table{width:100%;border-collapse:collapse;font-size:10px;min-width:540px}
+.survey-data-table th,.survey-data-table td{text-align:left;padding:9px 8px;border-bottom:1px solid #e5ebf0;vertical-align:top}
+.survey-data-table th{font-size:9px;color:#718096;text-transform:uppercase}
+.survey-data-table td{color:#40546c}
+.survey-data-table-wrap{overflow:auto;border:1px solid #e2e8ef;border-radius:10px;margin-top:10px}
+.survey-result-note{font-size:10px;color:#7b8999;margin:5px 0 8px}
+.survey-question-options{font-size:10px;color:#7b8999;line-height:1.6}
+.survey-admin-toolbar{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.survey-admin-toolbar .survey-admin-field{min-width:240px;flex:1;margin:0}
+@media(max-width:760px){.survey-identity-grid{grid-template-columns:1fr}.survey-dashboard-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.survey-trend{gap:3px}}
+</style>
 </head>
 <body>
 <div class="topline"><span>CODE INFORMATICS</span><span>INTERNAL EMPLOYEE PUBLICATION</span></div>
@@ -447,8 +482,15 @@ main{max-width:1260px;margin:0 auto;background:#f8f4eb;box-shadow:0 18px 65px rg
   <div class="survey-header"><span class="section-kicker">EMPLOYEE VOICE · YOUR FEEDBACK MATTERS</span><span class="section-index">EMPLOYEE SURVEY</span></div>
   <h2 id="employeeSurveyTitle">Share your feedback.</h2>
   <p class="survey-description" id="employeeSurveyDescription"></p>
-  <form id="employeeSurveyForm"><div id="employeeSurveyQuestions"></div>
-   <div class="survey-submit-row"><p class="survey-privacy">Anonymous survey: your name and email are not collected. Please submit once from this browser.</p><button class="survey-submit-button" id="employeeSurveySubmit" type="submit">Submit feedback</button></div>
+  
+  <form id="employeeSurveyForm">
+   <div class="survey-identity-grid">
+    <div class="survey-identity-field"><label for="surveyRespondentName">Full name *</label><input id="surveyRespondentName" name="respondent_name" type="text" autocomplete="name" maxlength="120" minlength="2" required placeholder="Enter your full name"></div>
+    <div class="survey-identity-field"><label for="surveyRespondentEmail">Work email address *</label><input id="surveyRespondentEmail" name="respondent_email" type="email" autocomplete="email" maxlength="254" required placeholder="name@company.com"></div>
+   </div>
+   <div id="employeeSurveyQuestions"></div>
+   <label class="survey-consent"><input id="surveyIdentityConsent" type="checkbox" required><span>I understand that my name and work email will be recorded with my answers and can be viewed by authorised HR administrators for survey analysis and follow-up. My details will not be shown on the public newspaper.</span></label>
+   <div class="survey-submit-row"><p class="survey-privacy">One response per work email for this survey. Please do not include sensitive personal information in written feedback.</p><button class="survey-submit-button" id="employeeSurveySubmit" type="submit">Submit feedback</button></div>
   </form>
   <p class="survey-status" id="employeeSurveyStatus" role="status" aria-live="polite"></p>
  </div>
@@ -741,71 +783,78 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
 </script>
 
 
+
 <script id="company-newsletter-employee-survey">
 (function(){
- const section=document.getElementById('employeeSurvey');
- const form=document.getElementById('employeeSurveyForm');
- const questionHost=document.getElementById('employeeSurveyQuestions');
- const titleNode=document.getElementById('employeeSurveyTitle');
- const descriptionNode=document.getElementById('employeeSurveyDescription');
- const statusNode=document.getElementById('employeeSurveyStatus');
+ const section=document.getElementById('employeeSurvey'),form=document.getElementById('employeeSurveyForm');
+ const questionHost=document.getElementById('employeeSurveyQuestions'),titleNode=document.getElementById('employeeSurveyTitle');
+ const descriptionNode=document.getElementById('employeeSurveyDescription'),statusNode=document.getElementById('employeeSurveyStatus');
  const submitButton=document.getElementById('employeeSurveySubmit');
  if(!section||!form||!questionHost||!window.supabase)return;
  const client=window.supabase.createClient('https://hotyjsgogisglrbgmtns.supabase.co','sb_publishable_0pKDjnllPyQjKJ0S6F4vOQ_tMLpLVMM');
  let activeSurvey=null,lastVersion='',sending=false;
  const escSurvey=value=>String(value==null?'':value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- const submittedKey=id=>'company-newsletter-survey-submitted-'+id;
- function hasSubmitted(id){try{return localStorage.getItem(submittedKey(id))==='yes'}catch(_){return false}}
  function renderQuestion(q,index){
-  const id=escSurvey(q.id),prompt=escSurvey(q.prompt),required=!!q.required;
-  const requiredText=required?'<span class="survey-required">*</span>':'';
+  const id=escSurvey(q.id),prompt=escSurvey(q.prompt),detail=q.description?'<p class="survey-question-description">'+escSurvey(q.description)+'</p>':'';
+  const requiredText=q.required?'<span class="survey-required">*</span>':'';
   if(q.type==='likert'){
-   let options='';
-   for(let n=1;n<=5;n++)options+='<label class="survey-rating-choice"><input type="radio" name="'+id+'" value="'+n+'" '+(required&&n===1?'required':'')+'><span>'+n+'</span></label>';
-   return '<fieldset class="survey-question"><legend>'+String(index+1)+'. '+prompt+requiredText+'</legend><div class="survey-rating-options">'+options+'</div><div class="survey-scale-captions"><span>1 · Strongly disagree</span><span>5 · Strongly agree</span></div></fieldset>';
+   const opts=[1,2,3,4,5].map(n=>'<label class="survey-rating-choice"><input type="radio" name="'+id+'" value="'+n+'"><span>'+n+'</span></label>').join('');
+   return '<fieldset class="survey-question"><legend>'+(index+1)+'. '+prompt+requiredText+'</legend>'+detail+'<div class="survey-rating-options">'+opts+'</div><div class="survey-scale-captions"><span>1 · Strongly disagree</span><span>5 · Strongly agree</span></div></fieldset>';
+  }
+  if(q.type==='closed_ended'){
+   const opts=['Yes','No'].map(v=>'<label class="survey-choice"><input type="radio" name="'+id+'" value="'+v+'"><span>'+v+'</span></label>').join('');
+   return '<fieldset class="survey-question"><legend>'+(index+1)+'. '+prompt+requiredText+'</legend>'+detail+'<div class="survey-choice-list">'+opts+'</div></fieldset>';
   }
   if(q.type==='multiple_choice'){
-   const options=(Array.isArray(q.options)?q.options:[]).filter(x=>String(x).trim());
-   const choices=options.map((option,i)=>'<label class="survey-choice"><input type="radio" name="'+id+'" value="'+escSurvey(option)+'" '+(required&&i===0?'required':'')+'><span>'+escSurvey(option)+'</span></label>').join('');
-   return '<fieldset class="survey-question"><legend>'+String(index+1)+'. '+prompt+requiredText+'</legend><div class="survey-choice-list">'+choices+'</div></fieldset>';
+   const opts=(q.options||[]).filter(v=>String(v).trim()).map(v=>'<label class="survey-choice"><input type="checkbox" name="'+id+'" value="'+escSurvey(v)+'"><span>'+escSurvey(v)+'</span></label>').join('');
+   return '<fieldset class="survey-question" data-survey-required="'+(q.required?'true':'false')+'" data-question-id="'+id+'"><legend>'+(index+1)+'. '+prompt+requiredText+'</legend>'+detail+'<p class="survey-question-options">Select all that apply.</p><div class="survey-choice-list">'+opts+'</div></fieldset>';
   }
-  if(q.type==='open_ended')return '<div class="survey-question"><label class="survey-question-title" for="surveyAnswer_'+id+'">'+String(index+1)+'. '+prompt+requiredText+'</label><textarea class="survey-answer-text" id="surveyAnswer_'+id+'" name="'+id+'" rows="3" maxlength="2000" '+(required?'required':'')+' placeholder="Write your feedback here…"></textarea></div>';
+  if(q.type==='open_ended')return '<div class="survey-question"><label class="survey-question-title" for="surveyAnswer_'+id+'">'+(index+1)+'. '+prompt+requiredText+'</label>'+detail+'<textarea class="survey-answer-text" id="surveyAnswer_'+id+'" name="'+id+'" rows="3" maxlength="2000" placeholder="Write your feedback here…"></textarea></div>';
   return '';
  }
  function renderSurvey(survey){
-  activeSurvey=survey;
-  lastVersion=survey?survey.id+'|'+(survey.updated_at||''):'';
+  activeSurvey=survey;lastVersion=survey?survey.id+'|'+(survey.updated_at||''):'';
   if(!survey||!Array.isArray(survey.questions)||!survey.questions.length){section.hidden=true;form.hidden=false;return;}
   section.hidden=false;titleNode.textContent=survey.title||'Employee Feedback Survey';
-  descriptionNode.textContent=survey.description||'We value your feedback. Please share your thoughts below.';
+  descriptionNode.textContent=survey.description||'Please share your feedback with HR.';
   statusNode.textContent='';form.reset();questionHost.innerHTML=survey.questions.map(renderQuestion).join('');
-  const already=hasSubmitted(survey.id);form.hidden=already;
-  if(already)statusNode.textContent='Thank you. A response from this browser has already been recorded for this survey.';
   submitButton.disabled=false;
  }
  async function refreshSurvey(){
   try{
    const {data,error}=await client.from('newsletter_surveys').select('id,title,description,questions,updated_at').eq('status','active').order('updated_at',{ascending:false}).limit(1).maybeSingle();
-   if(error)throw error;
-   const version=data?data.id+'|'+(data.updated_at||''):'';
+   if(error)throw error;const version=data?data.id+'|'+(data.updated_at||''):'';
    if(version!==lastVersion)renderSurvey(data);
   }catch(error){console.warn('Could not load the employee survey:',error.message||error);if(!activeSurvey)section.hidden=true;}
  }
+ function requiredAnswersPresent(){
+  for(const q of activeSurvey.questions){
+   if(!q.required)continue;
+   const controls=[...form.querySelectorAll('[name="'+CSS.escape(q.id)+'"]')];
+   if(q.type==='multiple_choice'&&!controls.some(c=>c.checked)){statusNode.textContent='Please select at least one option for: '+q.prompt;controls[0]?.focus();return false;}
+   if((q.type==='likert'||q.type==='closed_ended')&&!controls.some(c=>c.checked)){statusNode.textContent='Please answer: '+q.prompt;controls[0]?.focus();return false;}
+   if(q.type==='open_ended'&&!String(controls[0]?.value||'').trim()){statusNode.textContent='Please answer: '+q.prompt;controls[0]?.focus();return false;}
+  }
+  return true;
+ }
  form.addEventListener('submit',async function(event){
-  event.preventDefault();if(sending||!activeSurvey)return;if(!form.reportValidity())return;
+  event.preventDefault();if(sending||!activeSurvey)return;
+  if(!form.reportValidity()||!requiredAnswersPresent())return;
   const formData=new FormData(form),answers={};
   for(const q of activeSurvey.questions){
-   const raw=formData.get(q.id);if(raw===null||String(raw).trim()==='')continue;
-   answers[q.id]=q.type==='likert'?Number(raw):String(raw).trim();
+   const values=formData.getAll(q.id).map(v=>String(v).trim()).filter(Boolean);
+   if(!values.length)continue;
+   answers[q.id]=q.type==='likert'?Number(values[0]):q.type==='multiple_choice'?values:values[0];
   }
   if(!Object.keys(answers).length){statusNode.textContent='Please answer at least one question before submitting.';return;}
-  sending=true;submitButton.disabled=true;statusNode.textContent='Submitting your anonymous feedback…';
+  const respondentName=String(formData.get('respondent_name')||'').trim();
+  const respondentEmail=String(formData.get('respondent_email')||'').trim().toLowerCase();
+  sending=true;submitButton.disabled=true;statusNode.textContent='Submitting your response securely…';
   try{
-   const {error}=await client.from('newsletter_survey_responses').insert({survey_id:activeSurvey.id,answers:answers});
-   if(error)throw error;
-   try{localStorage.setItem(submittedKey(activeSurvey.id),'yes')}catch(_){}
-   form.hidden=true;statusNode.textContent='Thank you. Your anonymous feedback has been submitted successfully.';
-  }catch(error){statusNode.textContent='Your response could not be submitted. Please try again. '+(error.message||'');submitButton.disabled=false;}
+   const {error}=await client.from('newsletter_survey_responses').insert({survey_id:activeSurvey.id,respondent_name:respondentName,respondent_email:respondentEmail,answers:answers});
+   if(error){if(error.code==='23505')throw new Error('A response has already been recorded for this work email for this survey.');throw error;}
+   form.hidden=true;statusNode.textContent='Thank you, '+respondentName+'. Your response has been submitted successfully.';
+  }catch(error){statusNode.textContent=error.message||'Your response could not be submitted. Please check your details and try again.';submitButton.disabled=false;}
   finally{sending=false;}
  });
  refreshSurvey();
