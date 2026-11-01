@@ -53,13 +53,14 @@ jobs:
           set -euo pipefail
           verify_page() {
             local route="$1"
+            local expected_marker="$2"
             local url="${PAGE_URL%/}/${route}"
             local body_file
             body_file="$(mktemp)"
             for attempt in {1..12}; do
               status="$(curl --silent --show-error --location --max-time 20 --output "$body_file" --write-out "%{http_code}" "$url" || true)"
-              if [ "$status" = "200" ] && grep -qi "Company Newsletter" "$body_file"; then
-                echo "PASS: $url returned HTTP 200 and Company Newsletter content."
+              if [ "$status" = "200" ] && grep -qi "Company Newsletter" "$body_file" && grep -Fqi "$expected_marker" "$body_file"; then
+                echo "PASS: $url returned HTTP 200 with Company Newsletter and survey marker $expected_marker."
                 rm -f "$body_file"
                 return 0
               fi
@@ -72,5 +73,5 @@ jobs:
             rm -f "$body_file"
             return 1
           }
-          verify_page ""
-          verify_page "hr/"
+          verify_page "" 'id="surveyRespondentName"'
+          verify_page "hr/" 'id="surveyReportSelect"'
