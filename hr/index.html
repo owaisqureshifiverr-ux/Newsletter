@@ -369,6 +369,52 @@ main{max-width:1260px;margin:0 auto;background:#f8f4eb;box-shadow:0 18px 65px rg
 /* Company Newsletter masthead sizing */
 .brand-name{font-size:clamp(10px,1vw,12px);letter-spacing:.55px;white-space:nowrap}
 </style>
+<style id="companyNewsletterSurveyStyles">
+/* Company Newsletter employee survey */
+.survey-section{background:linear-gradient(145deg,#f7f9fb,#eef4f5);padding:58px 0 64px;border-top:1px solid #e1e7ef}
+.survey-section[hidden]{display:none!important}
+.survey-header{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:14px}
+.survey-section h2{font-family:var(--serif);font-size:clamp(28px,4vw,40px);font-weight:600;line-height:1.16;color:var(--deep);margin:12px 0}
+.survey-description{max-width:760px;color:#617187;font-size:14px;line-height:1.8;white-space:pre-line;margin:0 0 25px}
+.survey-question{border:1px solid #dce4eb;background:#fff;border-radius:14px;padding:18px 20px;margin:13px 0;min-width:0}
+.survey-question legend,.survey-question-title{font-size:14px;font-weight:750;color:#23364f;line-height:1.55;padding:0 4px}
+.survey-required{color:#a33e32;margin-left:3px}
+.survey-rating-options,.survey-choice-list{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}
+.survey-rating-choice,.survey-choice{display:flex;align-items:center;gap:8px;border:1px solid #dce4eb;border-radius:10px;padding:10px 12px;background:#fbfcfd;cursor:pointer;color:#33465f;font-size:12px}
+.survey-rating-choice input,.survey-choice input{accent-color:var(--teal)}
+.survey-rating-choice span{font-size:15px;font-weight:800;min-width:10px;text-align:center}
+.survey-scale-captions{display:flex;justify-content:space-between;gap:12px;color:#718096;font-size:10px;margin-top:8px}
+.survey-answer-text{width:100%;min-height:94px;margin-top:12px;border:1px solid #dce4eb;border-radius:10px;padding:12px;background:#fbfcfd;color:#23364f;font:inherit;font-size:13px;resize:vertical}
+.survey-submit-row{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-top:20px}
+.survey-privacy{font-size:10px;color:#758398;line-height:1.7;max-width:500px}
+.survey-submit-button{border:0;border-radius:999px;background:var(--teal);color:#fff;padding:12px 22px;font-weight:800;font-size:12px;cursor:pointer;box-shadow:0 8px 18px rgba(8,124,120,.15)}
+.survey-submit-button:disabled{opacity:.55;cursor:not-allowed}
+.survey-status{font-size:12px;color:var(--teal);font-weight:700;min-height:20px;margin:13px 0 0}
+.survey-admin-grid{display:grid;grid-template-columns:minmax(220px,.75fr) minmax(0,1.5fr);gap:14px}
+.survey-admin-field{display:flex;flex-direction:column;gap:6px;margin:11px 0}
+.survey-admin-field label{font-size:10px;font-weight:800;color:#52657a}
+.survey-admin-field input,.survey-admin-field textarea,.survey-admin-field select{width:100%;padding:11px;border:1px solid #d9e1e9;background:#fbfcfd;color:var(--ink);font:inherit;font-size:12px;outline-color:var(--teal);border-radius:8px}
+.survey-admin-field textarea{min-height:78px;resize:vertical}
+.survey-editor-question{border:1px solid #dce4eb;border-radius:12px;padding:14px;background:#fbfcfd;margin:11px 0}
+.survey-editor-question-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.survey-editor-question-head strong{font-size:12px;color:#23364f}
+.survey-editor-hint{font-size:10px;color:#718096;line-height:1.6;margin:6px 0}
+.survey-editor-required{display:flex;align-items:center;gap:7px;font-size:11px;color:#52657a;margin-top:9px}
+.survey-editor-required input{accent-color:var(--teal)}
+.survey-admin-status{font-size:11px;color:var(--teal);min-height:18px;margin-top:9px}
+.survey-response-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:9px;margin:12px 0}
+.survey-response-stat{border:1px solid #e0e7ee;border-radius:10px;padding:12px;background:#f8fafb}
+.survey-response-stat span{display:block;color:#7a899a;font-size:9px;letter-spacing:.5px;text-transform:uppercase}
+.survey-response-stat strong{display:block;color:var(--ink);font-size:21px;margin-top:3px}
+.survey-result-block{border-top:1px solid #e5ebf0;padding:13px 0}
+.survey-result-block h4{font-size:12px;color:#243750;margin:0 0 9px}
+.survey-result-bar{display:grid;grid-template-columns:minmax(90px,1fr) minmax(90px,2fr) 32px;gap:9px;align-items:center;font-size:10px;color:#52657a;margin:7px 0}
+.survey-result-track{background:#e9eef2;border-radius:99px;height:8px;overflow:hidden}
+.survey-result-track span{display:block;height:100%;background:var(--teal);border-radius:99px}
+.survey-open-answer{border:1px solid #e3e9ef;border-radius:8px;background:#fff;padding:10px 12px;margin:7px 0;color:#465a71;font-size:11px;line-height:1.7;white-space:pre-wrap}
+.survey-response-time{font-size:9px;color:#8a97a6}
+@media(max-width:760px){.survey-section{padding:42px 0}.survey-header{align-items:flex-start;flex-direction:column}.survey-admin-grid{grid-template-columns:1fr}.survey-question{padding:15px}.survey-rating-options,.survey-choice-list{gap:7px}.survey-rating-choice,.survey-choice{padding:9px 10px}}
+</style>
 </head>
 <body>
 <div class="topline"><span>CODE INFORMATICS</span><span>INTERNAL EMPLOYEE PUBLICATION</span></div>
@@ -388,6 +434,18 @@ main{max-width:1260px;margin:0 auto;background:#f8f4eb;box-shadow:0 18px 65px rg
   <section class="coming-section" id="coming-up"><div class="section-shell"><div class="section-heading"><div><div class="section-kicker">COMING UP</div><h2 id="comingHeading">Dates, events and opportunities<span class="title-period">.</span></h2></div><span class="section-index">04 / WHAT'S NEXT</span></div><div id="comingList" class="coming-list"></div></div></section>
   <div id="customSectionsList"></div>
   <section class="closing-band" id="closing"><div class="closing-mark">MP</div><p id="footerSlogan">ONE TEAM. SHARED PROGRESS.<br><strong>BIGGER POSSIBILITIES.</strong></p></section>
+
+<section class="survey-section" id="employeeSurvey" aria-labelledby="employeeSurveyTitle" hidden>
+ <div class="section-shell">
+  <div class="survey-header"><span class="section-kicker">EMPLOYEE VOICE · YOUR FEEDBACK MATTERS</span><span class="section-index">EMPLOYEE SURVEY</span></div>
+  <h2 id="employeeSurveyTitle">Share your feedback.</h2>
+  <p class="survey-description" id="employeeSurveyDescription"></p>
+  <form id="employeeSurveyForm"><div id="employeeSurveyQuestions"></div>
+   <div class="survey-submit-row"><p class="survey-privacy">Anonymous survey: your name and email are not collected. Please submit once from this browser.</p><button class="survey-submit-button" id="employeeSurveySubmit" type="submit">Submit feedback</button></div>
+  </form>
+  <p class="survey-status" id="employeeSurveyStatus" role="status" aria-live="polite"></p>
+ </div>
+</section>
 </main>
 <footer class="site-footer" id="footer"><div><strong>CODE INFORMATICS</strong><span>COMPANY NEWSLETTER</span></div><p>CODE INFORMATICS • COMPANY NEWSLETTER • INTERNAL EMPLOYEE NEWSLETTER</p><span class="footer-note" id="footerMessage">Company news, people and progress — brought together by Human Capital Management.</span><div class="privacy-note">This newsletter contains company-approved monthly updates. Engagement data in the single-file edition is browser-local; Site-level analytics are available separately in your hosting dashboard.</div></footer>
 
@@ -395,6 +453,44 @@ main{max-width:1260px;margin:0 auto;background:#f8f4eb;box-shadow:0 18px 65px rg
   <div class="hr-head"><div><div class="section-kicker">HUMAN CAPITAL MANAGEMENT</div><h2>HR Publishing Studio<span class="hr-heading-star">✦</span></h2><p>Shape every story, image and detail of the employee edition in one elegant workspace.</p></div><button class="secondary-button" id="hrLogoutBtn">Lock workspace</button></div>
   <div class="demo-label"><strong>Secure publishing:</strong> This workspace uses a password-protected HR login and database-level administrator permissions. Employee users cannot access editing controls. Drafts are saved centrally. Publishing updates the employee newsletter link automatically. Employees never receive this workspace or its administrator controls.</div>
   <div class="hr-card" id="directEditorCard"><div class="hr-card-eyebrow">CONTENT STUDIO · 01</div><h3>Edit your newsletter</h3><p>Use the structured content tables below to update every heading, article, date, supporting link and picture. Save to refresh the main preview, then generate a self-contained HTML edition for employees.</p><div class="hr-actions" style="margin-bottom:16px"><button class="primary-button" id="saveDirectEditorBtn">Save Draft to Cloud</button><button class="primary-button" id="publishIssueBtn">Publish to Employees ↗</button><button class="secondary-button" id="generateEmployeeHtmlBtn">Download Employee HTML</button><button class="secondary-button" id="downloadDirectHtmlBtn">Download HR Master Copy ↓</button></div><div class="hr-status" id="directEditorStatus" role="status"></div><div id="directEditor"></div><div class="hr-actions" style="margin-top:16px"><button class="primary-button" id="saveDirectEditorBottomBtn">Save Draft to Cloud</button><button class="primary-button" id="publishIssueBottomBtn">Publish to Employees ↗</button><button class="secondary-button" id="generateEmployeeHtmlBottomBtn">Download Employee HTML</button><button class="secondary-button" id="downloadDirectHtmlBottomBtn">Download HR Master Copy</button></div></div>
+
+  <div class="hr-card" id="newsletterSurveyManager">
+   <div class="hr-card-eyebrow">EMPLOYEE VOICE · 02</div>
+   <h3>Employee Survey Builder &amp; Results</h3>
+   <p>Create employee surveys, add the question types, and activate one on the Employee Newspaper. Previous surveys and their response history remain available. Submissions are anonymous.</p>
+   <div class="survey-admin-grid">
+    <div>
+     <div class="survey-admin-field"><label for="surveySelect">Existing surveys</label><select id="surveySelect"><option value="">No surveys yet</option></select></div>
+     <div class="hr-actions"><button type="button" class="secondary-button" id="surveyNewBtn">+ Create next survey</button></div>
+     <div class="survey-admin-field"><label for="surveyTitleInput">Survey title</label><input id="surveyTitleInput" maxlength="160" placeholder="e.g. Employee Engagement Survey"></div>
+     <div class="survey-admin-field"><label for="surveyDescriptionInput">Introduction / instructions</label><textarea id="surveyDescriptionInput" maxlength="1500" placeholder="Tell employees what this survey is about."></textarea></div>
+     <div class="survey-admin-status" id="surveyManagerStatus" role="status"></div>
+     <div class="hr-actions" style="margin-top:12px">
+      <button type="button" class="primary-button" id="surveySaveBtn">Save Survey</button>
+      <button type="button" class="primary-button" id="surveyActivateBtn">Activate on Employee Newspaper</button>
+      <button type="button" class="secondary-button" id="surveyCloseBtn">Close survey</button>
+      <button type="button" class="danger-button" id="surveyDeleteBtn">Delete survey</button>
+     </div>
+     <p class="survey-editor-hint">Saving an active survey applies your edits to the live form. Closing it hides the form from employees but keeps its response history.</p>
+    </div>
+    <div>
+     <div class="survey-admin-field"><label>Questions · maximum 30</label><div id="surveyQuestionList"></div></div>
+     <div class="hr-actions">
+      <button type="button" class="secondary-button" id="surveyAddLikertBtn">+ Likert scale (1–5)</button>
+      <button type="button" class="secondary-button" id="surveyAddChoiceBtn">+ Multiple choice</button>
+      <button type="button" class="secondary-button" id="surveyAddOpenBtn">+ Open-ended</button>
+     </div>
+    </div>
+   </div>
+   <div class="editor-section">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+     <div><h3 style="margin-bottom:3px">Survey response monitor</h3><p style="margin:0">Anonymous response totals and question-level results.</p></div>
+     <div class="hr-actions"><button type="button" class="secondary-button" id="surveyRefreshResponsesBtn">Refresh responses</button><button type="button" class="secondary-button" id="surveyExportCsvBtn">Download CSV</button></div>
+    </div>
+    <div class="survey-response-summary" id="surveyResponseSummary"></div>
+    <div id="surveyResponsePanel"><p class="survey-editor-hint">Select a survey to view its response report.</p></div>
+   </div>
+  </div>
   <div class="hr-card"><div class="hr-card-eyebrow">ENGAGEMENT · 02</div><h3>Website visit &amp; engagement overview</h3><p>Review activity captured in this browser. Site-wide analytics depend on the hosting provider and can be connected separately.</p><div class="hr-kpis" id="analyticsKpis"></div><div class="hr-actions" style="margin-top:14px"><a class="secondary-button" id="netlifyAnalyticsLink" href="https://app.netlify.com/" target="_blank" rel="noopener">Open hosting dashboard ↗</a><button class="danger-button" id="clearActivityBtn">Clear browser activity</button></div><div class="hr-status" id="analyticsStatus"></div><div class="hr-table-wrap" style="margin-top:14px"><table class="hr-table"><thead><tr><th>Time</th><th>Visitor ID</th><th>Event</th><th>Section / Item</th></tr></thead><tbody id="activityRows"></tbody></table></div></div>
   <div class="hr-card"><div class="hr-card-eyebrow">PUBLICATION · 03</div><h3>Current edition</h3><p id="currentIssueStatus">Starter newsletter preview.</p><div class="hr-actions"><button class="secondary-button" id="resetPreviewBtn">Restore Word-template starter content</button></div></div>
 </div></section>
@@ -585,7 +681,7 @@ async function loadCloudEdition(){
 function unlockHr(){
  if(!cloudAdmin){showLogin();$('hrLoginError').textContent='This account is not authorised for HR publishing.';return;}
  hrOpen=true;$('hrLoginModal').classList.remove('open');$('hrWorkspace').classList.add('visible');$('hrLogoutBtn').style.display='inline-block';
- loadCloudEdition().then(()=>{renderAnalytics();$('directEditorStatus').textContent='Connected to secure cloud publishing.';}).catch(e=>{$('directEditorStatus').textContent='Could not load saved issue: '+e.message;});
+ loadCloudEdition().then(async()=>{await loadSurveyList();renderAnalytics();$('directEditorStatus').textContent='Connected to secure cloud publishing.';}).catch(e=>{$('directEditorStatus').textContent='Could not load saved issue: '+e.message;});
  $('hrWorkspace').scrollIntoView({behavior:'smooth'});track('hr_workspace_open','HR Workspace');
 }
 async function login(e){
@@ -824,7 +920,185 @@ function bind(){
  if(NETLIFY_SITE_SLUG!=='NOT_CONFIGURED'&&$('netlifyAnalyticsLink'))$('netlifyAnalyticsLink').href=`https://app.netlify.com/sites/${encodeURIComponent(NETLIFY_SITE_SLUG)}/analytics`;
 }
 function init(){render();bind();track('page_view',location.pathname);if($('hrWorkspace')){verifyHrAdmin().then(ok=>{if(ok)unlockHr()}).catch(e=>console.warn('Auth restore failed',e))}const ids=new Set();if('IntersectionObserver'in window){const ob=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting&&!ids.has(e.target.id)){ids.add(e.target.id);track('section_visit',e.target.id)}}),{threshold:.35});['inside','latest','international','spotlight','coming-up'].forEach(id=>{const el=$(id);if(el)ob.observe(el)})}}
+
+/* ───────── EMPLOYEE SURVEY BUILDER & RESPONSE MONITOR ───────── */
+let newsletterSurveys=[];
+let surveyDraft=null;
+let surveyResponses=[];
+function surveyUid(){return 'q-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,9);}
+function newSurveyDraft(){return {id:null,title:'Employee Feedback Survey',description:'Please take a moment to share your feedback. Your responses are anonymous.',questions:[],status:'draft'};}
+function surveyAdminMessage(message,isError=false){
+ const node=$('surveyManagerStatus');if(node){node.textContent=message||'';node.style.color=isError?'#a33e32':'var(--teal)';}
+}
+function renderSurveyQuestionEditor(){
+ const host=$('surveyQuestionList');if(!host)return;
+ if(!surveyDraft||!Array.isArray(surveyDraft.questions))surveyDraft=newSurveyDraft();
+ if(!surveyDraft.questions.length){host.innerHTML='<p class="survey-editor-hint">No questions yet. Add a 1–5 Likert scale, multiple-choice, or open-ended question.</p>';return;}
+ host.innerHTML=surveyDraft.questions.map((q,index)=>{
+  const typeLabel=q.type==='likert'?'LIKERT SCALE · 1 TO 5':q.type==='multiple_choice'?'MULTIPLE CHOICE':'OPEN-ENDED';
+  const opts=(q.options||[]).join('\n');
+  const optionsEditor=q.type==='multiple_choice'?'<div class="survey-admin-field"><label>Answer options · one per line</label><textarea data-survey-qid="'+esc(q.id)+'" data-survey-qfield="options">'+esc(opts)+'</textarea></div>':'';
+  const typeHint=q.type==='likert'?'Employees select one rating from 1 to 5 (Strongly disagree → Strongly agree).':q.type==='multiple_choice'?'Employees select one answer from your options.':'Employees type a written response.';
+  return '<div class="survey-editor-question" data-survey-question="'+esc(q.id)+'"><div class="survey-editor-question-head"><strong>QUESTION '+(index+1)+' · '+typeLabel+'</strong><button type="button" class="danger-button" data-survey-remove-question="'+esc(q.id)+'">Remove</button></div><div class="survey-admin-field"><label>Question text</label><textarea maxlength="500" data-survey-qid="'+esc(q.id)+'" data-survey-qfield="prompt" placeholder="Write your question…">'+esc(q.prompt||'')+'</textarea></div>'+optionsEditor+'<label class="survey-editor-required"><input type="checkbox" data-survey-qid="'+esc(q.id)+'" data-survey-qfield="required" '+(q.required?'checked':'')+'> Required question</label><p class="survey-editor-hint">'+typeHint+'</p></div>';
+ }).join('');
+}
+function renderSurveyManager(){
+ if(!$('newsletterSurveyManager'))return;
+ const select=$('surveySelect');
+ if(select){
+  select.innerHTML='<option value="">Select a survey</option>'+newsletterSurveys.map(s=>'<option value="'+esc(s.id)+'">'+esc(s.title)+' · '+esc(String(s.status).toUpperCase())+'</option>').join('');
+  select.value=surveyDraft&&surveyDraft.id?surveyDraft.id:'';
+ }
+ $('surveyTitleInput').value=surveyDraft?.title||'';
+ $('surveyDescriptionInput').value=surveyDraft?.description||'';
+ $('surveyCloseBtn').disabled=!surveyDraft||surveyDraft.status!=='active';
+ $('surveyDeleteBtn').disabled=!surveyDraft||!surveyDraft.id||surveyResponses.length>0;
+ $('surveyActivateBtn').disabled=!surveyDraft||surveyDraft.status==='active';
+ $('surveySaveBtn').disabled=!surveyDraft;
+ $('surveyManagerStatus').textContent=surveyDraft?(surveyDraft.status==='active'?'Status: ACTIVE · visible to employees':surveyDraft.status==='closed'?'Status: CLOSED · responses retained':'Status: DRAFT · not visible to employees'):'Create a survey to get started.';
+ renderSurveyQuestionEditor();renderSurveyResponseReport();
+}
+async function loadSurveyResponses(){
+ surveyResponses=[];
+ if(!surveyDraft||!surveyDraft.id){renderSurveyResponseReport();renderSurveyManager();return;}
+ const {data,error}=await cloud.from('newsletter_survey_responses').select('id,answers,submitted_at').eq('survey_id',surveyDraft.id).order('submitted_at',{ascending:false}).limit(1000);
+ if(error){surveyAdminMessage('Could not load responses: '+error.message,true);renderSurveyResponseReport();return;}
+ surveyResponses=data||[];renderSurveyManager();
+}
+async function loadSurveyList(preferredId){
+ const {data,error}=await cloud.from('newsletter_surveys').select('id,title,description,questions,status,created_at,updated_at').order('updated_at',{ascending:false});
+ if(error){surveyAdminMessage('Could not load surveys: '+error.message,true);return;}
+ newsletterSurveys=data||[];
+ const chosen=newsletterSurveys.find(s=>s.id===preferredId)||newsletterSurveys.find(s=>s.status==='active')||newsletterSurveys[0]||null;
+ surveyDraft=chosen?cloneData(chosen):newSurveyDraft();
+ await loadSurveyResponses();renderSurveyManager();
+}
+function addSurveyQuestion(type){
+ if(!surveyDraft)surveyDraft=newSurveyDraft();
+ if(surveyDraft.questions.length>=30){surveyAdminMessage('A survey can contain up to 30 questions.',true);return;}
+ const q={id:surveyUid(),type,prompt:'',required:true};if(type==='multiple_choice')q.options=['Yes','No'];
+ surveyDraft.questions.push(q);renderSurveyQuestionEditor();surveyAdminMessage('Question added. Complete its text and options, then save the survey.');
+}
+function handleSurveyQuestionEdit(event){
+ const target=event.target,id=target.dataset.surveyQid,field=target.dataset.surveyQfield;
+ if(!id||!field||!surveyDraft)return;
+ const q=surveyDraft.questions.find(item=>item.id===id);if(!q)return;
+ if(field==='required')q.required=!!target.checked;
+ else if(field==='options')q.options=target.value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+ else q[field]=target.value;
+}
+function validateSurveyDraft(activate){
+ if(!$('surveyTitleInput').value.trim()){surveyAdminMessage('Please enter a survey title.',true);return false;}
+ if(surveyDraft.questions.length>30){surveyAdminMessage('A survey can contain up to 30 questions.',true);return false;}
+ if(activate&&!surveyDraft.questions.length){surveyAdminMessage('Add at least one question before activation.',true);return false;}
+ for(let i=0;i<surveyDraft.questions.length;i++){
+  const q=surveyDraft.questions[i];
+  if(!String(q.prompt||'').trim()){surveyAdminMessage('Please write the text for question '+(i+1)+'.',true);return false;}
+  if(q.type==='multiple_choice'){
+   const opts=(q.options||[]).map(x=>String(x).trim()).filter(Boolean);
+   if(opts.length<2||new Set(opts.map(x=>x.toLowerCase())).size!==opts.length){surveyAdminMessage('Question '+(i+1)+' needs at least two different answer options.',true);return false;}
+  }
+ }
+ return true;
+}
+async function saveSurvey(mode){
+ if(!cloudAdmin||!cloudUser){surveyAdminMessage('Sign in with an approved HR administrator account first.',true);return false;}
+ if(!surveyDraft)surveyDraft=newSurveyDraft();
+ surveyDraft.title=$('surveyTitleInput').value.trim();surveyDraft.description=$('surveyDescriptionInput').value.trim();
+ if(!validateSurveyDraft(mode==='activate'))return false;
+ const oldActive=newsletterSurveys.find(s=>s.status==='active'),now=new Date().toISOString();
+ const payload={title:surveyDraft.title,description:surveyDraft.description,questions:surveyDraft.questions,updated_by:cloudUser.id,updated_at:now};
+ let targetId=surveyDraft.id;
+ if(!targetId){
+  const {data,error}=await cloud.from('newsletter_surveys').insert({...payload,status:'draft',created_by:cloudUser.id}).select('id').single();
+  if(error){surveyAdminMessage('Could not save the survey: '+error.message,true);return false;}
+  targetId=data.id;surveyDraft.id=targetId;
+ }
+ if(mode==='activate'&&oldActive&&oldActive.id!==targetId){
+  const {error}=await cloud.from('newsletter_surveys').update({status:'closed',updated_at:now}).eq('id',oldActive.id);
+  if(error){surveyAdminMessage('Could not close the previously active survey: '+error.message,true);return false;}
+ }
+ const desiredStatus=mode==='activate'?'active':(surveyDraft.status==='active'?'active':'draft');
+ const {data,error}=await cloud.from('newsletter_surveys').update({...payload,status:desiredStatus}).eq('id',targetId).select('id,title,description,questions,status,created_at,updated_at').single();
+ if(error){
+  if(mode==='activate'&&oldActive&&oldActive.id!==targetId)await cloud.from('newsletter_surveys').update({status:'active',updated_at:new Date().toISOString()}).eq('id',oldActive.id);
+  surveyAdminMessage('Could not save the survey: '+error.message,true);return false;
+ }
+ surveyDraft=cloneData(data);
+ surveyAdminMessage(mode==='activate'?'Survey activated. It is now visible at the end of the Employee Newspaper.':desiredStatus==='active'?'Active survey updated and live changes saved.':'Survey draft saved securely.');
+ await loadSurveyList(data.id);return true;
+}
+async function closeSurvey(){
+ if(!surveyDraft||!surveyDraft.id||surveyDraft.status!=='active')return;
+ if(!confirm('Close this survey? It will disappear from the Employee Newspaper, but all responses will be retained.'))return;
+ const {error}=await cloud.from('newsletter_surveys').update({status:'closed',updated_at:new Date().toISOString()}).eq('id',surveyDraft.id);
+ if(error){surveyAdminMessage('Could not close survey: '+error.message,true);return;}
+ await loadSurveyList(surveyDraft.id);surveyAdminMessage('Survey closed. Its response history is retained.');
+}
+async function deleteSurvey(){
+ if(!surveyDraft||!surveyDraft.id||surveyResponses.length)return;
+ if(!confirm('Delete this survey? This is only allowed when it has no responses.'))return;
+ const id=surveyDraft.id;const {error}=await cloud.from('newsletter_surveys').delete().eq('id',id);
+ if(error){surveyAdminMessage('Could not delete survey: '+error.message,true);return;}
+ await loadSurveyList();surveyAdminMessage('Survey deleted.');
+}
+function renderSurveyResponseReport(){
+ const summary=$('surveyResponseSummary'),panel=$('surveyResponsePanel');if(!summary||!panel)return;
+ const count=surveyResponses.length;
+ summary.innerHTML='<div class="survey-response-stat"><span>Anonymous responses</span><strong>'+count+'</strong></div><div class="survey-response-stat"><span>Questions</span><strong>'+(surveyDraft?.questions?.length||0)+'</strong></div><div class="survey-response-stat"><span>Survey status</span><strong style="font-size:13px">'+esc((surveyDraft?.status||'—').toUpperCase())+'</strong></div>';
+ if(!surveyDraft||!surveyDraft.questions.length){panel.innerHTML='<p class="survey-editor-hint">Add questions to build your survey.</p>';return;}
+ if(!count){panel.innerHTML='<p class="survey-editor-hint">No responses have been submitted for this survey yet.</p>';return;}
+ panel.innerHTML=surveyDraft.questions.map((q,index)=>{
+  const answerRows=surveyResponses.filter(r=>r.answers&&r.answers[q.id]!==undefined&&r.answers[q.id]!==null&&String(r.answers[q.id]).trim()!=='');
+  const values=answerRows.map(r=>r.answers[q.id]);let body='';
+  if(q.type==='likert'){
+   const nums=values.map(Number).filter(n=>Number.isInteger(n)&&n>=1&&n<=5);
+   const avg=nums.length?(nums.reduce((a,b)=>a+b,0)/nums.length).toFixed(2):'—';
+   body='<p class="survey-editor-hint">Average score: <strong>'+avg+'/5</strong> · '+nums.length+' answers</p>'+[1,2,3,4,5].map(n=>{
+    const c=nums.filter(v=>v===n).length;
+    return '<div class="survey-result-bar"><span>'+n+' / 5</span><div class="survey-result-track"><span style="width:'+(nums.length?(c/nums.length*100):0)+'%"></span></div><strong>'+c+'</strong></div>';
+   }).join('');
+  }else if(q.type==='multiple_choice'){
+   body=(q.options||[]).map(opt=>{
+    const c=values.filter(v=>v===opt).length;
+    return '<div class="survey-result-bar"><span>'+esc(opt)+'</span><div class="survey-result-track"><span style="width:'+(values.length?(c/values.length*100):0)+'%"></span></div><strong>'+c+'</strong></div>';
+   }).join('')+'<p class="survey-editor-hint">'+values.length+' answers</p>';
+  }else{
+   body=answerRows.map(row=>'<div class="survey-open-answer">'+esc(row.answers[q.id])+'<div class="survey-response-time">'+esc(new Date(row.submitted_at).toLocaleString())+'</div></div>').join('')||'<p class="survey-editor-hint">No written answers yet.</p>';
+  }
+  return '<div class="survey-result-block"><h4>Q'+(index+1)+'. '+esc(q.prompt)+'</h4>'+body+'</div>';
+ }).join('');
+}
+function downloadSurveyCsv(){
+ if(!surveyDraft||!surveyDraft.id||!surveyResponses.length){surveyAdminMessage('There are no responses to export for this survey.',true);return;}
+ const questions=surveyDraft.questions||[],csvCell=value=>'"'+String(value==null?'':value).replace(/"/g,'""')+'"';
+ const rows=[['Submitted at',...questions.map(q=>q.prompt)]];
+ surveyResponses.forEach(r=>rows.push([r.submitted_at,...questions.map(q=>r.answers&&r.answers[q.id]!==undefined?r.answers[q.id]:'')]));
+ const csv='\uFEFF'+rows.map(row=>row.map(csvCell).join(',')).join('\r\n');
+ const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob);
+ const a=document.createElement('a');a.href=url;a.download='Company_Newsletter_Survey_Responses.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+}
+function initSurveyManagerBindings(){
+ $('surveyNewBtn')?.addEventListener('click',()=>{surveyDraft=newSurveyDraft();surveyResponses=[];renderSurveyManager();surveyAdminMessage('New survey draft created. Add questions and save it.');});
+ $('surveySelect')?.addEventListener('change',async e=>{const selected=newsletterSurveys.find(s=>s.id===e.target.value);if(!selected)return;surveyDraft=cloneData(selected);surveyResponses=[];renderSurveyManager();await loadSurveyResponses();});
+ $('surveyTitleInput')?.addEventListener('input',e=>{if(surveyDraft)surveyDraft.title=e.target.value;});
+ $('surveyDescriptionInput')?.addEventListener('input',e=>{if(surveyDraft)surveyDraft.description=e.target.value;});
+ $('surveyQuestionList')?.addEventListener('input',handleSurveyQuestionEdit);
+ $('surveyQuestionList')?.addEventListener('change',handleSurveyQuestionEdit);
+ $('surveyQuestionList')?.addEventListener('click',e=>{const btn=e.target.closest('[data-survey-remove-question]');if(!btn||!surveyDraft)return;surveyDraft.questions=surveyDraft.questions.filter(q=>q.id!==btn.dataset.surveyRemoveQuestion);renderSurveyQuestionEditor();});
+ $('surveyAddLikertBtn')?.addEventListener('click',()=>addSurveyQuestion('likert'));
+ $('surveyAddChoiceBtn')?.addEventListener('click',()=>addSurveyQuestion('multiple_choice'));
+ $('surveyAddOpenBtn')?.addEventListener('click',()=>addSurveyQuestion('open_ended'));
+ $('surveySaveBtn')?.addEventListener('click',()=>saveSurvey('save'));
+ $('surveyActivateBtn')?.addEventListener('click',()=>saveSurvey('activate'));
+ $('surveyCloseBtn')?.addEventListener('click',closeSurvey);
+ $('surveyDeleteBtn')?.addEventListener('click',deleteSurvey);
+ $('surveyRefreshResponsesBtn')?.addEventListener('click',loadSurveyResponses);
+ $('surveyExportCsvBtn')?.addEventListener('click',downloadSurveyCsv);
+}
+
 init();
+initSurveyManagerBindings();
 </script>
 
 <script id="mp-newspaper-effects">
@@ -946,5 +1220,78 @@ init();
 })();
 </script>
 
+
+<script id="company-newsletter-employee-survey">
+(function(){
+ const section=document.getElementById('employeeSurvey');
+ const form=document.getElementById('employeeSurveyForm');
+ const questionHost=document.getElementById('employeeSurveyQuestions');
+ const titleNode=document.getElementById('employeeSurveyTitle');
+ const descriptionNode=document.getElementById('employeeSurveyDescription');
+ const statusNode=document.getElementById('employeeSurveyStatus');
+ const submitButton=document.getElementById('employeeSurveySubmit');
+ if(!section||!form||!questionHost||!window.supabase)return;
+ const client=window.supabase.createClient('https://hotyjsgogisglrbgmtns.supabase.co','sb_publishable_0pKDjnllPyQjKJ0S6F4vOQ_tMLpLVMM');
+ let activeSurvey=null,lastVersion='',sending=false;
+ const escSurvey=value=>String(value==null?'':value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const submittedKey=id=>'company-newsletter-survey-submitted-'+id;
+ function hasSubmitted(id){try{return localStorage.getItem(submittedKey(id))==='yes'}catch(_){return false}}
+ function renderQuestion(q,index){
+  const id=escSurvey(q.id),prompt=escSurvey(q.prompt),required=!!q.required;
+  const requiredText=required?'<span class="survey-required">*</span>':'';
+  if(q.type==='likert'){
+   let options='';
+   for(let n=1;n<=5;n++)options+='<label class="survey-rating-choice"><input type="radio" name="'+id+'" value="'+n+'" '+(required&&n===1?'required':'')+'><span>'+n+'</span></label>';
+   return '<fieldset class="survey-question"><legend>'+String(index+1)+'. '+prompt+requiredText+'</legend><div class="survey-rating-options">'+options+'</div><div class="survey-scale-captions"><span>1 · Strongly disagree</span><span>5 · Strongly agree</span></div></fieldset>';
+  }
+  if(q.type==='multiple_choice'){
+   const options=(Array.isArray(q.options)?q.options:[]).filter(x=>String(x).trim());
+   const choices=options.map((option,i)=>'<label class="survey-choice"><input type="radio" name="'+id+'" value="'+escSurvey(option)+'" '+(required&&i===0?'required':'')+'><span>'+escSurvey(option)+'</span></label>').join('');
+   return '<fieldset class="survey-question"><legend>'+String(index+1)+'. '+prompt+requiredText+'</legend><div class="survey-choice-list">'+choices+'</div></fieldset>';
+  }
+  if(q.type==='open_ended')return '<div class="survey-question"><label class="survey-question-title" for="surveyAnswer_'+id+'">'+String(index+1)+'. '+prompt+requiredText+'</label><textarea class="survey-answer-text" id="surveyAnswer_'+id+'" name="'+id+'" rows="3" maxlength="2000" '+(required?'required':'')+' placeholder="Write your feedback here…"></textarea></div>';
+  return '';
+ }
+ function renderSurvey(survey){
+  activeSurvey=survey;
+  lastVersion=survey?survey.id+'|'+(survey.updated_at||''):'';
+  if(!survey||!Array.isArray(survey.questions)||!survey.questions.length){section.hidden=true;form.hidden=false;return;}
+  section.hidden=false;titleNode.textContent=survey.title||'Employee Feedback Survey';
+  descriptionNode.textContent=survey.description||'We value your feedback. Please share your thoughts below.';
+  statusNode.textContent='';form.reset();questionHost.innerHTML=survey.questions.map(renderQuestion).join('');
+  const already=hasSubmitted(survey.id);form.hidden=already;
+  if(already)statusNode.textContent='Thank you. A response from this browser has already been recorded for this survey.';
+  submitButton.disabled=false;
+ }
+ async function refreshSurvey(){
+  try{
+   const {data,error}=await client.from('newsletter_surveys').select('id,title,description,questions,updated_at').eq('status','active').order('updated_at',{ascending:false}).limit(1).maybeSingle();
+   if(error)throw error;
+   const version=data?data.id+'|'+(data.updated_at||''):'';
+   if(version!==lastVersion)renderSurvey(data);
+  }catch(error){console.warn('Could not load the employee survey:',error.message||error);if(!activeSurvey)section.hidden=true;}
+ }
+ form.addEventListener('submit',async function(event){
+  event.preventDefault();if(sending||!activeSurvey)return;if(!form.reportValidity())return;
+  const formData=new FormData(form),answers={};
+  for(const q of activeSurvey.questions){
+   const raw=formData.get(q.id);if(raw===null||String(raw).trim()==='')continue;
+   answers[q.id]=q.type==='likert'?Number(raw):String(raw).trim();
+  }
+  if(!Object.keys(answers).length){statusNode.textContent='Please answer at least one question before submitting.';return;}
+  sending=true;submitButton.disabled=true;statusNode.textContent='Submitting your anonymous feedback…';
+  try{
+   const {error}=await client.from('newsletter_survey_responses').insert({survey_id:activeSurvey.id,answers:answers});
+   if(error)throw error;
+   try{localStorage.setItem(submittedKey(activeSurvey.id),'yes')}catch(_){}
+   form.hidden=true;statusNode.textContent='Thank you. Your anonymous feedback has been submitted successfully.';
+  }catch(error){statusNode.textContent='Your response could not be submitted. Please try again. '+(error.message||'');submitButton.disabled=false;}
+  finally{sending=false;}
+ });
+ refreshSurvey();
+ window.setInterval(()=>{if(document.visibilityState==='visible')refreshSurvey()},20000);
+ document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refreshSurvey()});
+})();
+</script>
 </body>
 </html>
