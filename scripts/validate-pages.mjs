@@ -125,8 +125,9 @@ checkDocument("HR workspace", hr, [
   "newsletter_surveys",
   "newsletter_survey_responses",
   "saveSurvey(mode)",
-  "downloadSurveyCsv",
+  "downloadSurveyExcel",
   'id="surveyReportSelect"',
+  'id="surveyExportExcelBtn"',
   'id="surveyInsights"',
   'id="surveyRespondentRows"',
   'id="surveyAddClosedBtn"',
@@ -168,7 +169,7 @@ for (const [label, html] of [["HR workspace", hr], ["Employee website", employee
     if (!html.includes(marker)) fail(label + ": employee survey feature missing " + marker);
   }
 }
-for (const marker of ["LIKERT SCALE · 1 TO 5", "multiple_choice", "open_ended", "closed_ended", "respondent_email", "respondent_name", "Download responses CSV", "Survey published successfully."]) {
+for (const marker of ["LIKERT SCALE · 1 TO 5", "multiple_choice", "open_ended", "closed_ended", "respondent_email", "respondent_name", "Download Excel Workbook (.xlsx)", "downloadSurveyExcel", "Question Analysis", "Written Feedback", "xlsx-0.20.3/package/dist/xlsx.full.min.js", "Survey published successfully."]) {
   if (!hr.includes(marker) && !employee.includes(marker)) fail("Survey workflow check missing " + marker);
 }
 console.log("Publication sync, survey builder, survey submissions, response monitoring, section management, text sizing, login, and route isolation checks passed.");
