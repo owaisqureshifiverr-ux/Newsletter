@@ -377,6 +377,52 @@ main{max-width:1260px;margin:0 auto;background:#f8f4eb;box-shadow:0 18px 65px rg
 .brand-name{font-size:clamp(10px,1vw,12px);letter-spacing:.55px;white-space:nowrap}
 </style>
 <meta name="robots" content="index,follow">
+<style id="companyNewsletterSurveyStyles">
+/* Company Newsletter employee survey */
+.survey-section{background:linear-gradient(145deg,#f7f9fb,#eef4f5);padding:58px 0 64px;border-top:1px solid #e1e7ef}
+.survey-section[hidden]{display:none!important}
+.survey-header{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:14px}
+.survey-section h2{font-family:var(--serif);font-size:clamp(28px,4vw,40px);font-weight:600;line-height:1.16;color:var(--deep);margin:12px 0}
+.survey-description{max-width:760px;color:#617187;font-size:14px;line-height:1.8;white-space:pre-line;margin:0 0 25px}
+.survey-question{border:1px solid #dce4eb;background:#fff;border-radius:14px;padding:18px 20px;margin:13px 0;min-width:0}
+.survey-question legend,.survey-question-title{font-size:14px;font-weight:750;color:#23364f;line-height:1.55;padding:0 4px}
+.survey-required{color:#a33e32;margin-left:3px}
+.survey-rating-options,.survey-choice-list{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}
+.survey-rating-choice,.survey-choice{display:flex;align-items:center;gap:8px;border:1px solid #dce4eb;border-radius:10px;padding:10px 12px;background:#fbfcfd;cursor:pointer;color:#33465f;font-size:12px}
+.survey-rating-choice input,.survey-choice input{accent-color:var(--teal)}
+.survey-rating-choice span{font-size:15px;font-weight:800;min-width:10px;text-align:center}
+.survey-scale-captions{display:flex;justify-content:space-between;gap:12px;color:#718096;font-size:10px;margin-top:8px}
+.survey-answer-text{width:100%;min-height:94px;margin-top:12px;border:1px solid #dce4eb;border-radius:10px;padding:12px;background:#fbfcfd;color:#23364f;font:inherit;font-size:13px;resize:vertical}
+.survey-submit-row{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-top:20px}
+.survey-privacy{font-size:10px;color:#758398;line-height:1.7;max-width:500px}
+.survey-submit-button{border:0;border-radius:999px;background:var(--teal);color:#fff;padding:12px 22px;font-weight:800;font-size:12px;cursor:pointer;box-shadow:0 8px 18px rgba(8,124,120,.15)}
+.survey-submit-button:disabled{opacity:.55;cursor:not-allowed}
+.survey-status{font-size:12px;color:var(--teal);font-weight:700;min-height:20px;margin:13px 0 0}
+.survey-admin-grid{display:grid;grid-template-columns:minmax(220px,.75fr) minmax(0,1.5fr);gap:14px}
+.survey-admin-field{display:flex;flex-direction:column;gap:6px;margin:11px 0}
+.survey-admin-field label{font-size:10px;font-weight:800;color:#52657a}
+.survey-admin-field input,.survey-admin-field textarea,.survey-admin-field select{width:100%;padding:11px;border:1px solid #d9e1e9;background:#fbfcfd;color:var(--ink);font:inherit;font-size:12px;outline-color:var(--teal);border-radius:8px}
+.survey-admin-field textarea{min-height:78px;resize:vertical}
+.survey-editor-question{border:1px solid #dce4eb;border-radius:12px;padding:14px;background:#fbfcfd;margin:11px 0}
+.survey-editor-question-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.survey-editor-question-head strong{font-size:12px;color:#23364f}
+.survey-editor-hint{font-size:10px;color:#718096;line-height:1.6;margin:6px 0}
+.survey-editor-required{display:flex;align-items:center;gap:7px;font-size:11px;color:#52657a;margin-top:9px}
+.survey-editor-required input{accent-color:var(--teal)}
+.survey-admin-status{font-size:11px;color:var(--teal);min-height:18px;margin-top:9px}
+.survey-response-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:9px;margin:12px 0}
+.survey-response-stat{border:1px solid #e0e7ee;border-radius:10px;padding:12px;background:#f8fafb}
+.survey-response-stat span{display:block;color:#7a899a;font-size:9px;letter-spacing:.5px;text-transform:uppercase}
+.survey-response-stat strong{display:block;color:var(--ink);font-size:21px;margin-top:3px}
+.survey-result-block{border-top:1px solid #e5ebf0;padding:13px 0}
+.survey-result-block h4{font-size:12px;color:#243750;margin:0 0 9px}
+.survey-result-bar{display:grid;grid-template-columns:minmax(90px,1fr) minmax(90px,2fr) 32px;gap:9px;align-items:center;font-size:10px;color:#52657a;margin:7px 0}
+.survey-result-track{background:#e9eef2;border-radius:99px;height:8px;overflow:hidden}
+.survey-result-track span{display:block;height:100%;background:var(--teal);border-radius:99px}
+.survey-open-answer{border:1px solid #e3e9ef;border-radius:8px;background:#fff;padding:10px 12px;margin:7px 0;color:#465a71;font-size:11px;line-height:1.7;white-space:pre-wrap}
+.survey-response-time{font-size:9px;color:#8a97a6}
+@media(max-width:760px){.survey-section{padding:42px 0}.survey-header{align-items:flex-start;flex-direction:column}.survey-admin-grid{grid-template-columns:1fr}.survey-question{padding:15px}.survey-rating-options,.survey-choice-list{gap:7px}.survey-rating-choice,.survey-choice{padding:9px 10px}}
+</style>
 </head>
 <body>
 <div class="topline"><span>CODE INFORMATICS</span><span>INTERNAL EMPLOYEE PUBLICATION</span></div>
@@ -395,6 +441,18 @@ main{max-width:1260px;margin:0 auto;background:#f8f4eb;box-shadow:0 18px 65px rg
 <section class="coming-section" id="coming-up"><div class="section-shell"><div class="section-heading"><div><div class="section-kicker">COMING UP</div><h2 id="comingHeading">Dates, events and opportunities<span class="title-period">.</span></h2></div><span class="section-index">04 / WHAT'S NEXT</span></div><div class="coming-list" id="comingList"></div></div></section>
 <div id="customSectionsList"></div>
   <section class="closing-band" id="closing"><div class="closing-mark">MP</div><p id="footerSlogan">ONE TEAM. SHARED PROGRESS.<br/><strong>BIGGER POSSIBILITIES.</strong></p></section>
+
+<section class="survey-section" id="employeeSurvey" aria-labelledby="employeeSurveyTitle" hidden>
+ <div class="section-shell">
+  <div class="survey-header"><span class="section-kicker">EMPLOYEE VOICE · YOUR FEEDBACK MATTERS</span><span class="section-index">EMPLOYEE SURVEY</span></div>
+  <h2 id="employeeSurveyTitle">Share your feedback.</h2>
+  <p class="survey-description" id="employeeSurveyDescription"></p>
+  <form id="employeeSurveyForm"><div id="employeeSurveyQuestions"></div>
+   <div class="survey-submit-row"><p class="survey-privacy">Anonymous survey: your name and email are not collected. Please submit once from this browser.</p><button class="survey-submit-button" id="employeeSurveySubmit" type="submit">Submit feedback</button></div>
+  </form>
+  <p class="survey-status" id="employeeSurveyStatus" role="status" aria-live="polite"></p>
+ </div>
+</section>
 </main>
 <footer class="site-footer" id="footer"><div><strong>CODE INFORMATICS</strong><span>COMPANY NEWSLETTER</span></div><p>CODE INFORMATICS • COMPANY NEWSLETTER • INTERNAL EMPLOYEE NEWSLETTER</p><span class="footer-note" id="footerMessage">Company news, people and progress — brought together by Human Capital Management.</span></footer>
 <div class="modal-backdrop" id="articleModal"><article class="article-modal"><button class="modal-close" id="articleClose">✕</button><div class="article-topline" id="modalCategory"></div><h2 id="modalTitle"></h2><p id="modalBody"></p><div id="modalLinks"></div></article></div>
@@ -682,5 +740,78 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
 })();
 </script>
 
+
+<script id="company-newsletter-employee-survey">
+(function(){
+ const section=document.getElementById('employeeSurvey');
+ const form=document.getElementById('employeeSurveyForm');
+ const questionHost=document.getElementById('employeeSurveyQuestions');
+ const titleNode=document.getElementById('employeeSurveyTitle');
+ const descriptionNode=document.getElementById('employeeSurveyDescription');
+ const statusNode=document.getElementById('employeeSurveyStatus');
+ const submitButton=document.getElementById('employeeSurveySubmit');
+ if(!section||!form||!questionHost||!window.supabase)return;
+ const client=window.supabase.createClient('https://hotyjsgogisglrbgmtns.supabase.co','sb_publishable_0pKDjnllPyQjKJ0S6F4vOQ_tMLpLVMM');
+ let activeSurvey=null,lastVersion='',sending=false;
+ const escSurvey=value=>String(value==null?'':value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const submittedKey=id=>'company-newsletter-survey-submitted-'+id;
+ function hasSubmitted(id){try{return localStorage.getItem(submittedKey(id))==='yes'}catch(_){return false}}
+ function renderQuestion(q,index){
+  const id=escSurvey(q.id),prompt=escSurvey(q.prompt),required=!!q.required;
+  const requiredText=required?'<span class="survey-required">*</span>':'';
+  if(q.type==='likert'){
+   let options='';
+   for(let n=1;n<=5;n++)options+='<label class="survey-rating-choice"><input type="radio" name="'+id+'" value="'+n+'" '+(required&&n===1?'required':'')+'><span>'+n+'</span></label>';
+   return '<fieldset class="survey-question"><legend>'+String(index+1)+'. '+prompt+requiredText+'</legend><div class="survey-rating-options">'+options+'</div><div class="survey-scale-captions"><span>1 · Strongly disagree</span><span>5 · Strongly agree</span></div></fieldset>';
+  }
+  if(q.type==='multiple_choice'){
+   const options=(Array.isArray(q.options)?q.options:[]).filter(x=>String(x).trim());
+   const choices=options.map((option,i)=>'<label class="survey-choice"><input type="radio" name="'+id+'" value="'+escSurvey(option)+'" '+(required&&i===0?'required':'')+'><span>'+escSurvey(option)+'</span></label>').join('');
+   return '<fieldset class="survey-question"><legend>'+String(index+1)+'. '+prompt+requiredText+'</legend><div class="survey-choice-list">'+choices+'</div></fieldset>';
+  }
+  if(q.type==='open_ended')return '<div class="survey-question"><label class="survey-question-title" for="surveyAnswer_'+id+'">'+String(index+1)+'. '+prompt+requiredText+'</label><textarea class="survey-answer-text" id="surveyAnswer_'+id+'" name="'+id+'" rows="3" maxlength="2000" '+(required?'required':'')+' placeholder="Write your feedback here…"></textarea></div>';
+  return '';
+ }
+ function renderSurvey(survey){
+  activeSurvey=survey;
+  lastVersion=survey?survey.id+'|'+(survey.updated_at||''):'';
+  if(!survey||!Array.isArray(survey.questions)||!survey.questions.length){section.hidden=true;form.hidden=false;return;}
+  section.hidden=false;titleNode.textContent=survey.title||'Employee Feedback Survey';
+  descriptionNode.textContent=survey.description||'We value your feedback. Please share your thoughts below.';
+  statusNode.textContent='';form.reset();questionHost.innerHTML=survey.questions.map(renderQuestion).join('');
+  const already=hasSubmitted(survey.id);form.hidden=already;
+  if(already)statusNode.textContent='Thank you. A response from this browser has already been recorded for this survey.';
+  submitButton.disabled=false;
+ }
+ async function refreshSurvey(){
+  try{
+   const {data,error}=await client.from('newsletter_surveys').select('id,title,description,questions,updated_at').eq('status','active').order('updated_at',{ascending:false}).limit(1).maybeSingle();
+   if(error)throw error;
+   const version=data?data.id+'|'+(data.updated_at||''):'';
+   if(version!==lastVersion)renderSurvey(data);
+  }catch(error){console.warn('Could not load the employee survey:',error.message||error);if(!activeSurvey)section.hidden=true;}
+ }
+ form.addEventListener('submit',async function(event){
+  event.preventDefault();if(sending||!activeSurvey)return;if(!form.reportValidity())return;
+  const formData=new FormData(form),answers={};
+  for(const q of activeSurvey.questions){
+   const raw=formData.get(q.id);if(raw===null||String(raw).trim()==='')continue;
+   answers[q.id]=q.type==='likert'?Number(raw):String(raw).trim();
+  }
+  if(!Object.keys(answers).length){statusNode.textContent='Please answer at least one question before submitting.';return;}
+  sending=true;submitButton.disabled=true;statusNode.textContent='Submitting your anonymous feedback…';
+  try{
+   const {error}=await client.from('newsletter_survey_responses').insert({survey_id:activeSurvey.id,answers:answers});
+   if(error)throw error;
+   try{localStorage.setItem(submittedKey(activeSurvey.id),'yes')}catch(_){}
+   form.hidden=true;statusNode.textContent='Thank you. Your anonymous feedback has been submitted successfully.';
+  }catch(error){statusNode.textContent='Your response could not be submitted. Please try again. '+(error.message||'');submitButton.disabled=false;}
+  finally{sending=false;}
+ });
+ refreshSurvey();
+ window.setInterval(()=>{if(document.visibilityState==='visible')refreshSurvey()},20000);
+ document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refreshSurvey()});
+})();
+</script>
 </body>
 </html>
