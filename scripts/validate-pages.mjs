@@ -35,7 +35,11 @@ checkDocument("Employee website", employee, [
   "publication={...publication,...data.publication",
   "renderCustomSections(publication)",
   "applySectionVisibility(publication)",
-  "newsletter:published-edition-loaded"
+  "newsletter:published-edition-loaded",
+  'id="employeeSurvey"',
+  'id="company-newsletter-employee-survey"',
+  "newsletter_surveys",
+  "newsletter_survey_responses"
 ]);
 
 if (employee.includes('id="hrWorkspace"') || employee.includes('id="hrLoginModal"')) {
@@ -108,7 +112,15 @@ checkDocument("HR workspace", hr, [
   "data-array-remove",
   "Section Manager",
   "Add New Section",
-  "Delete section"
+  "Delete section",
+  'id="newsletterSurveyManager"',
+  'id="surveyQuestionList"',
+  'id="surveyActivateBtn"',
+  'id="surveyResponsePanel"',
+  "newsletter_surveys",
+  "newsletter_survey_responses",
+  "saveSurvey(mode)",
+  "downloadSurveyCsv"
 ]);
 
 for (const obsolete of ['id="hrEmail"', 'id="hrBootstrapCode"', 'id="hrCreateAccountBtn"', 'id="hrClaimAdminBtn"', "claim_first_hr_admin"]) {
@@ -139,5 +151,13 @@ for (const [label, html] of [["HR workspace", hr], ["Employee website", employee
     if (!html.includes(marker)) fail(label + ": text-size control missing " + marker);
   }
 }
-console.log("Publication sync, section management, text sizing, login, and route isolation checks passed.");
+for (const [label, html] of [["HR workspace", hr], ["Employee website", employee]]) {
+  for (const marker of ['id="employeeSurvey"', 'id="company-newsletter-employee-survey"', "newsletter_surveys", "newsletter_survey_responses", "Submit feedback"]) {
+    if (!html.includes(marker)) fail(label + ": employee survey feature missing " + marker);
+  }
+}
+for (const marker of ["LIKERT SCALE · 1 TO 5", "multiple_choice", "open_ended", "Survey activated.", "newsletter_survey_responses"]) {
+  if (!hr.includes(marker) && !employee.includes(marker)) fail("Survey workflow check missing " + marker);
+}
+console.log("Publication sync, survey builder, survey submissions, response monitoring, section management, text sizing, login, and route isolation checks passed.");
 console.log("All static and inline-JavaScript checks passed.");
