@@ -450,6 +450,7 @@ main{max-width:1260px;margin:0 auto;background:#f8f4eb;box-shadow:0 18px 65px rg
 .survey-admin-toolbar .survey-admin-field{min-width:240px;flex:1;margin:0}
 @media(max-width:760px){.survey-identity-grid{grid-template-columns:1fr}.survey-dashboard-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.survey-trend{gap:3px}}
 </style>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 </head>
 <body>
 <div class="topline"><span>CODE INFORMATICS</span><span>INTERNAL EMPLOYEE PUBLICATION</span></div>
@@ -528,7 +529,7 @@ main{max-width:1260px;margin:0 auto;background:#f8f4eb;box-shadow:0 18px 65px rg
    <p>Monitor response counts, unique respondents, completion, question-wise choices, rating averages and written feedback.</p>
    <div class="survey-admin-toolbar">
     <div class="survey-admin-field"><label for="surveyReportSelect">Survey report</label><select id="surveyReportSelect"><option value="">No surveys yet</option></select></div>
-    <div class="hr-actions"><button type="button" class="secondary-button" id="surveyRefreshResponsesBtn">Refresh dashboard</button><button type="button" class="primary-button" id="surveyExportCsvBtn">Download responses CSV</button></div>
+    <div class="hr-actions"><button type="button" class="secondary-button" id="surveyRefreshResponsesBtn">Refresh dashboard</button><button type="button" class="primary-button" id="surveyExportExcelBtn">Download Excel Workbook (.xlsx)</button></div>
    </div>
    <div class="survey-dashboard-kpis" id="surveyResponseSummary"></div>
    <div class="survey-insights" id="surveyInsights"><h4>Survey insights</h4><p>Submit a survey to begin analysing responses.</p></div>
@@ -1049,9 +1050,18 @@ function renderSurveyResponseReport(){
 async function loadSurveyReport(surveyId){
  surveyReport=newsletterSurveys.find(s=>s.id===surveyId)||null;surveyReportResponses=[];
  if(!surveyReport){renderSurveyResponseReport();return;}
- const {data,error}=await cloud.from('newsletter_survey_responses').select('id,respondent_name,respondent_email,answers,submitted_at').eq('survey_id',surveyId).order('submitted_at',{ascending:false}).limit(3000);
- if(error){surveyAdminMessage('Dashboard could not load responses: '+error.message,true);renderSurveyResponseReport();return;}
- surveyReportResponses=data||[];renderSurveyResponseReport();
+ const pageSize=1000;let offset=0,allResponses=[];
+ while(true){
+  const {data,error}=await cloud.from('newsletter_survey_responses')
+   .select('id,respondent_name,respondent_email,answers,submitted_at')
+   .eq('survey_id',surveyId).order('submitted_at',{ascending:false})
+   .range(offset,offset+pageSize-1);
+  if(error){surveyAdminMessage('Dashboard could not load responses: '+error.message,true);renderSurveyResponseReport();return;}
+  const page=data||[];allResponses.push(...page);
+  if(page.length<pageSize)break;
+  offset+=pageSize;
+ }
+ surveyReportResponses=allResponses;renderSurveyResponseReport();
 }
 async function loadSurveyList(preferredEditId,preferredReportId){
  const {data,error}=await cloud.from('newsletter_surveys').select('id,title,description,questions,status,created_at,updated_at').order('updated_at',{ascending:false});
@@ -1127,14 +1137,104 @@ async function deleteSurvey(){
  if(error){surveyAdminMessage('Could not delete survey: '+error.message,true);return;}
  await loadSurveyList();surveyAdminMessage('Empty survey deleted.');
 }
-function downloadSurveyCsv(){
- if(!surveyReport||!surveyReportResponses.length){surveyAdminMessage('No responses are available for this survey report.',true);return;}
- const questions=surveyReport.questions||[],cell=value=>'"'+String(value==null?'':Array.isArray(value)?value.join('; '):value).replace(/"/g,'""')+'"';
- const rows=[['Submitted at','Employee name','Work email',...questions.map(q=>q.prompt)]];
- surveyReportResponses.forEach(r=>rows.push([r.submitted_at,r.respondent_name||'',r.respondent_email||'',...questions.map(q=>r.answers&&r.answers[q.id]!==undefined?r.answers[q.id]:'')]));
- const csv='\uFEFF'+rows.map(row=>row.map(cell).join(',')).join('\r\n');
- const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob);
- const a=document.createElement('a');a.href=url;a.download='Company_Newsletter_'+String(surveyReport.title||'Survey').replace(/[^a-z0-9]+/gi,'_')+'_Respondents.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+function downloadSurveyExcel(){
+ if(!surveyReport){surveyAdminMessage('Select a survey report before exporting.',true);return;}
+ if(!surveyReportResponses.length){surveyAdminMessage('No responses are available for this survey report yet.',true);return;}
+ const XLSX=window.XLSX;
+ if(!XLSX||!XLSX.utils||!XLSX.writeFile){surveyAdminMessage('The Excel workbook library did not load. Refresh the HR Workspace and try again.',true);return;}
+ const questions=surveyReport.questions||[],responses=surveyReportResponses;
+ const safeValue=value=>Array.isArray(value)?value.join('; '):value===null||value===undefined?'':typeof value==='object'?JSON.stringify(value):value;
+ const responseHeaders=['Submitted at','Employee name','Work email',...questions.map((q,i)=>'Q'+(i+1)+'. '+q.prompt)];
+ const responseRows=[responseHeaders];
+ responses.forEach(r=>{
+  responseRows.push([
+   r.submitted_at||'',
+   r.respondent_name||'',
+   r.respondent_email||'',
+   ...questions.map(q=>safeValue(r.answers&&Object.prototype.hasOwnProperty.call(r.answers,q.id)?r.answers[q.id]:''))
+  ]);
+ });
+ const responsesSheet=XLSX.utils.aoa_to_sheet(responseRows);
+ responsesSheet['!cols']=[{wch:24},{wch:26},{wch:34},...questions.map(()=>({wch:42}))];
+ if(responseRows.length>1)responsesSheet['!autofilter']={ref:'A1:'+XLSX.utils.encode_col(responseHeaders.length-1)+responseRows.length};
+
+ const uniqueEmails=new Set(responses.map(r=>String(r.respondent_email||'').trim().toLowerCase()).filter(Boolean));
+ const likertValues=[];
+ questions.forEach(q=>{
+  if(q.type!=='likert')return;
+  responses.forEach(r=>{
+   const value=r.answers&&r.answers[q.id]!==undefined?Number(r.answers[q.id]):NaN;
+   if(Number.isFinite(value)&&value>=1&&value<=5)likertValues.push(value);
+  });
+ });
+ const averageLikert=likertValues.length?(likertValues.reduce((sum,value)=>sum+value,0)/likertValues.length).toFixed(2):'N/A';
+ const summaryRows=[
+  ['COMPANY NEWSLETTER — SURVEY REPORT'],
+  ['Survey title',surveyReport.title||''],
+  ['Description',surveyReport.description||''],
+  ['Survey status',String(surveyReport.status||'').toUpperCase()],
+  ['Created at',surveyReport.created_at||''],
+  ['Last updated',surveyReport.updated_at||''],
+  ['Total responses',responses.length],
+  ['Unique identified employees',uniqueEmails.size],
+  ['Number of questions',questions.length],
+  ['Average Likert score',averageLikert],
+  ['Generated at',new Date().toISOString()],
+  ['Data note','Employee names, work emails and answers are visible in this HR-only workbook.']
+ ];
+ const summarySheet=XLSX.utils.aoa_to_sheet(summaryRows);
+ summarySheet['!cols']=[{wch:30},{wch:90}];
+
+ const analysisRows=[['Question #','Question','Question type','Answered responses','Summary / distribution']];
+ questions.forEach((q,index)=>{
+  const values=responses.map(r=>r.answers&&Object.prototype.hasOwnProperty.call(r.answers,q.id)?r.answers[q.id]:null)
+   .filter(v=>v!==null&&v!==undefined&&v!==''&&(!Array.isArray(v)||v.length));
+  let summary='';
+  if(q.type==='likert'){
+   const numeric=values.map(Number).filter(v=>Number.isFinite(v)&&v>=1&&v<=5);
+   const counts=[1,2,3,4,5].map(n=>n+': '+numeric.filter(v=>v===n).length);
+   const avg=numeric.length?(numeric.reduce((sum,v)=>sum+v,0)/numeric.length).toFixed(2):'N/A';
+   summary='Average: '+avg+' | '+counts.join(' | ');
+  }else if(q.type==='closed_ended'){
+   summary=['Yes','No'].map(option=>option+': '+values.filter(v=>String(v)===option).length).join(' | ');
+  }else if(q.type==='multiple_choice'){
+   summary=(q.options||[]).map(option=>{
+    const count=values.reduce((total,value)=>total+(Array.isArray(value)?(value.includes(option)?1:0):(value===option?1:0)),0);
+    return option+': '+count;
+   }).join(' | ');
+  }else{
+   summary='Written answers are listed in the Written Feedback sheet.';
+  }
+  analysisRows.push([index+1,q.prompt||'',q.type||'',values.length,summary]);
+ });
+ const analysisSheet=XLSX.utils.aoa_to_sheet(analysisRows);
+ analysisSheet['!cols']=[{wch:12},{wch:56},{wch:20},{wch:20},{wch:80}];
+ if(analysisRows.length>1)analysisSheet['!autofilter']={ref:'A1:E'+analysisRows.length};
+
+ const writtenRows=[['Question #','Question','Employee name','Work email','Submitted at','Written answer']];
+ questions.forEach((q,index)=>{
+  if(q.type!=='open_ended')return;
+  responses.forEach(r=>{
+   const value=r.answers&&r.answers[q.id];
+   if(typeof value==='string'&&value.trim()){
+    writtenRows.push([index+1,q.prompt||'',r.respondent_name||'',r.respondent_email||'',r.submitted_at||'',value]);
+   }
+  });
+ });
+ if(writtenRows.length===1)writtenRows.push(['','','','','','No written answers were submitted.']);
+ const writtenSheet=XLSX.utils.aoa_to_sheet(writtenRows);
+ writtenSheet['!cols']=[{wch:12},{wch:50},{wch:26},{wch:34},{wch:24},{wch:80}];
+ if(writtenRows.length>1)writtenSheet['!autofilter']={ref:'A1:F'+writtenRows.length};
+
+ const workbook=XLSX.utils.book_new();
+ XLSX.utils.book_append_sheet(workbook,summarySheet,'Summary');
+ XLSX.utils.book_append_sheet(workbook,responsesSheet,'Responses');
+ XLSX.utils.book_append_sheet(workbook,analysisSheet,'Question Analysis');
+ XLSX.utils.book_append_sheet(workbook,writtenSheet,'Written Feedback');
+ workbook.Props={Title:'Company Newsletter Survey Report',Subject:surveyReport.title||'Employee survey responses',Author:'Company Newsletter HR',CreatedDate:new Date()};
+ const filename='Company_Newsletter_'+String(surveyReport.title||'Survey').replace(/[^a-z0-9]+/gi,'_')+'_Responses.xlsx';
+ XLSX.writeFile(workbook,filename,{compression:true});
+ surveyAdminMessage('Excel workbook downloaded with Summary, Responses, Question Analysis and Written Feedback sheets.');
 }
 function initSurveyManagerBindings(){
  $('surveyTitleInput')?.addEventListener('input',e=>{if(surveyDraft)surveyDraft.title=e.target.value;});
@@ -1156,7 +1256,7 @@ function initSurveyManagerBindings(){
  $('surveyDeleteBtn')?.addEventListener('click',deleteSurvey);
  $('surveyReportSelect')?.addEventListener('change',e=>loadSurveyReport(e.target.value));
  $('surveyRefreshResponsesBtn')?.addEventListener('click',()=>loadSurveyReport($('surveyReportSelect').value));
- $('surveyExportCsvBtn')?.addEventListener('click',downloadSurveyCsv);
+ $('surveyExportExcelBtn')?.addEventListener('click',downloadSurveyExcel);
 }
 
 init();
