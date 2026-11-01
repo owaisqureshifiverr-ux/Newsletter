@@ -39,7 +39,12 @@ checkDocument("Employee website", employee, [
   'id="employeeSurvey"',
   'id="company-newsletter-employee-survey"',
   "newsletter_surveys",
-  "newsletter_survey_responses"
+  "newsletter_survey_responses",
+  'id="surveyRespondentName"',
+  'id="surveyRespondentEmail"',
+  "respondent_name",
+  "respondent_email",
+  "surveyIdentityConsent"
 ]);
 
 if (employee.includes('id="hrWorkspace"') || employee.includes('id="hrLoginModal"')) {
@@ -120,7 +125,14 @@ checkDocument("HR workspace", hr, [
   "newsletter_surveys",
   "newsletter_survey_responses",
   "saveSurvey(mode)",
-  "downloadSurveyCsv"
+  "downloadSurveyCsv",
+  'id="surveyReportSelect"',
+  'id="surveyInsights"',
+  'id="surveyRespondentRows"',
+  'id="surveyAddClosedBtn"',
+  "respondent_email",
+  "respondent_name",
+  "closed_ended"
 ]);
 
 for (const obsolete of ['id="hrEmail"', 'id="hrBootstrapCode"', 'id="hrCreateAccountBtn"', 'id="hrClaimAdminBtn"', "claim_first_hr_admin"]) {
@@ -156,7 +168,7 @@ for (const [label, html] of [["HR workspace", hr], ["Employee website", employee
     if (!html.includes(marker)) fail(label + ": employee survey feature missing " + marker);
   }
 }
-for (const marker of ["LIKERT SCALE · 1 TO 5", "multiple_choice", "open_ended", "Survey activated.", "newsletter_survey_responses"]) {
+for (const marker of ["LIKERT SCALE · 1 TO 5", "multiple_choice", "open_ended", "closed_ended", "respondent_email", "respondent_name", "Download responses CSV", "Survey published successfully."]) {
   if (!hr.includes(marker) && !employee.includes(marker)) fail("Survey workflow check missing " + marker);
 }
 console.log("Publication sync, survey builder, survey submissions, response monitoring, section management, text sizing, login, and route isolation checks passed.");
