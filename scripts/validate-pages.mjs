@@ -36,7 +36,11 @@ checkDocument("WorkPulse HRMS", workpulse, [
   "calculate_payroll",
   "My payslips",
   "Create account",
-  "Sign in to WorkPulse"
+  "Sign in to WorkPulse",
+  "Forgot password?",
+  "resetPasswordForEmail",
+  "updateUser({password})",
+  "PASSWORD_RECOVERY"
 ]);
 for (const obsolete of [
   "First-time HR setup code",
