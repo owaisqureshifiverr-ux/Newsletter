@@ -43,17 +43,15 @@
       <form id="loginForm">
         <div class="field"><label>Email address</label><input id="loginEmail" type="email" autocomplete="username" required placeholder="name@company.com"></div>
         <div class="field"><label>Password</label><input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Your password"></div>
-        <div class="field"><label>First-time HR setup code <span class="muted">(HR only)</span></label><input id="loginSetupCode" type="password" autocomplete="off" placeholder="Leave blank for employee login"></div>
         <button class="btn block" type="submit">Sign in to WorkPulse</button>
       </form>
       <form id="signupForm" class="hidden">
         <div class="field"><label>Full name</label><input id="signupName" required placeholder="Your full name"></div>
         <div class="field"><label>Work email</label><input id="signupEmail" type="email" required placeholder="name@company.com"></div>
         <div class="field"><label>Create password</label><input id="signupPassword" type="password" minlength="8" required placeholder="At least 8 characters"></div>
-        <div class="field"><label>First-time HR setup code <span class="muted">(only for initial HR administrator)</span></label><input id="signupSetupCode" type="password" autocomplete="off" placeholder="Employees should leave this blank"></div>
-        <button class="btn block" type="submit">Create employee account</button>
+        <button class="btn block" type="submit">Create account</button>
       </form>
-      <div class="note">Employee registrations require HR approval before attendance can begin. The first HR administrator must use the one-time setup code.</div>
+      <div class="note">The first account registered becomes the HR administrator. Every later employee registration is sent to HR for approval before attendance access is enabled.</div>
       <div id="authMessage" class="help" style="margin-top:13px"></div>
     </div>
   </section>
@@ -102,34 +100,38 @@ async function afterAuth(){
   const {data:{session}}=await sb.auth.getSession();
   if(!session){showAuth();return}
   currentUser=session.user;
-  try{await loadProfile();showApp();$('userName').textContent=profile.full_name||profile.email;$('userAvatar').textContent=(profile.full_name||profile.email||'W').slice(0,1).toUpperCase();$('userRole').textContent=profile.role==='hr_admin'?'HR Administrator':'Employee';$('sideRole').textContent=profile.role==='hr_admin'?'HR Admin Portal':'Employee Portal';$('topDate').textContent=new Date().toLocaleDateString('en-PK',{weekday:'long',day:'numeric',month:'long',year:'numeric'});if(profile.status==='pending'){renderPending();return}if(profile.status==='suspended'){renderSuspended();return}buildNav();await navigate('dashboard')}catch(e){showAuth();authMsg(e.message)}
-}
-async function tryClaim(code){
-  if(!code)return false;
-  const {error}=await sb.rpc('claim_first_hr_admin',{p_code:code});
-  if(error)throw error;
-  sessionStorage.removeItem('wp_admin_code');
-  await loadProfile();return true;
+  try{
+    await loadProfile();
+    showApp();
+    $('userName').textContent=profile.full_name||profile.email;
+    $('userAvatar').textContent=(profile.full_name||profile.email||'W').slice(0,1).toUpperCase();
+    $('userRole').textContent=profile.role==='hr_admin'?'HR Administrator':'Employee';
+    $('sideRole').textContent=profile.role==='hr_admin'?'HR Admin Portal':'Employee Portal';
+    $('topDate').textContent=new Date().toLocaleDateString('en-PK',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+    if(profile.status==='pending'){renderPending();return}
+    if(profile.status==='suspended'){renderSuspended();return}
+    buildNav();
+    await navigate('dashboard');
+  }catch(e){showAuth();authMsg(e.message)}
 }
 $('loginForm').addEventListener('submit',async e=>{
  e.preventDefault();authMsg('Signing in…');
  try{
   const {data,error}=await sb.auth.signInWithPassword({email:$('loginEmail').value.trim(),password:$('loginPassword').value});
-  if(error)throw error;currentUser=data.user;
-  const code=$('loginSetupCode').value.trim()||sessionStorage.getItem('wp_admin_code')||'';
-  if(code){try{await tryClaim(code);toast('Initial HR administrator setup completed.','success')}catch(err){if(err.message.includes('already been completed'))sessionStorage.removeItem('wp_admin_code');else throw err}}
-  authMsg('');await afterAuth();
+  if(error)throw error;
+  currentUser=data.user;
+  authMsg('');
+  await afterAuth();
  }catch(err){authMsg(err.message);toast(err.message,'error')}
 });
 $('signupForm').addEventListener('submit',async e=>{
  e.preventDefault();authMsg('Creating your account…');
  try{
-  const name=$('signupName').value.trim(),email=$('signupEmail').value.trim(),password=$('signupPassword').value,code=$('signupSetupCode').value.trim();
-  if(code)sessionStorage.setItem('wp_admin_code',code);
+  const name=$('signupName').value.trim(),email=$('signupEmail').value.trim(),password=$('signupPassword').value;
   const {data,error}=await sb.auth.signUp({email,password,options:{data:{full_name:name},emailRedirectTo:window.location.href.split('#')[0]}});
   if(error)throw error;
-  if(data.session){currentUser=data.user;if(code){await tryClaim(code)}await afterAuth()}
-  else{authMsg('Account created. Check your email to confirm your address, then sign in. If this is the first HR account, enter the same setup code in the sign-in form after confirmation.');toast('Please confirm your email before signing in.')}
+  if(data.session){currentUser=data.user;await afterAuth()}
+  else{authMsg('Your account has been created. Please verify your email, then return here and sign in with your email and password.');toast('Account created. Please verify your email.','success')}
  }catch(err){authMsg(err.message);toast(err.message,'error')}
 });
 function buildNav(){
@@ -162,10 +164,9 @@ async function navigate(panel){
 }
 function renderPending(){
  $('nav').innerHTML='<button class="active"><span class="ico">◷</span>Account approval</button>';
- $('pageContent').innerHTML='<div class="card" style="max-width:680px;margin:55px auto;text-align:center;padding:35px"><div class="stat-icon" style="margin:auto;font-size:24px">◷</div><h2>Account awaiting approval</h2><p class="sub">Your profile has been created. An HR administrator must approve your employee account before you can record attendance or access payroll.</p><div class="field" style="text-align:left;max-width:420px;margin:22px auto 10px"><label>First-time HR setup code (only for the initial HR administrator)</label><input id="claimCodePending" type="password" placeholder="Enter the one-time setup code"></div><button class="btn" onclick="claimPending()">Complete first HR setup</button><p class="help" style="margin-top:18px">Employees should leave the setup code blank and wait for HR approval.</p></div>';
+ $('pageContent').innerHTML='<div class="card" style="max-width:680px;margin:55px auto;text-align:center;padding:35px"><div class="stat-icon" style="margin:auto;font-size:24px">◷</div><h2>Account awaiting approval</h2><p class="sub">Your employee account has been created successfully. HR will review your registration and enable attendance access once it is approved.</p><button class="btn secondary" onclick="afterAuth()">Refresh approval status</button><p class="help" style="margin-top:18px">You can sign in with the same email and password after approval.</p></div>';
  $('topTitle').textContent='Account approval';$('sideRole').textContent='Pending registration';
 }
-async function claimPending(){try{await tryClaim($('claimCodePending').value.trim());toast('HR administrator activated.','success');await afterAuth()}catch(e){toast(e.message,'error')}}
 function renderSuspended(){$('nav').innerHTML='';$('pageContent').innerHTML='<div class="card" style="max-width:620px;margin:55px auto;text-align:center;padding:35px"><h2>Account suspended</h2><p class="sub">Please contact your HR administrator for assistance.</p><button class="btn secondary" onclick="signOut()">Sign out</button></div>'}
 function statCard(label,value,hint,icon){return '<div class="card"><div class="stat"><div><div class="label">'+label+'</div><div class="value">'+value+'</div><div class="hint">'+(hint||'')+'</div></div><div class="stat-icon">'+icon+'</div></div></div>'}
 function badge(s){return '<span class="badge '+esc(String(s||'').toLowerCase())+'">'+esc(String(s||'—').replace('_',' '))+'</span>'}
