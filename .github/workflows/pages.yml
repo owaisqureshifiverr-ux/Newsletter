@@ -78,7 +78,7 @@ jobs:
           workpulse_url="${PAGE_URL%/}/workpulse/"
           workpulse_file="$(mktemp)"
           workpulse_status="$(curl --silent --show-error --location --max-time 20 --output "$workpulse_file" --write-out "%{http_code}" "$workpulse_url" || true)"
-          if [ "$workpulse_status" != "200" ] || ! grep -Fqi '<title>WorkPulse HRMS</title>' "$workpulse_file" || ! grep -Fqi 'Employee ID' "$workpulse_file" || ! grep -Fqi 'Access PIN' "$workpulse_file" || ! grep -Fqi 'hrActivationForm' "$workpulse_file" || ! grep -Fqi 'workpulse-access' "$workpulse_file" || ! grep -Fqi "action:'create_employee'" "$workpulse_file" || ! grep -Fqi "action:'reset_pin'" "$workpulse_file"; then
+          if [ "$workpulse_status" != "200" ] || ! grep -Fqi '<title>WorkPulse HRMS</title>' "$workpulse_file" || ! grep -Fqi 'Employee ID' "$workpulse_file" || ! grep -Fqi 'Access PIN' "$workpulse_file" || ! grep -Fqi 'hrActivationForm' "$workpulse_file" || ! grep -Fqi 'workpulse-access' "$workpulse_file" || ! grep -Fqi "action:'bootstrap_hr'" "$workpulse_file" || ! grep -Fqi "action:'create_employee'" "$workpulse_file" || ! grep -Fqi "action:'reset_pin'" "$workpulse_file"; then
             echo "FAIL: $workpulse_url did not return WorkPulse HRMS with employee ID and PIN access."
             head -c 1200 "$workpulse_file" || true
             rm -f "$workpulse_file"
