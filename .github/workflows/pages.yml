@@ -78,11 +78,11 @@ jobs:
           workpulse_url="${PAGE_URL%/}/workpulse/"
           workpulse_file="$(mktemp)"
           workpulse_status="$(curl --silent --show-error --location --max-time 20 --output "$workpulse_file" --write-out "%{http_code}" "$workpulse_url" || true)"
-          if [ "$workpulse_status" != "200" ] || ! grep -Fqi '<title>WorkPulse HRMS</title>' "$workpulse_file" || ! grep -Fqi 'Forgot password?' "$workpulse_file" || ! grep -Fqi 'resetPasswordForEmail' "$workpulse_file" || ! grep -Fqi 'WORKPULSE_URL' "$workpulse_file" || ! grep -Fqi 'PASSWORD_RECOVERY' "$workpulse_file" || ! grep -Fqi "event==='SIGNED_IN'||event==='INITIAL_SESSION'" "$workpulse_file"; then
+          if [ "$workpulse_status" != "200" ] || ! grep -Fqi '<title>WorkPulse HRMS</title>' "$workpulse_file" || ! grep -Fqi 'Forgot password?' "$workpulse_file" || ! grep -Fqi 'resetPasswordForEmail' "$workpulse_file" || ! grep -Fqi 'WORKPULSE_URL' "$workpulse_file" || ! grep -Fqi 'PASSWORD_RECOVERY' "$workpulse_file" || ! grep -Fqi "event==='SIGNED_IN'||event==='INITIAL_SESSION'" "$workpulse_file" || ! grep -Fqi 'resendVerificationForm' "$workpulse_file" || ! grep -Fqi "sb.auth.resend({type:'signup'" "$workpulse_file"; then
             echo "FAIL: $workpulse_url did not return WorkPulse HRMS with complete email callback handling."
             head -c 1200 "$workpulse_file" || true
             rm -f "$workpulse_file"
             exit 1
           fi
-          echo "PASS: $workpulse_url returned HTTP 200 with password recovery and email callback handling."
+          echo "PASS: $workpulse_url returned HTTP 200 with password recovery, verification resend, and email callback handling."
           rm -f "$workpulse_file"
