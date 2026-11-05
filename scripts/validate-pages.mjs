@@ -45,7 +45,9 @@ checkDocument("WorkPulse HRMS", workpulse, [
   "detectSessionInUrl:true",
   "authCallbackError",
   "event==='SIGNED_IN'||event==='INITIAL_SESSION'",
-  "clearAuthCallbackUrl"
+  "clearAuthCallbackUrl",
+  'id="resendVerificationForm"',
+  "sb.auth.resend({type:'signup'"
 ]);
 for (const obsolete of [
   "First-time HR setup code",
