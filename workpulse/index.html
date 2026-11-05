@@ -104,7 +104,7 @@ const timeLabel = d => d ? new Date(d).toLocaleTimeString('en-PK',{hour:'2-digit
 const duration = mins => Math.floor(Number(mins||0)/60)+'h '+(Number(mins||0)%60)+'m';
 function toast(msg,type){const t=$('toast');t.textContent=msg;t.className='toast '+(type||'');t.classList.remove('hidden');clearTimeout(window._toastTimer);window._toastTimer=setTimeout(()=>t.classList.add('hidden'),3700)}
 function authMsg(msg,type='info'){$('authMessage').textContent=msg||'';$('authMessage').className='auth-message'+(msg?' '+type:'');}
-function clearAuthCallbackUrl(){history.replaceState(null,document.title,WORKPULSE_URL);}
+function clearAuthCallbackUrl(){history.replaceState(null,document.title,window.location.pathname);}
 function scheduleAfterAuth(){if(authRenderQueued||authRenderRunning)return;authRenderQueued=true;window.setTimeout(async()=>{authRenderQueued=false;if(passwordRecoveryMode||authRenderRunning)return;authRenderRunning=true;try{await afterAuth()}catch(err){showAuth();authMsg(err.message,'error')}finally{authRenderRunning=false}},0)}
 function showEmailCallbackError(message){showAuth();showAuthMode('login');authMsg(message||'This email link is invalid, expired, or has already been used. Request a fresh link and open the newest email.','error');}
 function showAuthMode(mode){const login=mode==='login';$('authTabs').classList.remove('hidden');$('loginForm').classList.toggle('hidden',!login);$('signupForm').classList.toggle('hidden',login);$('resetRequestForm').classList.add('hidden');$('newPasswordForm').classList.add('hidden');$('forgotPasswordRow').classList.toggle('hidden',!login);$('authNote').classList.remove('hidden');$('loginTab').classList.toggle('active',login);$('signupTab').classList.toggle('active',!login);$('authTitle').textContent=login?'Welcome back':'Create your account';$('authSubtitle').textContent=login?'Sign in to access your employee or HR workspace.':'Join your organisation’s WorkPulse workspace.';authMsg('')}
@@ -143,8 +143,7 @@ $('loginForm').addEventListener('submit',async e=>{
   const {data,error}=await sb.auth.signInWithPassword({email:$('loginEmail').value.trim(),password:$('loginPassword').value});
   if(error)throw error;
   currentUser=data.user;
-  authMsg('');
-  await afterAuth();
+  authMsg('Signing in to your WorkPulse workspace…','success');
  }catch(err){authMsg(err.message);toast(err.message,'error')}
 });
 $('resetRequestForm').addEventListener('submit',async e=>{
@@ -163,6 +162,8 @@ $('newPasswordForm').addEventListener('submit',async e=>{
  if(password!==confirmPassword){authMsg('The passwords do not match.');return}
  authMsg('Updating your password…');
  try{
+  const {data:{session}}=await sb.auth.getSession();
+  if(!session)throw new Error('This reset link is no longer valid. Please request a fresh password reset email.');
   const {error}=await sb.auth.updateUser({password});
   if(error)throw error;
   passwordRecoveryMode=false;
@@ -177,7 +178,7 @@ $('signupForm').addEventListener('submit',async e=>{
   const name=$('signupName').value.trim(),email=$('signupEmail').value.trim(),password=$('signupPassword').value;
   const {data,error}=await sb.auth.signUp({email,password,options:{data:{full_name:name},emailRedirectTo:WORKPULSE_URL}});
   if(error)throw error;
-  if(data.session){currentUser=data.user;await afterAuth()}
+  if(data.session){currentUser=data.user;authMsg('Your account is ready. Opening WorkPulse…','success')}
   else{authMsg('Account created. Check your inbox for the WorkPulse verification email. Open the newest confirmation link to finish activating your account.');toast('Account created. Please verify your email.','success')}
  }catch(err){authMsg(err.message);toast(err.message,'error')}
 });
