@@ -48,7 +48,7 @@
       <form id="hrActivationForm" class="hidden">
         <div class="note warn">One-time setup for the existing HR Administrator account. This does not create a second HR account.</div>
         <div class="field"><label>One-time HR activation code</label><input id="hrActivationCode" type="password" autocomplete="off" required placeholder="Paste the activation code"></div>
-        <div class="field"><label>New 10-digit Access PIN</label><input id="hrNewPin" type="password" inputmode="numeric" pattern="[0-9]{8,12}" minlength="8" maxlength="12" required placeholder="Generate or enter 8–12 digits"></div>
+        <div class="field"><label>New 10-digit Access PIN</label><input id="hrNewPin" type="text" inputmode="numeric" pattern="[0-9]{8,12}" minlength="8" maxlength="12" required placeholder="Generate or enter 8–12 digits"></div>
         <div class="field"><label>Confirm Access PIN</label><input id="hrConfirmPin" type="password" inputmode="numeric" pattern="[0-9]{8,12}" minlength="8" maxlength="12" required placeholder="Re-enter the PIN"></div>
         <button class="btn secondary block" type="button" onclick="generateHrPin()">Generate secure PIN</button>
         <button class="btn block" type="submit">Activate HR access</button>
@@ -108,7 +108,8 @@ function showHrActivation(){
  $('authNote').classList.add('hidden');
  $('authTitle').textContent='Activate HR access';
  $('authSubtitle').textContent='One-time setup for your existing HR Administrator account. No email address is required.';
- authMsg('Enter the one-time activation code and create a new 8–12 digit PIN.','info');
+ if(!$('hrNewPin').value)generateHrPin();
+ authMsg('Enter the one-time activation code. Your secure PIN is generated below—save it before activating.','info');
 }
 function makeSecurePin(){
  const values=new Uint32Array(10);
@@ -123,7 +124,7 @@ function generateHrPin(){
 }
 function showAuth(){ $('authView').style.display='grid';$('appView').style.display='none' }
 function showApp(){ $('authView').style.display='none';$('appView').style.display='block' }
-async function signOut(){await sb.auth.signOut();currentUser=null;profile=null;showAuth()}
+async function signOut(){await sb.auth.signOut();currentUser=null;profile=null;showAuth();showLoginMode()}
 async function loadProfile(){
   const {data,error}=await sb.from('profiles').select('*').eq('id',currentUser.id).maybeSingle();
   if(error) throw error;
@@ -263,7 +264,7 @@ function showEmployeePinReset(employeeCode){
   try{
    const {data,error}=await sb.functions.invoke('workpulse-access',{body:{action:'reset_pin',employee_code:employeeCode,pin}});
    if(error)throw new Error(data?.error||error.message);
-   toast('Access PIN reset. Share the new PIN securely with the employee.','success');closeModal();
+   $('resetEmployeePinForm').innerHTML='<div class="note good"><b>PIN reset successfully.</b><br>Employee ID: <b>'+esc(employeeCode)+'</b><br>New Access PIN: <b>'+esc(pin)+'</b><br>Share this PIN securely with the employee.</div>';toast('Access PIN reset.','success');
   }catch(err){toast(err.message,'error')}
  });
 }
@@ -353,7 +354,7 @@ function downloadRows(rows,filename){
  if(window.XLSX){const ws=XLSX.utils.aoa_to_sheet(rows);const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'WorkPulse');XLSX.writeFile(wb,filename)}else{const csv=rows.map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename.replace(/\.xlsx$/i,'.csv');a.click();URL.revokeObjectURL(a.href)}}
 function exportPayroll(){const rows=[['Employee','Employee ID','Pay basis','Scheduled days','Present days','Paid leave','Unpaid leave','Absent days','Late days','Regular hours','Overtime hours','Gross pay','Allowances','Bonus','Other deductions','Advance','Tax','EOBI','Net pay'],...payrollCache.map(x=>[x.profiles?.full_name,x.profiles?.employee_code,x.profiles?.pay_type,x.scheduled_days,x.present_days,x.paid_leave_days,x.unpaid_leave_days,x.absent_days,x.late_days,x.regular_hours,x.overtime_hours,x.gross_pay,x.allowances,x.bonus,x.deductions,x.advance_deduction,x.tax_deduction,x.eobi_deduction,x.net_pay])];downloadRows(rows,'WorkPulse-Payroll.xlsx')}
 async function exportAllPayroll(){const {data,error}=await sb.from('payroll_items').select('*,profiles(full_name,employee_code),payroll_periods(name)').order('created_at',{ascending:false});if(error){toast(error.message,'error');return}const rows=[['Period','Employee','Employee ID','Gross','Allowance','Bonus','Deductions','Advance','Tax','EOBI','Net'],...(data||[]).map(x=>[x.payroll_periods?.name,x.profiles?.full_name,x.profiles?.employee_code,x.gross_pay,x.allowances,x.bonus,x.deductions,x.advance_deduction,x.tax_deduction,x.eobi_deduction,x.net_pay])];downloadRows(rows,'WorkPulse-All-Payroll.xlsx')}
-async function exportEmployees(){const {data,error}=await sb.from('profiles').select('employee_code,full_name,email,phone,company_name,designation,employment_type,work_mode,pay_type,monthly_salary,hourly_rate,status').order('full_name');if(error){toast(error.message,'error');return}downloadRows([Object.keys(data[0]||{full_name:'No data'}),...(data||[]).map(x=>Object.values(x))],'WorkPulse-Employees.xlsx')}
+async function exportEmployees(){const {data,error}=await sb.from('profiles').select('employee_code,full_name,phone,company_name,designation,employment_type,work_mode,pay_type,monthly_salary,hourly_rate,status').order('full_name');if(error){toast(error.message,'error');return}downloadRows([Object.keys(data[0]||{full_name:'No data'}),...(data||[]).map(x=>Object.values(x))],'WorkPulse-Employees.xlsx')}
 async function exportAttendance(){const {data,error}=await sb.from('attendance').select('attendance_date,employee_id,check_in,check_out,work_minutes,attendance_type,status,profiles(full_name,employee_code)').order('attendance_date',{ascending:false}).limit(10000);if(error){toast(error.message,'error');return}const rows=[['Date','Employee','Employee ID','Check in','Check out','Work minutes','Attendance type','Status'],...(data||[]).map(x=>[x.attendance_date,x.profiles?.full_name,x.profiles?.employee_code,x.check_in,x.check_out,x.work_minutes,x.attendance_type,x.status])];downloadRows(rows,'WorkPulse-Attendance.xlsx')}
 sb.auth.onAuthStateChange((event,session)=>{
  if(event==='SIGNED_OUT'){
