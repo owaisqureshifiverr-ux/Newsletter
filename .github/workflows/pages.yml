@@ -78,11 +78,11 @@ jobs:
           workpulse_url="${PAGE_URL%/}/workpulse/"
           workpulse_file="$(mktemp)"
           workpulse_status="$(curl --silent --show-error --location --max-time 20 --output "$workpulse_file" --write-out "%{http_code}" "$workpulse_url" || true)"
-          if [ "$workpulse_status" != "200" ] || ! grep -Fqi '<title>WorkPulse HRMS</title>' "$workpulse_file"; then
-            echo "FAIL: $workpulse_url did not return the WorkPulse HRMS application."
+          if [ "$workpulse_status" != "200" ] || ! grep -Fqi '<title>WorkPulse HRMS</title>' "$workpulse_file" || ! grep -Fqi 'Forgot password?' "$workpulse_file" || ! grep -Fqi 'resetPasswordForEmail' "$workpulse_file"; then
+            echo "FAIL: $workpulse_url did not return WorkPulse HRMS with the password recovery feature."
             head -c 1200 "$workpulse_file" || true
             rm -f "$workpulse_file"
             exit 1
           fi
-          echo "PASS: $workpulse_url returned HTTP 200 with the WorkPulse HRMS title."
+          echo "PASS: $workpulse_url returned HTTP 200 with WorkPulse HRMS and password recovery."
           rm -f "$workpulse_file"
