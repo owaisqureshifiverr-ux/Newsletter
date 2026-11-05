@@ -75,3 +75,14 @@ jobs:
           }
           verify_page "" 'id="surveyRespondentName"'
           verify_page "hr/" 'id="surveyReportSelect"'
+          workpulse_url="${PAGE_URL%/}/workpulse/"
+          workpulse_file="$(mktemp)"
+          workpulse_status="$(curl --silent --show-error --location --max-time 20 --output "$workpulse_file" --write-out "%{http_code}" "$workpulse_url" || true)"
+          if [ "$workpulse_status" != "200" ] || ! grep -Fqi '<title>WorkPulse HRMS</title>' "$workpulse_file"; then
+            echo "FAIL: $workpulse_url did not return the WorkPulse HRMS application."
+            head -c 1200 "$workpulse_file" || true
+            rm -f "$workpulse_file"
+            exit 1
+          fi
+          echo "PASS: $workpulse_url returned HTTP 200 with the WorkPulse HRMS title."
+          rm -f "$workpulse_file"
