@@ -35,19 +35,15 @@ checkDocument("WorkPulse HRMS", workpulse, [
   "clock_out",
   "calculate_payroll",
   "My payslips",
-  "Create account",
-  "Sign in to WorkPulse",
-  "Forgot password?",
-  "resetPasswordForEmail",
-  "updateUser({password})",
-  "PASSWORD_RECOVERY",
-  "WORKPULSE_URL",
-  "detectSessionInUrl:true",
-  "authCallbackError",
-  "event==='SIGNED_IN'||event==='INITIAL_SESSION'",
-  "clearAuthCallbackUrl",
-  'id="resendVerificationForm"',
-  "sb.auth.resend({type:'signup'"
+  "Employee ID",
+  "Access PIN",
+  'id="hrActivationForm"',
+  "workpulse-access",
+  "signInWithPassword",
+  "showCreateEmployeeAccess",
+  "action:'create_employee'",
+  "action:'reset_pin'",
+  "action:'bootstrap_hr'"
 ]);
 for (const obsolete of [
   "First-time HR setup code",
