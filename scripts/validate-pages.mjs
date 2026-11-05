@@ -31,12 +31,23 @@ function checkDocument(label, html, required) {
 
 checkDocument("WorkPulse HRMS", workpulse, [
   "<title>WorkPulse HRMS</title>",
-  "claim_first_hr_admin",
   "clock_in",
   "clock_out",
   "calculate_payroll",
-  "My payslips"
+  "My payslips",
+  "Create account",
+  "Sign in to WorkPulse"
 ]);
+for (const obsolete of [
+  "First-time HR setup code",
+  "loginSetupCode",
+  "signupSetupCode",
+  "claimCodePending",
+  "claim_first_hr_admin",
+  "wp_admin_code"
+]) {
+  if (workpulse.includes(obsolete)) fail("WorkPulse still contains the removed setup-code flow: " + obsolete);
+}
 
 checkDocument("Employee website", employee, [
   "Company Newsletter",
