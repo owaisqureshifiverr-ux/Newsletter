@@ -3,6 +3,7 @@ import vm from "node:vm";
 
 const employee = readFileSync("index.html", "utf8");
 const hr = readFileSync("hr/index.html", "utf8");
+const workpulse = readFileSync("workpulse/index.html", "utf8");
 
 function fail(message) { throw new Error(message); }
 
@@ -27,6 +28,15 @@ function checkDocument(label, html, required) {
   const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index && id !== "mp-app-code" && !id.includes("${"));
   if (duplicates.length) fail(label + ": duplicate DOM ids: " + [...new Set(duplicates)].join(", "));
 }
+
+checkDocument("WorkPulse HRMS", workpulse, [
+  "<title>WorkPulse HRMS</title>",
+  "claim_first_hr_admin",
+  "clock_in",
+  "clock_out",
+  "calculate_payroll",
+  "My payslips"
+]);
 
 checkDocument("Employee website", employee, [
   "Company Newsletter",
