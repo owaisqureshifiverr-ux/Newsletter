@@ -137,6 +137,9 @@ async function afterAuth(){
   currentUser=session.user;
   try{
     await loadProfile();
+    if(profile.role==='hr_admin'&&!String(currentUser.email||'').toLowerCase().endsWith(LOGIN_DOMAIN)){
+      showAuth();showHrActivation();return;
+    }
     showApp();
     $('userName').textContent=profile.full_name||profile.email;
     $('userAvatar').textContent=(profile.full_name||profile.email||'W').slice(0,1).toUpperCase();
