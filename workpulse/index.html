@@ -39,36 +39,22 @@
     <div class="auth-card">
       <div class="brand" style="margin-bottom:23px"><div class="logo">W</div><div>WorkPulse<small>HR & Payroll Suite</small></div></div>
       <h2 id="authTitle">Welcome back</h2><p class="sub" id="authSubtitle">Sign in to access your employee or HR workspace.</p>
-      <div class="tabs" id="authTabs"><button id="loginTab" class="active" type="button" onclick="showAuthMode('login')">Sign in</button><button id="signupTab" type="button" onclick="showAuthMode('signup')">Create account</button></div>
       <form id="loginForm">
-        <div class="field"><label>Email address</label><input id="loginEmail" type="email" autocomplete="username" required placeholder="name@company.com"></div>
-        <div class="field"><label>Password</label><input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Your password"></div>
+        <div class="field"><label>Employee ID</label><input id="loginEmployeeCode" type="text" autocomplete="username" required placeholder="e.g. HR-001" autocapitalize="characters"></div>
+        <div class="field"><label>Access PIN</label><input id="loginPin" type="password" inputmode="numeric" pattern="[0-9]{8,12}" minlength="8" maxlength="12" autocomplete="current-password" required placeholder="8–12 digit PIN"></div>
         <button class="btn block" type="submit">Sign in to WorkPulse</button>
       </form>
-      <div id="forgotPasswordRow" style="text-align:right;margin-top:10px"><button class="text-link" type="button" onclick="showResetRequest()">Forgot password?</button></div>
-      <div id="resendVerificationRow" style="text-align:right;margin-top:9px"><button class="text-link" type="button" onclick="showResendVerification()">Didn't receive the verification email?</button></div>
-      <form id="resetRequestForm" class="hidden">
-        <div class="field"><label>Account email</label><input id="resetEmail" type="email" autocomplete="email" required placeholder="name@company.com"></div>
-        <button class="btn block" type="submit">Send password reset link</button>
-        <button class="btn ghost block" type="button" onclick="showAuthMode('login')">Back to sign in</button>
+      <div id="hrActivationRow" style="text-align:center;margin-top:14px"><button class="text-link" type="button" onclick="showHrActivation()">First-time HR access setup</button></div>
+      <form id="hrActivationForm" class="hidden">
+        <div class="note warn">One-time setup for the existing HR Administrator account. This does not create a second HR account.</div>
+        <div class="field"><label>One-time HR activation code</label><input id="hrActivationCode" type="password" autocomplete="off" required placeholder="Paste the activation code"></div>
+        <div class="field"><label>New 10-digit Access PIN</label><input id="hrNewPin" type="password" inputmode="numeric" pattern="[0-9]{8,12}" minlength="8" maxlength="12" required placeholder="Generate or enter 8–12 digits"></div>
+        <div class="field"><label>Confirm Access PIN</label><input id="hrConfirmPin" type="password" inputmode="numeric" pattern="[0-9]{8,12}" minlength="8" maxlength="12" required placeholder="Re-enter the PIN"></div>
+        <button class="btn secondary block" type="button" onclick="generateHrPin()">Generate secure PIN</button>
+        <button class="btn block" type="submit">Activate HR access</button>
+        <button class="btn ghost block" type="button" onclick="showLoginMode()">Back to sign in</button>
       </form>
-      <form id="resendVerificationForm" class="hidden">
-        <div class="field"><label>Account email</label><input id="resendVerificationEmail" type="email" autocomplete="email" required placeholder="name@company.com"></div>
-        <button class="btn block" type="submit">Resend verification email</button>
-        <button class="btn ghost block" type="button" onclick="showAuthMode('login')">Back to sign in</button>
-      </form>
-      <form id="newPasswordForm" class="hidden">
-        <div class="field"><label>New password</label><input id="newPassword" type="password" minlength="8" autocomplete="new-password" required placeholder="At least 8 characters"></div>
-        <div class="field"><label>Confirm new password</label><input id="confirmNewPassword" type="password" minlength="8" autocomplete="new-password" required placeholder="Re-enter new password"></div>
-        <button class="btn block" type="submit">Save new password</button>
-      </form>
-      <form id="signupForm" class="hidden">
-        <div class="field"><label>Full name</label><input id="signupName" required placeholder="Your full name"></div>
-        <div class="field"><label>Work email</label><input id="signupEmail" type="email" required placeholder="name@company.com"></div>
-        <div class="field"><label>Create password</label><input id="signupPassword" type="password" minlength="8" required placeholder="At least 8 characters"></div>
-        <button class="btn block" type="submit">Create account</button>
-      </form>
-      <div class="note" id="authNote">The first account registered becomes the HR administrator. Every later employee registration is sent to HR for approval before attendance access is enabled.</div>
+      <div class="note" id="authNote">Sign in with your Employee ID and Access PIN. HR creates employee access; email verification and email-based password links are not required.</div>
       <div id="authMessage" class="auth-message" role="status" aria-live="polite"></div>
     </div>
   </section>
