@@ -11,7 +11,7 @@
 *{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:var(--ink);font-size:14px}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}button:disabled{opacity:.45;cursor:not-allowed}.hidden{display:none!important}
 .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:18px;letter-spacing:-.4px}.logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(140deg,#315df4,#6e8cff);display:grid;place-items:center;color:white;font-weight:900;box-shadow:0 7px 16px #315df433}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:1.3px;text-transform:uppercase;font-weight:700;margin-top:1px}
 .auth-wrap{min-height:100vh;display:grid;grid-template-columns:1.05fr .95fr}.auth-left{background:linear-gradient(145deg,#14273e,#1b3d62);color:#fff;padding:8vh 7vw;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}.auth-left:after{content:"";position:absolute;width:560px;height:560px;border:1px solid #ffffff18;border-radius:50%;right:-200px;bottom:-180px;box-shadow:0 0 0 70px #ffffff08,0 0 0 140px #ffffff05}.auth-copy{max-width:550px;position:relative;z-index:1}.auth-copy h1{font-size:clamp(34px,4vw,58px);line-height:1.06;letter-spacing:-2px;margin:65px 0 18px}.auth-copy p{font-size:16px;line-height:1.8;color:#c4d2e4;max-width:470px}.feature-list{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:34px}.feature{padding:15px;border:1px solid #ffffff24;border-radius:14px;background:#ffffff0b;color:#e7effa}.feature b{display:block;margin-bottom:5px}.feature span{font-size:12px;color:#b8c8dc}.auth-right{display:grid;place-items:center;padding:30px}.auth-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:34px;width:min(460px,100%);box-shadow:var(--shadow)}.auth-card h2{font-size:25px;letter-spacing:-.7px;margin:5px 0}.sub{color:var(--muted);line-height:1.6}.tabs{display:flex;background:#f1f4f8;border-radius:11px;padding:4px;margin:22px 0}.tabs button{flex:1;padding:10px;border-radius:8px;background:transparent;color:var(--muted);font-weight:700}.tabs button.active{background:#fff;color:var(--ink);box-shadow:0 2px 7px #14273e14}
-.field{display:grid;gap:6px;margin:13px 0}.field label{font-size:12px;font-weight:750;color:#4a5b70}.field input,.field select,.field textarea,.control{width:100%;border:1px solid #dce3ed;border-radius:10px;padding:11px 12px;outline:none;background:#fff;color:var(--ink);min-height:42px}.field input:focus,.field select:focus,.field textarea:focus{border-color:#7795ff;box-shadow:0 0 0 3px #315df41c}.field textarea{min-height:75px;resize:vertical}.btn{border-radius:10px;padding:10px 15px;font-weight:750;background:var(--blue);color:white;box-shadow:0 5px 12px #315df426}.btn:hover{filter:brightness(.97)}.btn.secondary{background:#eef2f8;color:#2a3c52;box-shadow:none}.btn.ghost{background:transparent;color:#53657c;box-shadow:none;border:1px solid var(--line)}.btn.danger{background:#fff0f1;color:#bd3646;box-shadow:none}.btn.success{background:#e6f7ef;color:#127c56;box-shadow:none}.btn.sm{padding:7px 10px;font-size:12px;border-radius:8px}.btn.block{width:100%;margin-top:8px}.help{font-size:11px;color:var(--muted);line-height:1.5}.text-link{background:transparent;color:var(--blue);padding:0;font-weight:750;font-size:12px;text-decoration:underline;text-underline-offset:3px}.text-link:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:3px}.note{padding:11px 13px;border-radius:10px;background:#f4f7fc;color:#62738b;font-size:12px;line-height:1.5;margin-top:14px}.note.warn{background:var(--amberbg);color:#815a15}.note.good{background:var(--greenbg);color:#117450}
+.field{display:grid;gap:6px;margin:13px 0}.field label{font-size:12px;font-weight:750;color:#4a5b70}.field input,.field select,.field textarea,.control{width:100%;border:1px solid #dce3ed;border-radius:10px;padding:11px 12px;outline:none;background:#fff;color:var(--ink);min-height:42px}.field input:focus,.field select:focus,.field textarea:focus{border-color:#7795ff;box-shadow:0 0 0 3px #315df41c}.field textarea{min-height:75px;resize:vertical}.btn{border-radius:10px;padding:10px 15px;font-weight:750;background:var(--blue);color:white;box-shadow:0 5px 12px #315df426}.btn:hover{filter:brightness(.97)}.btn.secondary{background:#eef2f8;color:#2a3c52;box-shadow:none}.btn.ghost{background:transparent;color:#53657c;box-shadow:none;border:1px solid var(--line)}.btn.danger{background:#fff0f1;color:#bd3646;box-shadow:none}.btn.success{background:#e6f7ef;color:#127c56;box-shadow:none}.btn.sm{padding:7px 10px;font-size:12px;border-radius:8px}.btn.block{width:100%;margin-top:8px}.help{font-size:11px;color:var(--muted);line-height:1.5}.text-link{background:transparent;color:var(--blue);padding:0;font-weight:750;font-size:12px;text-decoration:underline;text-underline-offset:3px}.text-link:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:3px}.auth-message{display:block;margin-top:14px;padding:11px 13px;border-radius:11px;font-size:12px;line-height:1.55;background:#f1f5fb;color:#52647b}.auth-message:empty{display:none}.auth-message.error{background:var(--redbg);color:#a52c3a}.auth-message.success{background:var(--greenbg);color:#117450}.auth-message.warn{background:var(--amberbg);color:#815a15}.auth-message.info{background:#edf3ff;color:#31508f}.note{padding:11px 13px;border-radius:10px;background:#f4f7fc;color:#62738b;font-size:12px;line-height:1.5;margin-top:14px}.note.warn{background:var(--amberbg);color:#815a15}.note.good{background:var(--greenbg);color:#117450}
 .app{display:none;min-height:100vh}.sidebar{position:fixed;inset:0 auto 0 0;width:248px;background:var(--navy);color:#e7eef7;padding:23px 16px;display:flex;flex-direction:column;z-index:10}.sidebar .brand{padding:0 9px 27px}.sidebar .brand small{color:#9eb0c7}.side-label{font-size:10px;text-transform:uppercase;letter-spacing:1.4px;color:#8294ac;font-weight:800;padding:15px 11px 8px}.nav{display:grid;gap:5px}.nav button{width:100%;display:flex;align-items:center;gap:12px;color:#b9c8d9;background:transparent;text-align:left;padding:11px 12px;border-radius:10px;font-weight:650}.nav button .ico{width:20px;text-align:center;font-size:16px}.nav button:hover,.nav button.active{background:#ffffff14;color:#fff}.nav button.active{box-shadow:inset 3px 0 #7392ff}.side-foot{margin-top:auto;padding:15px 10px;color:#8da1ba;font-size:11px;line-height:1.6;border-top:1px solid #ffffff17}
 .main{margin-left:248px;min-height:100vh}.topbar{height:76px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 34px;position:sticky;top:0;z-index:5}.top-title{font-size:18px;font-weight:800;letter-spacing:-.4px}.user-chip{display:flex;align-items:center;gap:10px}.avatar{width:35px;height:35px;border-radius:50%;background:#e8efff;color:#315df4;display:grid;place-items:center;font-weight:800}.user-chip b{font-size:12px;display:block}.user-chip small{font-size:10px;color:var(--muted)}.content{max-width:1450px;padding:28px 34px 54px;margin:auto}.page-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:15px;margin-bottom:22px}.page-heading h1{font-size:25px;letter-spacing:-.9px;margin:0 0 6px}.page-heading p{margin:0;color:var(--muted);font-size:13px}.grid{display:grid;gap:16px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:18px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 3px 12px #14273e05}.stat{display:flex;justify-content:space-between;align-items:flex-start}.stat .label{font-size:12px;color:var(--muted);font-weight:650}.stat .value{font-size:27px;font-weight:850;letter-spacing:-1px;margin:10px 0 2px}.stat .hint{font-size:11px;color:var(--muted)}.stat-icon{width:38px;height:38px;border-radius:12px;background:var(--blue2);color:var(--blue);display:grid;place-items:center;font-size:18px}.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.between{display:flex;align-items:center;justify-content:space-between;gap:12px}.two{grid-template-columns:1.35fr 1fr}.section-title{font-size:15px;font-weight:800;margin:0 0 15px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}table{width:100%;border-collapse:collapse;min-width:650px;background:white}th{font-size:10px;text-transform:uppercase;letter-spacing:.75px;color:#8391a4;font-weight:800;background:#f9fafc;text-align:left;padding:12px 14px;white-space:nowrap}td{padding:13px 14px;border-top:1px solid #edf0f4;font-size:12px;color:#405168;white-space:nowrap}td b{color:#203148}.empty{padding:35px 18px;text-align:center;color:var(--muted);font-size:13px}.badge{display:inline-flex;align-items:center;padding:5px 8px;border-radius:100px;font-size:10px;font-weight:800;text-transform:capitalize;background:#edf1f6;color:#66778b}.badge.active,.badge.present,.badge.approved{background:var(--greenbg);color:#11805a}.badge.pending,.badge.late{background:var(--amberbg);color:#946516}.badge.rejected,.badge.suspended,.badge.absent{background:var(--redbg);color:#b83a48}.badge.draft{background:#edf1f6;color:#617187}.tabs-line{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:17px}.tabs-line button{background:#fff;border:1px solid var(--line);padding:9px 13px;border-radius:9px;font-weight:700;color:#68788c}.tabs-line button.active{background:var(--blue2);border-color:#cfdaff;color:var(--blue)}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px}.attendance-hero{background:linear-gradient(125deg,#1d3760,#315df4);color:white;border-radius:17px;padding:23px;margin-bottom:17px;display:flex;align-items:center;justify-content:space-between;gap:20px}.attendance-hero h2{margin:0 0 5px;font-size:21px}.attendance-hero p{margin:0;color:#d5e0ff;font-size:12px}.clock{font-size:27px;font-weight:850;letter-spacing:-1px}.quick-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:17px}.attendance-hero .btn{background:white;color:#284bd0;box-shadow:none}.attendance-hero .btn.secondary{background:#ffffff20;color:white;border:1px solid #ffffff42}.modal-backdrop{position:fixed;inset:0;background:#07172b8a;display:grid;place-items:center;padding:18px;z-index:30}.modal{width:min(680px,100%);max-height:90vh;overflow:auto;background:white;border-radius:18px;padding:22px;box-shadow:0 25px 80px #07172b55}.modal h2{margin:0 0 15px}.toast{position:fixed;bottom:22px;right:22px;background:#14283f;color:white;padding:13px 16px;border-radius:11px;box-shadow:var(--shadow);z-index:100;max-width:min(420px,90vw);font-size:12px}.toast.error{background:#a62f3d}.toast.success{background:#117b58}.muted{color:var(--muted)}.toolbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.toolbar input,.toolbar select{border:1px solid var(--line);border-radius:9px;padding:9px 11px;background:white;min-height:38px}.right{text-align:right}.mobile-menu{display:none;background:transparent;font-size:20px;color:#53657c}.loading{padding:32px;text-align:center;color:var(--muted)}
 @media(max-width:1000px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.two{grid-template-columns:1fr}.sidebar{width:220px}.main{margin-left:220px}.content{padding:24px}}
@@ -63,7 +63,7 @@
         <button class="btn block" type="submit">Create account</button>
       </form>
       <div class="note" id="authNote">The first account registered becomes the HR administrator. Every later employee registration is sent to HR for approval before attendance access is enabled.</div>
-      <div id="authMessage" class="help" style="margin-top:13px"></div>
+      <div id="authMessage" class="auth-message" role="status" aria-live="polite"></div>
     </div>
   </section>
 </div>
@@ -87,9 +87,15 @@
 <script>
 const SUPABASE_URL = 'https://bbubzumfbzcqkjklrzqu.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_Wv-nN9qjgOeTT_ANfs48Gg_hTail0eX';
-const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const WORKPULSE_URL = 'https://owaisqureshifiverr-ux.github.io/Newsletter/workpulse/';
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {auth:{flowType:'implicit',detectSessionInUrl:true,persistSession:true,autoRefreshToken:true}});
 let currentUser = null, profile = null, currentPanel = 'dashboard', payrollCache = [], periodCache = [], employeeCache = [];
-let passwordRecoveryMode = new URLSearchParams(window.location.hash.replace(/^#/, '')).get('type') === 'recovery';
+const initialHashParams = new URLSearchParams(window.location.hash.replace(/^#/, ''));
+const initialQueryParams = new URLSearchParams(window.location.search);
+const authCallbackType = initialHashParams.get('type') || initialQueryParams.get('type') || '';
+const authCallbackError = initialHashParams.get('error_description') || initialQueryParams.get('error_description') || initialHashParams.get('error') || initialQueryParams.get('error') || '';
+let passwordRecoveryMode = authCallbackType === 'recovery';
+let authRenderQueued = false, authRenderRunning = false;
 const $ = id => document.getElementById(id);
 const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money = v => new Intl.NumberFormat('en-PK',{style:'currency',currency:'PKR',maximumFractionDigits:0}).format(Number(v||0));
@@ -97,7 +103,10 @@ const dateLabel = d => d ? new Date(d+'T00:00:00').toLocaleDateString('en-PK',{d
 const timeLabel = d => d ? new Date(d).toLocaleTimeString('en-PK',{hour:'2-digit',minute:'2-digit'}) : '—';
 const duration = mins => Math.floor(Number(mins||0)/60)+'h '+(Number(mins||0)%60)+'m';
 function toast(msg,type){const t=$('toast');t.textContent=msg;t.className='toast '+(type||'');t.classList.remove('hidden');clearTimeout(window._toastTimer);window._toastTimer=setTimeout(()=>t.classList.add('hidden'),3700)}
-function authMsg(msg){$('authMessage').textContent=msg}
+function authMsg(msg,type='info'){$('authMessage').textContent=msg||'';$('authMessage').className='auth-message'+(msg?' '+type:'');}
+function clearAuthCallbackUrl(){history.replaceState(null,document.title,WORKPULSE_URL);}
+function scheduleAfterAuth(){if(authRenderQueued||authRenderRunning)return;authRenderQueued=true;window.setTimeout(async()=>{authRenderQueued=false;if(passwordRecoveryMode||authRenderRunning)return;authRenderRunning=true;try{await afterAuth()}catch(err){showAuth();authMsg(err.message,'error')}finally{authRenderRunning=false}},0)}
+function showEmailCallbackError(message){showAuth();showAuthMode('login');authMsg(message||'This email link is invalid, expired, or has already been used. Request a fresh link and open the newest email.','error');}
 function showAuthMode(mode){const login=mode==='login';$('authTabs').classList.remove('hidden');$('loginForm').classList.toggle('hidden',!login);$('signupForm').classList.toggle('hidden',login);$('resetRequestForm').classList.add('hidden');$('newPasswordForm').classList.add('hidden');$('forgotPasswordRow').classList.toggle('hidden',!login);$('authNote').classList.remove('hidden');$('loginTab').classList.toggle('active',login);$('signupTab').classList.toggle('active',!login);$('authTitle').textContent=login?'Welcome back':'Create your account';$('authSubtitle').textContent=login?'Sign in to access your employee or HR workspace.':'Join your organisation’s WorkPulse workspace.';authMsg('')}
 function showResetRequest(){passwordRecoveryMode=false;$('authTabs').classList.add('hidden');$('loginForm').classList.add('hidden');$('signupForm').classList.add('hidden');$('newPasswordForm').classList.add('hidden');$('resetRequestForm').classList.remove('hidden');$('forgotPasswordRow').classList.add('hidden');$('authNote').classList.add('hidden');$('authTitle').textContent='Reset your password';$('authSubtitle').textContent='Enter your WorkPulse email address and we’ll send you a secure reset link.';$('resetEmail').value=$('loginEmail').value.trim();authMsg('')}
 function showPasswordRecoveryForm(){passwordRecoveryMode=true;showAuth();$('authTabs').classList.add('hidden');$('loginForm').classList.add('hidden');$('signupForm').classList.add('hidden');$('resetRequestForm').classList.add('hidden');$('newPasswordForm').classList.remove('hidden');$('forgotPasswordRow').classList.add('hidden');$('authNote').classList.add('hidden');$('authTitle').textContent='Choose a new password';$('authSubtitle').textContent='Create a new password for your WorkPulse account.';authMsg('')}
@@ -142,8 +151,7 @@ $('resetRequestForm').addEventListener('submit',async e=>{
  e.preventDefault();authMsg('Sending password reset email…');
  try{
   const email=$('resetEmail').value.trim();
-  const redirectTo=window.location.origin+window.location.pathname;
-  const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo});
+  const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:WORKPULSE_URL});
   if(error)throw error;
   authMsg('If an account exists for this email, a password reset link has been sent. Check your inbox and spam folder.');
  }catch(err){authMsg(err.message);toast(err.message,'error')}
@@ -158,8 +166,8 @@ $('newPasswordForm').addEventListener('submit',async e=>{
   const {error}=await sb.auth.updateUser({password});
   if(error)throw error;
   passwordRecoveryMode=false;
-  history.replaceState(null,document.title,window.location.pathname);
-  authMsg('Your password has been updated. Opening WorkPulse…');
+  clearAuthCallbackUrl();
+  authMsg('Your password has been updated. Opening WorkPulse…','success');
   await afterAuth();
  }catch(err){authMsg(err.message);toast(err.message,'error')}
 });
@@ -167,10 +175,10 @@ $('signupForm').addEventListener('submit',async e=>{
  e.preventDefault();authMsg('Creating your account…');
  try{
   const name=$('signupName').value.trim(),email=$('signupEmail').value.trim(),password=$('signupPassword').value;
-  const {data,error}=await sb.auth.signUp({email,password,options:{data:{full_name:name},emailRedirectTo:window.location.href.split('#')[0]}});
+  const {data,error}=await sb.auth.signUp({email,password,options:{data:{full_name:name},emailRedirectTo:WORKPULSE_URL}});
   if(error)throw error;
   if(data.session){currentUser=data.user;await afterAuth()}
-  else{authMsg('Your account has been created. Please verify your email, then return here and sign in with your email and password.');toast('Account created. Please verify your email.','success')}
+  else{authMsg('Account created. Check your inbox for the WorkPulse verification email. Open the newest confirmation link to finish activating your account.');toast('Account created. Please verify your email.','success')}
  }catch(err){authMsg(err.message);toast(err.message,'error')}
 });
 function buildNav(){
@@ -313,10 +321,37 @@ async function exportAllPayroll(){const {data,error}=await sb.from('payroll_item
 async function exportEmployees(){const {data,error}=await sb.from('profiles').select('employee_code,full_name,email,phone,company_name,designation,employment_type,work_mode,pay_type,monthly_salary,hourly_rate,status').order('full_name');if(error){toast(error.message,'error');return}downloadRows([Object.keys(data[0]||{full_name:'No data'}),...(data||[]).map(x=>Object.values(x))],'WorkPulse-Employees.xlsx')}
 async function exportAttendance(){const {data,error}=await sb.from('attendance').select('attendance_date,employee_id,check_in,check_out,work_minutes,attendance_type,status,profiles(full_name,employee_code)').order('attendance_date',{ascending:false}).limit(10000);if(error){toast(error.message,'error');return}const rows=[['Date','Employee','Employee ID','Check in','Check out','Work minutes','Attendance type','Status'],...(data||[]).map(x=>[x.attendance_date,x.profiles?.full_name,x.profiles?.employee_code,x.check_in,x.check_out,x.work_minutes,x.attendance_type,x.status])];downloadRows(rows,'WorkPulse-Attendance.xlsx')}
 sb.auth.onAuthStateChange((event,session)=>{
- if(event==='PASSWORD_RECOVERY'){showPasswordRecoveryForm()}
- if(event==='SIGNED_OUT'){passwordRecoveryMode=false;showAuth();showAuthMode('login')}
+ if(event==='PASSWORD_RECOVERY'){
+  passwordRecoveryMode=true;
+  showPasswordRecoveryForm();
+  clearAuthCallbackUrl();
+  return;
+ }
+ if(event==='SIGNED_OUT'){
+  passwordRecoveryMode=false;
+  showAuth();
+  showAuthMode('login');
+  return;
+ }
+ if((event==='SIGNED_IN'||event==='INITIAL_SESSION')&&session){
+  if(passwordRecoveryMode){showPasswordRecoveryForm();return;}
+  clearAuthCallbackUrl();
+  scheduleAfterAuth();
+ }
 });
-if(passwordRecoveryMode)showPasswordRecoveryForm();else afterAuth();
+if(authCallbackError){
+ const friendly=authCallbackError.toLowerCase().includes('expired')||authCallbackError.toLowerCase().includes('invalid')
+  ? 'This email link has expired or was already used. Request a new link and open the latest email.'
+  : 'We could not complete this email action. Please request a new link and try again.';
+ showEmailCallbackError(friendly);
+}else if(passwordRecoveryMode){
+ showPasswordRecoveryForm();
+ authMsg('Your secure reset link has been opened. Choose a new password below.','success');
+}else{
+ showAuth();
+ // Supabase emits INITIAL_SESSION after it has processed email-link tokens.
+ scheduleAfterAuth();
+}
 </script>
 </body>
 </html>
