@@ -40,7 +40,12 @@ checkDocument("WorkPulse HRMS", workpulse, [
   "Forgot password?",
   "resetPasswordForEmail",
   "updateUser({password})",
-  "PASSWORD_RECOVERY"
+  "PASSWORD_RECOVERY",
+  "WORKPULSE_URL",
+  "detectSessionInUrl:true",
+  "authCallbackError",
+  "event==='SIGNED_IN'||event==='INITIAL_SESSION'",
+  "clearAuthCallbackUrl"
 ]);
 for (const obsolete of [
   "First-time HR setup code",
